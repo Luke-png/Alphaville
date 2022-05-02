@@ -11,12 +11,15 @@ import java.util.List;
 //
 public class SearchListViewModel extends ViewModel {
 
-    // Gör senare om till en lista av kaffeproduktobjekt, denna lista ska sorteras baseras
-    // på sök / filter
     private final MutableLiveData<List<CoffeeProduct>> filteredList = new MutableLiveData<List<CoffeeProduct>>();
 
     public LiveData<List<CoffeeProduct>> getFilteredList() {
         return filteredList;
     }
-    // Fixa via modellen att filteredList uppdateras baserat på filter & sök
+
+    public void filterList(String param1, String param2) {
+        // Ungefär vad som ska ske, dock får man göra om till LiveData
+        // filteredList = CoffeeDatabase.getInstance().filter(param1, param2);
+    }
+
 }

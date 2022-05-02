@@ -30,7 +30,7 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout -- byt senare ut NAMEOFCARD mot kortet för en product (XML)
-        View contactView = inflater.inflate(R.layout.placeholder_card, parent, false);
+        View contactView = inflater.inflate(R.layout.search_result_list_item, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -42,12 +42,11 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         // Get the data model based on position
         CoffeeProduct product = coffeeProducts.get(position);
 
-        // Set item views based on your views and data model
-
-        // Byt ut mot vad som faktiskt finns på ett kort senare
-
-        TextView textView = holder.testTextView;
-        textView.setText(product.toString());
+        holder.title.setText(product.getName() + "");
+        holder.match.setText("match??");
+        holder.height.setText(product.getElevation() + "");
+        holder.country.setText(product.getCountry() + "");
+        holder.process.setText(product.getProcess().toString() + "");
 
     }
 
@@ -60,7 +59,12 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView testTextView;
+        public TextView title;
+        public TextView match;
+        public TextView height;
+        public TextView country;
+        public TextView process;
+
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -69,7 +73,11 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            testTextView = (TextView) itemView.findViewById(R.id.textView);
+            title = (TextView) itemView.findViewById(R.id.sr_title);
+            match = (TextView) itemView.findViewById(R.id.sr_match);
+            height = (TextView) itemView.findViewById(R.id.sr_height);
+            country = (TextView) itemView.findViewById(R.id.sr_country);
+            process = (TextView) itemView.findViewById(R.id.sr_process);
 
         }
     }

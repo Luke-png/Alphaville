@@ -49,7 +49,19 @@ public class CoffeeProduct
         this.description = description;
         this.isLiked = isLiked;
     }
+    // Test constructor
+    public CoffeeProduct() {
+        this.name = "namn";
+        this.roast = Roast.light;
+        this.country = "Sweden";
 
+        this.elevation = 123;
+        this.process = Process.dry;
+        this.tastes = new ArrayList<>();
+
+        this.description = "test";
+        this.isLiked = true;
+    }
     // Getters ------------
 
     public String getName() { return name; }

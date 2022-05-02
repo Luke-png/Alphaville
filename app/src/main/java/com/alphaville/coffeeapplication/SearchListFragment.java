@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +28,8 @@ public class SearchListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private RecyclerView rv;
     private CoffeeProductAdapter adapter;
-    List<CoffeeProduct> coffeProducts = new ArrayList<>();
+    List<CoffeeProduct> coffeeProducts = new ArrayList<>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,14 +40,26 @@ public class SearchListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        SearchListViewModel model = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
+        coffeeProducts.add(new CoffeeProduct());
+        coffeeProducts.add(new CoffeeProduct());
+
+        SearchListViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
+        viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
+            @Override
+            public void onChanged(@Nullable List<CoffeeProduct> p) {
+                coffeeProducts = p;
+                // kanske måste notifya adapter / rv, men osäker borde gå utan
+            }
+        });
+
+        /*
         final Observer<List<CoffeeProduct>> nameObserver = new Observer<List<CoffeeProduct>>() {
             @Override
-            public void onChanged(@Nullable final List<CoffeeProduct> t) {
+            public void onChanged(@Nullable List<CoffeeProduct> t) {
                 coffeProducts = t;
                 // kanske måste notifya adapter / rv, men osäker borde gå utan
             }
-        };
+        };*/
 
         View v = LayoutInflater.from(getContext()).inflate(R.layout.search_list_fragment,container,false);
 
@@ -54,7 +68,7 @@ public class SearchListFragment extends Fragment {
 
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        adapter = new CoffeeProductAdapter(coffeProducts);
+        adapter = new CoffeeProductAdapter(coffeeProducts);
         rv.setAdapter(adapter);
         return v; //inflater.inflate(R.layout.search_list_fragment, container, false);
     }
