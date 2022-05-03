@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <EditText
             android:id="@+id/inputBox"
             android:layout_width="330dp"
@@ -54,6 +55,16 @@
             app:layout_constraintBottom_toTopOf="@+id/locationBox"
             app:layout_constraintStart_toStartOf="@+id/locationBox" />
 
+        <TextView
+            android:id="@+id/currentProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"  />
+
         <Button
             android:id="@+id/textSaveButton"
             android:layout_width="wrap_content"
@@ -74,7 +85,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.538"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/currentProduct" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

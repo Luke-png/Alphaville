@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
+import com.alphaville.coffeeapplication.model.CoffeeProduct;
 import com.alphaville.coffeeapplication.viewModels.CoffeeInfoViewModel;
 
 /**
