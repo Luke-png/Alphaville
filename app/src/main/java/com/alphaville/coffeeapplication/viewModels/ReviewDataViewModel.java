@@ -17,7 +17,7 @@ public class ReviewDataViewModel extends ViewModel {
     public void createTextReview(String reviewText) {
        reviewHandler.createTextReview(reviewText);
     }
-    public void createTextAndRatingReview(String reviewText, double rating){
-        reviewHandler.createTextAndRatingReview(reviewText,rating);
+    public void createReview(String reviewText, String location, double rating){
+        reviewHandler.createReview(reviewText, location,rating);
     }
 }

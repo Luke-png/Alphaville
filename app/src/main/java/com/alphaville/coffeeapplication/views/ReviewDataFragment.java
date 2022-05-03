@@ -33,9 +33,13 @@ public class ReviewDataFragment extends Fragment {
 
         //initRatingbar();
         initInputBox();
+        initLocationBox();
         initSaveButton();
 
     return view;
+    }
+
+    private void initLocationBox() {binding.locationBox.setHint("Enter location");
     }
 
     /**
@@ -56,8 +60,7 @@ public class ReviewDataFragment extends Fragment {
         binding.textSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("pressed");
-                viewModel.createTextAndRatingReview(binding.inputBox.getText().toString(),
+                viewModel.createReview(binding.inputBox.getText().toString(), 
                         binding.ratingBar.getRating());
             }
         });
