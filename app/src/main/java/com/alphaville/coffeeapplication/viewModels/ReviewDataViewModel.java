@@ -19,7 +19,7 @@ public class ReviewDataViewModel extends ViewModelEngine {
        reviewHandler.createTextReview(reviewText);
     }
     public void createReview(String reviewText, String location, double rating){
-        reviewHandler.createReview(reviewText, location,rating);
+        reviewHandler.createReview(reviewText, location,rating, getActiveProduct());
     }
     public CoffeeProduct getActiveProduct(){
         return getModel().getActive();
