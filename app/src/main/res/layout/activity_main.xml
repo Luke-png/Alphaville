@@ -9,7 +9,7 @@
 <!-- för searchlistan
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.alphaville.coffeeapplication.SearchListFragment"
+        android:name="com.alphaville.coffeeapplication.views.SearchListFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,6 +38,7 @@
 
   <!--Hardcoded fragment for demo purpose. Remove later-->
 
+    <!--
     <fragment
         android:id="@+id/coffee_info_view_fragment.xml"
         android:name="com.alphaville.coffeeapplication.views.CoffeeInfoViewFragment"
@@ -48,6 +49,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    -->
+    <fragment
+        android:id="@+id/fragment_history.xml"
+        android:name="com.alphaville.coffeeapplication.views.HistoryFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
 
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>

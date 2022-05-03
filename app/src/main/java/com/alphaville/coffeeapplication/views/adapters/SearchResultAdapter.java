@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.views;
+package com.alphaville.coffeeapplication.views.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
