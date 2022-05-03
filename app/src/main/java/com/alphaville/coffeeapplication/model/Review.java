@@ -18,6 +18,10 @@ public class Review {
      * Rating bar with stars
      */
     private double rating;
+    /**
+     * The reviewed product
+     */
+    private CoffeeProduct product;
     //TODO Add more attributes
 
 
