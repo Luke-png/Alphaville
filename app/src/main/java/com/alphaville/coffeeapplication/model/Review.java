@@ -10,7 +10,13 @@ public class Review {
      * Free form text review of coffeeProduct
      */
     private String textReview;
+    /**
+     *Free form text Location of where coffeeProduct was bought
+     */
     private String location;
+    /**
+     * Rating bar with stars
+     */
     private double rating;
     //TODO Add more attributes
 

@@ -38,7 +38,9 @@ public class ReviewDataFragment extends Fragment {
 
     return view;
     }
-
+    /**
+     * Initiates the input box for inputting location of where the coffe drink was bought
+     */
     private void initLocationBox() {binding.locationBox.setHint("Enter location");
     }
 
