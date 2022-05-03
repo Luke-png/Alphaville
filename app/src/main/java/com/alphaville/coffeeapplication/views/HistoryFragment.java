@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 
@@ -26,7 +29,7 @@ public class HistoryFragment extends Fragment {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-
+        // Listener that should be triggered everytime the user changes anything in the searchfield.
         binding.searchHistory.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override

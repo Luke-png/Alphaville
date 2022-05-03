@@ -31,4 +31,8 @@ public class Review {
     public void setTextReview(String textReview) {
         this.textReview = textReview;
     }
+
+    public double getRating() {
+        return rating;
+    }
 }
