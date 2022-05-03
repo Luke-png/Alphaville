@@ -1,6 +1,8 @@
 package com.alphaville.coffeeapplication.views;
 
+import android.content.Intent;
 import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
+import com.alphaville.coffeeapplication.model.CoffeeProduct;
 import com.alphaville.coffeeapplication.viewModels.CoffeeInfoViewModel;
 
 /**
@@ -26,21 +29,24 @@ public class CoffeeInfoViewFragment extends Fragment {
                           Bundle savedInstanceState) {
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        return view;
+
         /*
         setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
         setCoffeeInformation(name, info, description);
         setCoffeePicture(image);
         setClockTexts(firstClockText, secondClockText, thirdClockText);
+         */
 
         //listener for the review button
         binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                model.openReviewPage(); //What class should do this? Probably not the model.
+                openReviewPage(); //What class should do this? Probably not the model.
             }
         });
+        return view;
 
+/*
         //listener for the heart button (the boolean value in model needs to reverse)
         binding.likeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,5 +85,9 @@ public class CoffeeInfoViewFragment extends Fragment {
         binding.clock2Text.setText(second);
         binding.clock2Text.setText(third);
 
+    }
+    private void openReviewPage(){
+        Intent intent = new Intent(getActivity(), ReviewActivity.class);
+        startActivity(intent);
     }
 }

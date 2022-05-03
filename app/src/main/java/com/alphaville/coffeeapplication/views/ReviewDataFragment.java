@@ -35,9 +35,18 @@ public class ReviewDataFragment extends Fragment {
         initInputBox();
         initLocationBox();
         initSaveButton();
+        initProductText();
+
 
     return view;
     }
+
+    /**
+     * Initiates the text of which coffeeproduct is being reviewed
+     */
+    private void initProductText() {binding.currentProduct.setText("Reviewing "+viewModel.getActiveProduct().getName());
+    }
+
     /**
      * Initiates the input box for inputting location of where the coffe drink was bought
      */

@@ -18,6 +18,10 @@ public class Review {
      * Rating bar with stars
      */
     private double rating;
+    /**
+     * The reviewed product
+     */
+    private CoffeeProduct product;
     //TODO Add more attributes
 
 
@@ -26,10 +30,11 @@ public class Review {
         this.textReview = textReview;
     }
 
-    public Review(String textReview, String location, double rating){
+    public Review(String textReview, String location, double rating, CoffeeProduct product){
         this.textReview = textReview;
         this.location = location;
         this.rating = rating;
+        this.product = product;
     }
 
     public String getTextReview() {

@@ -25,8 +25,8 @@ public class ReviewHandler {
         Review newReview = new Review(text);
         reviews.add(newReview);
     }
-    public void createReview(String text, String location, double rating){
-        Review newReview = new Review(text, location, rating);
+    public void createReview(String text, String location, double rating, CoffeeProduct coffeeProduct){
+        Review newReview = new Review(text, location, rating,coffeeProduct);
         reviews.add(newReview);
     }
 
