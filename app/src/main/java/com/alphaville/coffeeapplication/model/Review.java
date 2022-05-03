@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.Model;
+package com.alphaville.coffeeapplication.model;
 
 /**
  * The Review class is a data class representing a review of a CoffeeProduct
@@ -10,7 +10,18 @@ public class Review {
      * Free form text review of coffeeProduct
      */
     private String textReview;
+    /**
+     *Free form text Location of where coffeeProduct was bought
+     */
+    private String location;
+    /**
+     * Rating bar with stars
+     */
     private double rating;
+    /**
+     * The reviewed product
+     */
+    private CoffeeProduct product;
     //TODO Add more attributes
 
 
@@ -19,9 +30,11 @@ public class Review {
         this.textReview = textReview;
     }
 
-    public Review(String textReview, double rating){
+    public Review(String textReview, String location, double rating, CoffeeProduct product){
         this.textReview = textReview;
+        this.location = location;
         this.rating = rating;
+        this.product = product;
     }
 
     public String getTextReview() {
