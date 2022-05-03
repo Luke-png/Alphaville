@@ -2,8 +2,7 @@ package com.alphaville.coffeeapplication.viewModels;
 
 import androidx.lifecycle.ViewModel;
 
-import com.alphaville.coffeeapplication.Model.Review;
-import com.alphaville.coffeeapplication.Model.ReviewHandler;
+import com.alphaville.coffeeapplication.model.ReviewHandler;
 
 /**
  * ReviewDataViewModel is the viewmodel responsible for communicating with the model and create

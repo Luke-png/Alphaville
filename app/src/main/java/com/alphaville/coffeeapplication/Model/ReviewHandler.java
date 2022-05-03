@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.Model;
+package com.alphaville.coffeeapplication.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ public class ReviewHandler {
         Review newReview = new Review(text);
         reviews.add(newReview);
     }
-    public void createTextAndRatingReview(String text, double rating){
-        Review newReview = new Review(text, rating);
+    public void createReview(String text, String location, double rating){
+        Review newReview = new Review(text, location, rating);
         reviews.add(newReview);
     }
 
