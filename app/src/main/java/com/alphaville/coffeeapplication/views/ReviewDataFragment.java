@@ -41,6 +41,9 @@ public class ReviewDataFragment extends Fragment {
     return view;
     }
 
+    /**
+     * Initiates the text of which coffeeproduct is being reviewed
+     */
     private void initProductText() {binding.currentProduct.setText("Reviewing "+viewModel.getActiveProduct().getName());
     }
 
