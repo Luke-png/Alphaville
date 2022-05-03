@@ -60,7 +60,7 @@ public class ReviewDataFragment extends Fragment {
         binding.textSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.createReview(binding.inputBox.getText().toString(), 
+                viewModel.createReview(binding.inputBox.getText().toString(), binding.locationBox.getText().toString(),
                         binding.ratingBar.getRating());
             }
         });
