@@ -1,5 +1,8 @@
 package com.alphaville.coffeeapplication.views;
 
+import static com.alphaville.coffeeapplication.CoffeeProduct.Process.dry;
+import static com.alphaville.coffeeapplication.CoffeeProduct.Roast.light;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +14,19 @@ import androidx.fragment.app.Fragment;
 
 //import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
+import com.alphaville.coffeeapplication.CoffeeProduct;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
 import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * ReviewDataFragment is the fragment for inputting and saving a text review
  */
 public class ReviewDataFragment extends Fragment {
 
-    //TODO Try to implement databinding for MVVM
     private ReviewDataFragmentBinding binding;
     private ReviewDataViewModel viewModel;
 
@@ -67,12 +73,21 @@ public class ReviewDataFragment extends Fragment {
     /**
      * Initiates save button for text review
      */
+    //TODO Remove test coffeeProduct
     public void initSaveButton() {
         binding.textSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.createReview(binding.inputBox.getText().toString(), binding.locationBox.getText().toString(),
-                        binding.ratingBar.getRating());
+                System.out.println("pressed");
+
+                //Test object
+                CoffeeProduct cp = new CoffeeProduct("placeHolder", "testCountry",
+                        99999, light, dry, new ArrayList<>(), "testDesc", true);
+
+                viewModel.createReview(cp, binding.inputBox.getText().toString(),
+                        binding.ratingBar.getRating(), binding.locationBox.getText().toString(),
+                        "testCategory", new Timestamp(System.currentTimeMillis())
+                        );
             }
         });
     }

@@ -1,47 +1,71 @@
-package com.alphaville.coffeeapplication.model;
+package com.alphaville.coffeeapplication.Model;
+
+import com.alphaville.coffeeapplication.CoffeeProduct;
+
+import java.sql.Timestamp;
 
 /**
  * The Review class is a data class representing a review of a CoffeeProduct
  */
 public class Review {
 
-    //CoffeeProduct coffeeProduct;
+    private final CoffeeProduct coffeeProduct;
     /**
      * Free form text review of coffeeProduct
      */
-    private String textReview;
+    private final String textReview;
     /**
-     *Free form text Location of where coffeeProduct was bought
+     * The rating of the review
      */
-    private String location;
+    private final double rating;
     /**
-     * Rating bar with stars
+     * The location where the coffee was drank
      */
-    private double rating;
+    private final String location;
     /**
-     * The reviewed product
+     * The type of drink the coffee was consumed as e.g. Latte, Cappuccino etc.
      */
-    private CoffeeProduct product;
-    //TODO Add more attributes
+    private final String drinkCategory;
+    /**
+     * The time that the review was created
+     */
+    private final Timestamp creationTime;
+
+    //TODO possibly add taste clock attributes
 
 
-
-    public Review(String textReview) {
+    public Review(CoffeeProduct coffeeProduct, String textReview, double rating, String location, String drinkCategory, Timestamp creationTime) {
+        this.coffeeProduct = coffeeProduct;
         this.textReview = textReview;
+        this.rating = rating;
+        this.location = location;
+        this.drinkCategory = drinkCategory;
+        this.creationTime = creationTime;
     }
 
-    public Review(String textReview, String location, double rating, CoffeeProduct product){
-        this.textReview = textReview;
-        this.location = location;
-        this.rating = rating;
-        this.product = product;
+    public CoffeeProduct getCoffeeProduct() {
+        return coffeeProduct;
     }
 
     public String getTextReview() {
         return textReview;
     }
 
-    public void setTextReview(String textReview) {
-        this.textReview = textReview;
+    public double getRating() {
+        return rating;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDrinkCategory() {
+        return drinkCategory;
+    }
+
+    public Timestamp getCreationTime() {
+        return creationTime;
+    }
+
+
 }

@@ -1,4 +1,6 @@
-package com.alphaville.coffeeapplication.model;
+package com.alphaville.coffeeapplication.Model;
+
+import com.alphaville.coffeeapplication.CoffeeProduct;
 
 import java.nio.charset.CoderMalfunctionError;
 import java.util.ArrayList;
