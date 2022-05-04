@@ -41,8 +41,7 @@ public class ModelFacade {
     }
 
     public List<Review> searchInReviews(String s){
-        //pass on call to ReviewHandler
-        return new ArrayList<>();
+        return reviewHandler.searchInReviews(s);
     }
 
     public List<Review> getReviews(){

@@ -41,4 +41,9 @@ public class ReviewHandler {
     public List<Review> getReviews() {
         return new ArrayList<>(reviews);
     }
+
+    public List<Review> searchInReviews(String s){
+        //Pick out corresponding items in the reviews and return
+        return new ArrayList<>();
+    }
 }

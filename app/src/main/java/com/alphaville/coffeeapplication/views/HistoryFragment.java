@@ -24,8 +24,12 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        model = new HistoryTabViewModel();
 
         //binding.reviewList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        /**
+         * This should initiate the adapter and recyclerview
+         */
         binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews()));
 
         /**
