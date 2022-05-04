@@ -1,10 +1,5 @@
 package com.alphaville.coffeeapplication.Model;
 
-import static com.alphaville.coffeeapplication.CoffeeProduct.Process.dry;
-import static com.alphaville.coffeeapplication.CoffeeProduct.Roast.light;
-
-import com.alphaville.coffeeapplication.CoffeeProduct;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;

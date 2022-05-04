@@ -1,6 +1,6 @@
 package com.alphaville.coffeeapplication.viewModels;
 
-import com.alphaville.coffeeapplication.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.Model.ReviewHandler;
 
 

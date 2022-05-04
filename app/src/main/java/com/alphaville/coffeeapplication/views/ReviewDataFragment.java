@@ -1,7 +1,7 @@
 package com.alphaville.coffeeapplication.views;
 
-import static com.alphaville.coffeeapplication.CoffeeProduct.Process.dry;
-import static com.alphaville.coffeeapplication.CoffeeProduct.Roast.light;
+import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Process.dry;
+import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Roast.light;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 //import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
-import com.alphaville.coffeeapplication.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
 import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;

@@ -1,7 +1,5 @@
 package com.alphaville.coffeeapplication.Model;
 
-import com.alphaville.coffeeapplication.CoffeeProduct;
-
 import java.sql.Timestamp;
 
 /**
