@@ -8,12 +8,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="asd">
+        android:scrollbars="none"
+        android:contentDescription="recScroll">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -43,10 +44,44 @@
                         android:text="Test"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView4"
-                        app:layout_constraintVertical_bias="0.961" />
+                        app:layout_constraintVertical_bias="0.968" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="211dp"
+                        android:layout_height="82dp"
+                        android:layout_marginBottom="272dp"
+                        android:background="@drawable/rounded_corner"
+                        android:gravity="center_vertical|center"
+                        android:text="Veckans Favoriter"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.503"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4"
+                        app:layout_constraintVertical_bias="0.543" />
+
+                    <FrameLayout
+                        android:layout_width="295dp"
+                        android:layout_height="253dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView5"
+                        app:layout_constraintVertical_bias="0.145">
+
+                        <GridView
+                            android:id="@+id/idGVcourses"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:horizontalSpacing="6dp"
+                            android:numColumns="2"
+                            android:verticalSpacing="6dp"/>
+                    </FrameLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </FrameLayout>
