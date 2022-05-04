@@ -8,6 +8,7 @@ import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
@@ -26,7 +27,7 @@ public class HistoryFragment extends Fragment {
         View view = binding.getRoot();
         model = new HistoryTabViewModel();
 
-        //binding.reviewList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.reviewList.setLayoutManager(new LinearLayoutManager(getActivity()));
         /**
          * This should initiate the adapter and recyclerview
          */
@@ -40,14 +41,13 @@ public class HistoryFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-                binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews()));
-                model.searchInReviews(s);
+                binding.reviewList.setAdapter(new HistoryResultAdapter(model.searchInReviews(s)));
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews()));
+                binding.reviewList.setAdapter(new HistoryResultAdapter(model.searchInReviews(s)));
                 return true;
             }
         });

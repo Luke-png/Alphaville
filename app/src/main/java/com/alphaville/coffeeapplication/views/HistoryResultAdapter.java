@@ -93,7 +93,7 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
             name.setText(item.getCoffeeProduct().getName());
             country.setText(item.getCoffeeProduct().getCountry());
             process.setText(item.getCoffeeProduct().getProcess().toString());
-            reviewDate.setText((CharSequence) item.getCreationTime());
+            reviewDate.setText(item.getCreationTime().toString());
             drinktype.setText("Review for " + item.getDrinkCategory());
             //image.setImageIcon(item.getCoffeeProduct().getImage());
             rating.setRating((float) item.getRating());
