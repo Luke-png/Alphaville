@@ -1,13 +1,19 @@
 package com.alphaville.coffeeapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.alphaville.coffeeapplication.model.CoffeeProduct;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -17,10 +23,15 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
     // Instansvariabler + konstruktor
     // Byt ut mot kaffekort senare
     private List<CoffeeProduct> coffeeProducts;
+    private SearchListViewModel vm;
+    private FragmentContainerView fcv;
+
 
     // Pass in the contact array into the constructor
-    public CoffeeProductAdapter(List<CoffeeProduct> coffeeProducts) {
+    public CoffeeProductAdapter(List<CoffeeProduct> coffeeProducts, SearchListViewModel vm, FragmentContainerView fcv) {
         this.coffeeProducts = coffeeProducts;
+        this.vm = vm;
+        this.fcv = fcv;
     }
 
     @NonNull
@@ -48,6 +59,13 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         holder.country.setText(product.getCountry() + "");
         holder.process.setText(product.getProcess().toString() + "");
 
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vm.selectItem(coffeeProducts.get(holder.getAdapterPosition()));
+                fcv.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -65,6 +83,8 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         public TextView country;
         public TextView process;
 
+        public LinearLayout card;
+        public ImageButton like;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -79,6 +99,8 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
             country = (TextView) itemView.findViewById(R.id.sr_country);
             process = (TextView) itemView.findViewById(R.id.sr_process);
 
+            card = (LinearLayout) itemView.findViewById(R.id.LinearItem);
+            like = (ImageButton) itemView.findViewById(R.id.sr_liked_button);
         }
     }
 }

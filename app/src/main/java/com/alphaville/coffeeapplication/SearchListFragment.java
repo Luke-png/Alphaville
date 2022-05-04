@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,14 +21,9 @@ import java.util.List;
 
 public class SearchListFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private RecyclerView rv;
     private CoffeeProductAdapter adapter;
+    private FragmentContainerView fcv;
     List<CoffeeProduct> coffeeProducts = new ArrayList<>();
 
 
@@ -61,14 +57,16 @@ public class SearchListFragment extends Fragment {
             }
         };*/
 
-        View v = LayoutInflater.from(getContext()).inflate(R.layout.search_list_fragment,container,false);
-
+        View v = inflater.inflate(R.layout.search_list_fragment,container,false);
+        //return inflater.inflate(R.layout.fragment_search,container,false);
         // Inflate the layout for this fragment
         rv = (RecyclerView) v.findViewById(R.id.RV_SearchList);
+        fcv = (FragmentContainerView) v.findViewById(R.id.FCV_DetailView);
+        fcv.setVisibility(View.INVISIBLE);
 
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        adapter = new CoffeeProductAdapter(coffeeProducts);
+        adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
         return v; //inflater.inflate(R.layout.search_list_fragment, container, false);
     }

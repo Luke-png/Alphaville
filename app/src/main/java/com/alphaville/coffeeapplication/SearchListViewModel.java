@@ -12,6 +12,7 @@ import java.util.List;
 public class SearchListViewModel extends ViewModel {
 
     private final MutableLiveData<List<CoffeeProduct>> filteredList = new MutableLiveData<List<CoffeeProduct>>();
+    private final MutableLiveData<CoffeeProduct> selected = new MutableLiveData<CoffeeProduct>();
 
     public LiveData<List<CoffeeProduct>> getFilteredList() {
         return filteredList;
@@ -20,6 +21,12 @@ public class SearchListViewModel extends ViewModel {
     public void filterList(String param1, String param2) {
         // Ungefär vad som ska ske, dock får man göra om till LiveData
         // filteredList = CoffeeDatabase.getInstance().filter(param1, param2);
+    }
+    public void selectItem(CoffeeProduct product) {
+        selected.setValue(product);
+    }
+    public LiveData<CoffeeProduct> getSelected() {
+        return selected;
     }
 
 }
