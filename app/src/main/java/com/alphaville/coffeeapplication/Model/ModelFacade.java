@@ -1,12 +1,14 @@
 package com.alphaville.coffeeapplication.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A facade-class for the applications model. It is used by the ViewModels to handle the model.
  */
 public class ModelFacade {
 
+    ReviewHandler reviewHandler = new ReviewHandler();
     CoffeeProduct active;
 
     /**
@@ -36,5 +38,14 @@ public class ModelFacade {
 
     public void setActive(CoffeeProduct active) {
         this.active = active;
+    }
+
+    public List<Review> searchInReviews(String s){
+        //pass on call to ReviewHandler
+        return new ArrayList<>();
+    }
+
+    public List<Review> getReviews(){
+        return reviewHandler.getReviews();
     }
 }
