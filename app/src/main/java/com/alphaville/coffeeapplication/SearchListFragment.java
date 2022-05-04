@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.views;
+package com.alphaville.coffeeapplication;
 
 import android.os.Bundle;
 
@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.alphaville.coffeeapplication.R;
-import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

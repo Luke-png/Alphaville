@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.viewModels;
+package com.alphaville.coffeeapplication;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
