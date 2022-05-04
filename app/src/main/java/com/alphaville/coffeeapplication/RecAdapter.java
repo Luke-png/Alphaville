@@ -26,7 +26,7 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
         }
         GridCard courseModel = getItem(position);
         TextView courseTV = listitemView.findViewById(R.id.idTVCourse);
-        ImageView courseIV = listitemView.findViewById(R.id.idIVcourse);
+        ImageView courseIV = listitemView.findViewById(R.id.recCardImg);
         courseTV.setText(courseModel.getCourse_name());
         courseIV.setImageResource(courseModel.getImgid());
         return listitemView;

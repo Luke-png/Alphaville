@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import com.alphaville.coffeeapplication.GridCard;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.RecAdapter;
+import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
+import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 
 import java.util.ArrayList;
 
@@ -21,32 +24,29 @@ import java.util.ArrayList;
 public class RecommendationsFragment extends Fragment {
     @Nullable
 
-    GridView coursesGV;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //changeColor();
 
-        // coursesGV = findViewById(R.id.idGVcourses);
+        GridView recGrid = this.findViewById(R.id.recGrid);
 
-       // ArrayList<GridCard> courseModelArrayList = new ArrayList<GridCard>();
-       // courseModelArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
-        //courseModelArrayList.add(new GridCard(("JAVA", R.drawable.ic_filled_heart));
-        //courseModelArrayList.add(new GridCard(("C++", R.drawable.ic_filled_heart));
-        //courseModelArrayList.add(new GridCard(("Python", R.drawable.ic_filled_heart));
-        //courseModelArrayList.add(new GridCard(("Javascript", R.drawable.ic_filled_heart));
-        //courseModelArrayList.add(new GridCard(("DSA", R.drawable.ic_filled_heart));
 
-        //RecAdapter adapter = new RecAdapter(this, courseModelArrayList);
-       // coursesGV.setAdapter(adapter);
+        RecAdapter adapter = new RecAdapter(this, fillGridView());
+        recGrid.setAdapter(adapter);
 
         return inflater.inflate(R.layout.fragment_recommendations,container,false);
     }
 
-
-    //private void changeColor(){
-
-    //}
+    private ArrayList fillGridView(){
+        ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
+        gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
+        gridArrayList.add(new GridCard("JAVA", R.drawable.ic_filled_heart));
+        gridArrayList.add(new GridCard("C++", R.drawable.ic_filled_heart));
+        gridArrayList.add(new GridCard("Python", R.drawable.ic_filled_heart));
+        gridArrayList.add(new GridCard("Javascript", R.drawable.ic_filled_heart));
+        gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
+        return gridArrayList;
+    }
 
 }
