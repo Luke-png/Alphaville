@@ -1,5 +1,6 @@
-package com.alphaville.coffeeapplication.views.adapters;
+package com.alphaville.coffeeapplication.views;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alphaville.coffeeapplication.Model.Review;
@@ -32,18 +34,19 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
         this.reviewList = reviewList;
     }
 
+    /**
+     * Tells ViewHoldern which xml-file to refer towards
+     */
     @NonNull
     @Override
-    //TODO: change layout.activity_main to layout.'right reference to xml'
     public ReviewCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_main, parent, false);
+                .inflate(R.layout.review_history_list_item, parent, false);
 
         return new ReviewCardViewHolder(view);
     }
-
     @Override
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void onBindViewHolder(@NonNull ReviewCardViewHolder holder, int position) {
         holder.setReviewInfo(reviewList.get(position));
     }
@@ -58,20 +61,42 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
      */
     public static class ReviewCardViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView textReview;
+        private final TextView name;
+        private final TextView country;
+        private final TextView process;
+        //private final TextView attr1;
+        //private final TextView attr2;
+        //private final TextView attr3;
+        private final TextView reviewDate;
+        private final TextView drinktype; //Something like "cappuccino"
+        //private final ImageView image;
         private final RatingBar rating;
 
-        //TODO: change R.id references to the correct ones (ie something R.id.textReview...)
         public ReviewCardViewHolder(@NonNull View itemView) {
             super(itemView);
-            textReview = itemView.findViewById(R.id.clock1Text);
-            rating = itemView.findViewById(R.id.clock2Text);
+            name = itemView.findViewById(review_cp_product_name);
+            country = itemView.findViewById(review_cp_country);
+            process = itemView.findViewById(review_cp_process);
+            //attr1 = itemView.findViewById(review_cp_att1);
+            //attr2 = itemView.findViewById(review_cp_att2);
+            //attr3 = itemView.findViewById(review_cp_att3);
+            reviewDate = itemView.findViewById(R.id.review_date);
+            drinktype = itemView.findViewById(review_desc);
+            //image = itemView.findViewById(review_image);
+            rating = itemView.findViewById(R.id.review_rating);
 
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.M)
         public void setReviewInfo(Review item){
-            textReview.setText(item.getTextReview());
+            name.setText(item.getCoffeeProduct().getName());
+            country.setText(item.getCoffeeProduct().getCountry());
+            process.setText(item.getCoffeeProduct().getProcess());
+            reviewDate.setText(item.getCreationTime());
+            drinktype.setText("Review for " + item.getDrinkCategory());
+            //image.setImageIcon(item.getCoffeeProduct().getImage());
             rating.setRating((float) item.getRating());
+
         }
     }
 }

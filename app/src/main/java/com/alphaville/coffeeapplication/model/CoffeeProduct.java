@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.model;
+package com.alphaville.coffeeapplication.Model;
 
 import java.util.ArrayList;
 import java.util.List;

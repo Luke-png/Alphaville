@@ -6,15 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
-
-
 
 public class HistoryFragment extends Fragment {
 
@@ -29,21 +25,27 @@ public class HistoryFragment extends Fragment {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Listener that should be triggered everytime the user changes anything in the searchfield.
+        //binding.reviewList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews()));
+
+        /**
+         * Listener that should be triggered everytime the user changes anything in the search-field.
+         * This is if we want continuous updates while writing.
+         */
         binding.searchHistory.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
             public boolean onQueryTextSubmit(String s) {
+                binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews()));
                 model.searchInReviews(s);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                model.searchInReviews(s);
+                binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews()));
                 return true;
             }
-
         });
         return view;
     }

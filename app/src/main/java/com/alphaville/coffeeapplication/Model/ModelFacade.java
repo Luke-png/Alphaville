@@ -1,5 +1,6 @@
 package com.alphaville.coffeeapplication.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,6 +8,7 @@ import java.util.List;
  */
 public class ModelFacade {
 
+    ReviewHandler reviewHandler = new ReviewHandler();
     /**
      * Changes the boolean attribute "like" in the CoffeeProduct
      * @param value the new value
@@ -16,7 +18,11 @@ public class ModelFacade {
     }
     public List<Review> searchInReviews(String s){
         //pass on call to ReviewHandler
-        return null;
+        return new ArrayList<>();
+    }
+
+    public List<Review> getReviews(){
+        return reviewHandler.getReviews();
     }
 
 }

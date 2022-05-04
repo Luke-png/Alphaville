@@ -6,9 +6,12 @@ import java.util.List;
 
 public class HistoryTabViewModel extends ViewModelEngine{
 
-    public void searchInReviews(String s){
-        List<Review> reviewList = getModel().searchInReviews(s);
-        //call to adapter or whoever updates the list.
+    public List<Review> searchInReviews(String s){
+        return getModel().searchInReviews(s);
+    }
+
+    public List<Review> getReviews(){
+        return getModel().getReviews();
     }
 
 }

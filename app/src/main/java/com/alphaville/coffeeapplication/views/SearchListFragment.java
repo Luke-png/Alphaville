@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
-import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
