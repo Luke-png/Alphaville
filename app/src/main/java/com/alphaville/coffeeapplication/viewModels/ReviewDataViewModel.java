@@ -1,9 +1,10 @@
 package com.alphaville.coffeeapplication.viewModels;
 
-import androidx.lifecycle.ViewModel;
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.ReviewHandler;
 
-import com.alphaville.coffeeapplication.model.CoffeeProduct;
-import com.alphaville.coffeeapplication.model.ReviewHandler;
+
+import java.sql.Timestamp;
 
 /**
  * ReviewDataViewModel is the viewmodel responsible for communicating with the model and create
@@ -11,15 +12,26 @@ import com.alphaville.coffeeapplication.model.ReviewHandler;
  */
 public class ReviewDataViewModel extends ViewModelEngine {
 
-    // Initialize review handler in main activity or implement separate viewmodel
-    // that gives access to model
+    //TODO Initialize review handler in main activity or implement separate viewmodel
+    // that gives access to model etc.
     ReviewHandler reviewHandler = new ReviewHandler();
 
-    public void createTextReview(String reviewText) {
-       reviewHandler.createTextReview(reviewText);
-    }
-    public void createReview(String reviewText, String location, double rating){
-        reviewHandler.createReview(reviewText, location,rating, getActiveProduct());
+    /**
+     * Creates a review for a specific coffee product
+     * @param cp the {@link CoffeeProduct} that has been reviewed
+     * @param textReview the text review
+     * @param rating the rating
+     * @param location the location where the coffee was drank
+     * @param drinkCategory the type of drink the coffee was consumed as
+     * @param creationTime the time the review was created
+     */
+    public void createReview(CoffeeProduct cp, String textReview,
+                             double rating, String location, String drinkCategory, Timestamp creationTime){
+
+
+        reviewHandler.createReview(getActiveProduct(), textReview, rating, location,
+                "testCategory", new Timestamp(System.currentTimeMillis()));
+
     }
     public CoffeeProduct getActiveProduct(){
         return getModel().getActive();

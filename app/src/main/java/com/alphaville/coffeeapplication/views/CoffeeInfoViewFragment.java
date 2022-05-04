@@ -2,7 +2,6 @@ package com.alphaville.coffeeapplication.views;
 
 import android.content.Intent;
 import android.graphics.drawable.Icon;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
-import com.alphaville.coffeeapplication.model.CoffeeProduct;
 import com.alphaville.coffeeapplication.viewModels.CoffeeInfoViewModel;
 
 /**

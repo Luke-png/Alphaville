@@ -9,8 +9,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
-import com.alphaville.coffeeapplication.model.CoffeeProduct;
 
 import java.util.List;
 
