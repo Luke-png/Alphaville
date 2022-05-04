@@ -1,7 +1,4 @@
-package com.alphaville.coffeeapplication.model;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package com.alphaville.coffeeapplication.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +8,8 @@ import java.util.List;
  *
  * Completely immutable to prevent logical errors.
  */
-public class CoffeeProduct {
-
+public class CoffeeProduct
+{
     /** Possible ways for a coffee product to be processed. */
     public enum Process { dry, wet, fermented, honey }
     /** Possible tastes for a coffee product. */

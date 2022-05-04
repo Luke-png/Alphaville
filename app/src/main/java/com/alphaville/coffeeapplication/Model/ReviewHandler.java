@@ -1,5 +1,6 @@
-package com.alphaville.coffeeapplication.model;
+package com.alphaville.coffeeapplication.Model;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,18 +19,20 @@ public class ReviewHandler {
     }
 
     /**
-     * Creates a review object with a text review
-     * @param text The text review
+     * Creates a review object, saves it to the list of reviews and saves it to the database.
+     * @param cp the {@link CoffeeProduct} that has been reviewed
+     * @param textReview the text review
+     * @param rating the rating
+     * @param location the location where the coffee was drank
+     * @param drinkCategory the type of drink the coffee was consumed as
+     * @param creationTime the time the review was created
      */
-    public void createTextReview(String text) {
-        Review newReview = new Review(text);
+    //TODO save to database when implemented.
+    public void createReview(CoffeeProduct cp, String textReview, double rating, String location,
+                            String drinkCategory, Timestamp creationTime){
+        Review newReview = new Review(cp, textReview, rating, location, drinkCategory, creationTime);
         reviews.add(newReview);
     }
-    public void createReview(String text, String location, double rating, CoffeeProduct coffeeProduct){
-        Review newReview = new Review(text, location, rating,coffeeProduct);
-        reviews.add(newReview);
-    }
-
 
     /**
      * Returns a copy of the list of reviews
