@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new RecommendationsFragment();
                             break;
                         case R.id.nav_search:
-                            selectedFragment = new SearchFragment();
+                            selectedFragment = new SearchListFragment();
                             break;
                         case R.id.nav_history:
                             selectedFragment = new HistoryFragment();
