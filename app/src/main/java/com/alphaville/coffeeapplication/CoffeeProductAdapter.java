@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.alphaville.coffeeapplication.model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentContainerView;

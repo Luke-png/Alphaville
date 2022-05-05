@@ -1,6 +1,10 @@
 package com.alphaville.coffeeapplication.Model;
 
+import android.text.format.DateFormat;
+
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * The Review class is a data class representing a review of a CoffeeProduct
@@ -61,8 +65,11 @@ public class Review {
         return drinkCategory;
     }
 
-    public Timestamp getCreationTime() {
-        return creationTime;
+    public String getCreationTimeAsString() {
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(creationTime.getTime());
+        return DateFormat.format("yyyy-MM-dd", cal).toString();
+        //return creationTime;
     }
 
 

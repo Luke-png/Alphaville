@@ -1,5 +1,8 @@
 package com.alphaville.coffeeapplication.Model;
 
+import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Taste.floral;
+import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Taste.fruity;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,13 @@ public class ReviewHandler {
     private final List<Review> reviews = new ArrayList<>();
 
     public ReviewHandler() {
+
+        //testobject for checking recyclerview in history-tab.
+        List<CoffeeProduct.Taste> s = new ArrayList<>();
+        s.add(fruity);
+        reviews.add(new Review(new CoffeeProduct("something", "Sweden", 1900,
+                CoffeeProduct.Roast.light, CoffeeProduct.Process.dry, s, "from the best beans", false),
+                "this tastes good", 3, "Johanneberg", "cappuccino", new Timestamp(2000)));
     }
 
     /**
@@ -39,11 +49,47 @@ public class ReviewHandler {
      * @return a copy of the list of reviews
      */
     public List<Review> getReviews() {
+        //TODO remove test
+        //Test review
+        createReview(new CoffeeProduct("Skånerost", "Colombia", 225,
+                CoffeeProduct.Roast.light, CoffeeProduct.Process.fermented,
+                new ArrayList<CoffeeProduct.Taste>() {}, "Tastes great", false)
+        ,"testReview", 3.5, "testLocation", "Cappuccino",
+                new Timestamp(System.currentTimeMillis()));
         return new ArrayList<>(reviews);
     }
 
+    /**
+     * Method for picking out reviews that match the text-string the user is typing in history-tab.
+     * @param s the text-string the user has typed
+     * @return a list with matching reviews
+     */
     public List<Review> searchInReviews(String s){
-        //Pick out corresponding items in the reviews and return
-        return new ArrayList<>();
+        List<Review> newList = new ArrayList<>();
+        for(int i = 0; i < reviews.size(); i++){
+            if(validProduct(reviews.get(i), s)){
+                newList.add(reviews.get(i));
+            }
+        }
+
+        return newList;
+    }
+
+    /**
+     * Method for comparing a single coffeeproduct with a text-string.
+     * @param r the coffeeproduct that will be compared
+     * @param s the text-string to match with the coffeeproduct
+     * @return true if coffeeproduct matches the text-string, false if not
+     */
+    private boolean validProduct(Review r, String s){
+        char coffeeLetter, stringLetter;
+        for(int i = 0; i < s.length() && i < r.getCoffeeProduct().getName().length(); i++){
+            coffeeLetter = r.getCoffeeProduct().getName().charAt(i);
+            stringLetter = s.charAt(i);
+            if(Character.compare(coffeeLetter, stringLetter) != 0){
+                return false;
+            }
+        }
+        return true;
     }
 }
