@@ -3,7 +3,7 @@ package com.alphaville.coffeeapplication;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.alphaville.coffeeapplication.model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 
 import java.util.List;
 

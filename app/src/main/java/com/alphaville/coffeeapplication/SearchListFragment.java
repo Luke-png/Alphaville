@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.alphaville.coffeeapplication.model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 
 import java.util.ArrayList;
 import java.util.List;
