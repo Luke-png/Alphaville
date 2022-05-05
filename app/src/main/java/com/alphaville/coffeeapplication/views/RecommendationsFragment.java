@@ -4,30 +4,49 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alphaville.coffeeapplication.GridCard;
 import com.alphaville.coffeeapplication.R;
-import com.alphaville.coffeeapplication.RecAdapter;
-import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
+import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
+import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
 
 import java.util.ArrayList;
 
 //Placeholder class
 
 public class RecommendationsFragment extends Fragment {
+
+
+    private FragmentRecommendationsBinding binding;
+    private RecTabViewModel model;
+
     @Nullable
-
-
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
+
+        GridView gridView = findViewById(R.id.recGrid);
+
+        RecAdapter recAdapter = new RecAdapter(this, itemsarray);
+        gridView.setAdapter(recAdapter);
+
+        binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        model = new RecTabViewModel();
+
+        binding.recGrid.setLayoutManager(new LinearLayoutManager(getActivity()));
+        /**
+         * This should initiate the adapter and recyclerview
+         */
+        binding.recGrid.setAdapter(new RecAdapter(model.getReviews(),fillGridView()));
         //GridView recGrid = this.findViewById(R.id.recGrid);
 
 
