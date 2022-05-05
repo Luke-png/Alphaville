@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#EDE0D4"
-    android:orientation="horizontal"
     android:padding="1dp">
 
     <ImageView
@@ -17,7 +16,7 @@
         android:src="@drawable/placeholder_beans" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="#E6CCB2"
@@ -27,20 +26,20 @@
         android:paddingVertical="8dp">
 
         <LinearLayout
-            android:layout_width="291dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingStart="1dp"
             android:paddingEnd="0dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="193dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/review_cp_product_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
                     android:text="Coffee product name"
@@ -54,19 +53,19 @@
 
                     <TextView
                         android:id="@+id/review_cp_country"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Country: Peru"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/review_cp_process"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Process: test"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -74,9 +73,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                android:paddingStart="30dp"
-                android:paddingEnd="0dp">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -87,14 +84,14 @@
 
                     <TextView
                         android:id="@+id/review_cp_att1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Attribute 1"
                         android:textSize="9sp" />
 
                     <TextView
                         android:id="@+id/review_cp_att2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="2dp"
                         android:text="Attribute 2"
@@ -102,7 +99,7 @@
 
                     <TextView
                         android:id="@+id/review_cp_att3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="2dp"
                         android:text="Attribute 3"
@@ -118,19 +115,19 @@
 
                     <ImageView
                         android:id="@+id/review_cp_clock1"
-                        android:layout_width="14dp"
+                        android:layout_width="match_parent"
                         android:layout_height="14dp"
                         app:srcCompat="@android:drawable/ic_menu_recent_history" />
 
                     <ImageView
                         android:id="@+id/review_cp_clock2"
-                        android:layout_width="14dp"
+                        android:layout_width="match_parent"
                         android:layout_height="14dp"
                         app:srcCompat="@android:drawable/ic_menu_recent_history" />
 
                     <ImageView
                         android:id="@+id/review_cp_clock3"
-                        android:layout_width="14dp"
+                        android:layout_width="match_parent"
                         android:layout_height="14dp"
                         app:srcCompat="@android:drawable/ic_menu_recent_history" />
 
@@ -154,8 +151,8 @@
 
                 <TextView
                     android:id="@+id/review_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:paddingStart="1dp"
                     android:paddingEnd="0dp"
@@ -185,8 +182,8 @@
                     android:layout_gravity="bottom|end"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:paddingEnd="5dp"
                     android:paddingStart="0dp"
+                    android:paddingEnd="5dp"
                     android:text="2022-05-03"
                     android:textSize="10sp"
                     android:textStyle="italic" />

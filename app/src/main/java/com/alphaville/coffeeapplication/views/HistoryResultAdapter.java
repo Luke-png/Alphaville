@@ -77,7 +77,7 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
             super(itemView);
             name = itemView.findViewById(R.id.review_cp_product_name);
             country = itemView.findViewById(R.id.review_cp_country);
-            process = itemView.findViewById(R.id.review_cp_product_name);
+            process = itemView.findViewById(R.id.review_cp_process);
             //attr1 = itemView.findViewById(R.id.review_cp_att1);
             //attr2 = itemView.findViewById(R.id.review_cp_att2);
             //attr3 = itemView.findViewById(R.id.review_cp_att3);
@@ -92,8 +92,8 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
         public void setReviewInfo(Review item){
             name.setText(item.getCoffeeProduct().getName());
             country.setText(item.getCoffeeProduct().getCountry());
-            process.setText(item.getCoffeeProduct().getProcess().toString());
-            reviewDate.setText(item.getCreationTime().toString());
+            process.setText("Process: " + item.getCoffeeProduct().getProcess().toString());
+            reviewDate.setText(item.getCreationTimeAsString());
             drinktype.setText("Review for " + item.getDrinkCategory());
             //image.setImageIcon(item.getCoffeeProduct().getImage());
             rating.setRating((float) item.getRating());

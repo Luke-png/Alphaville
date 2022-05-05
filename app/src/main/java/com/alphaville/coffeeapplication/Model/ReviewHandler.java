@@ -49,6 +49,13 @@ public class ReviewHandler {
      * @return a copy of the list of reviews
      */
     public List<Review> getReviews() {
+        //TODO remove test
+        //Test review
+        createReview(new CoffeeProduct("Skånerost", "Colombia", 225,
+                CoffeeProduct.Roast.light, CoffeeProduct.Process.fermented,
+                new ArrayList<CoffeeProduct.Taste>() {}, "Tastes great", false)
+        ,"testReview", 3.5, "testLocation", "Cappuccino",
+                new Timestamp(System.currentTimeMillis()));
         return new ArrayList<>(reviews);
     }
 
