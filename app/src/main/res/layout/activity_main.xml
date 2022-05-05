@@ -38,16 +38,5 @@
 
   <!--Hardcoded fragment for demo purpose. Remove later-->
 
-    <fragment
-        android:id="@+id/coffee_info_view_fragment.xml"
-        android:name="com.alphaville.coffeeapplication.views.CoffeeInfoViewFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
 </RelativeLayout>
