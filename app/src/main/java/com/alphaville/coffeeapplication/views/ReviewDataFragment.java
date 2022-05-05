@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-//import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
-
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 

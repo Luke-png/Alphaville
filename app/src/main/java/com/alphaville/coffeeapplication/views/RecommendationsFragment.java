@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.alphaville.coffeeapplication.GridCard;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.RecAdapter;
-import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 
 import java.util.ArrayList;
@@ -29,11 +28,11 @@ public class RecommendationsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        GridView recGrid = this.findViewById(R.id.recGrid);
+        //GridView recGrid = this.findViewById(R.id.recGrid);
 
 
-        RecAdapter adapter = new RecAdapter(this, fillGridView());
-        recGrid.setAdapter(adapter);
+        //RecAdapter adapter = new RecAdapter(this, fillGridView());
+        //recGrid.setAdapter(adapter);
 
         return inflater.inflate(R.layout.fragment_recommendations,container,false);
     }
