@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.views;
+package com.alphaville.coffeeapplication.views.util;
 
 import android.graphics.Rect;
 import android.view.View;

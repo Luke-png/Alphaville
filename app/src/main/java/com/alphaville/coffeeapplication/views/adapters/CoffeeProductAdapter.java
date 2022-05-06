@@ -1,19 +1,18 @@
-package com.alphaville.coffeeapplication;
+package com.alphaville.coffeeapplication.views.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.R;
+import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication;
+package com.alphaville.coffeeapplication.viewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,11 +21,9 @@ public class SearchListViewModel extends ViewModelEngine {
         return filteredList;
     }
 
-    /**
-     * Method for picking out products that match the text-string the user is typing in search-tab.
-     * @param s the text-string the user has typed
-     * @return a list with matching products
-     */
+    //Filtreringslogic. Borde skötas någon annanstans. T.ex. hjälpklass till databasen.
+    //getFilteredList borde innehålla den filtrerade listan.
+    /*
     public List<CoffeeProduct> filterList(String s) {
         List<CoffeeProduct> newList = new ArrayList<>();
         for(int i = 0; i < filteredList.getValue().size(); i++){
@@ -38,15 +36,6 @@ public class SearchListViewModel extends ViewModelEngine {
         // filteredList = CoffeeDatabase.getInstance().filter(param1, param2);
     }
 
-
-
-
-    /**
-     * Method for comparing a single coffeeproduct with a text-string.
-     * @param r the coffeeproduct that will be compared
-     * @param s the text-string to match with the coffeeproduct
-     * @return true if coffeeproduct matches the text-string, false if not
-     */
     private boolean validProduct(CoffeeProduct r, String s){
         char coffeeLetter, stringLetter;
         for(int i = 0; i < s.length() && i < r.getName().length(); i++){
@@ -59,7 +48,7 @@ public class SearchListViewModel extends ViewModelEngine {
             }
         }
         return true;
-    }
+    }*/
 
     public void selectItem(CoffeeProduct product) {
         selected.setValue(product);

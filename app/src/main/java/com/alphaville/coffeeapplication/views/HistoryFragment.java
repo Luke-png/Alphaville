@@ -8,11 +8,12 @@ import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
+import com.alphaville.coffeeapplication.views.adapters.HistoryResultAdapter;
+import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
 
 public class HistoryFragment extends Fragment {
 
