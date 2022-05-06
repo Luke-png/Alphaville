@@ -30,8 +30,8 @@ public class SearchListFragment extends Fragment {
     private RecyclerView rv;
     private CoffeeProductAdapter adapter;
     private FragmentContainerView fcv;
-    private SearchListFragmentBinding binding;
-    private SearchListViewModel model;
+    private SearchListViewModel viewModel;
+    private SearchView sv;
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 
 
@@ -43,12 +43,12 @@ public class SearchListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = SearchListFragmentBinding.inflate(inflater, container, false);
-        model = new SearchListViewModel();
+        //binding = SearchListFragmentBinding.inflate(inflater, container, false);
+
         coffeeProducts.add(new CoffeeProduct());
         coffeeProducts.add(new CoffeeProduct());
 
-        SearchListViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
             @Override
             public void onChanged(@Nullable List<CoffeeProduct> p) {
@@ -71,6 +71,8 @@ public class SearchListFragment extends Fragment {
         // Inflate the layout for this fragment
         rv = (RecyclerView) v.findViewById(R.id.RV_SearchList);
         fcv = (FragmentContainerView) v.findViewById(R.id.FCV_DetailView);
+        sv = (SearchView) v.findViewById(R.id.searchInSearchTab);
+
         fcv.setVisibility(View.INVISIBLE);
 
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -79,22 +81,23 @@ public class SearchListFragment extends Fragment {
         rv.setAdapter(adapter);
 
         SpacingItemDecorator itemDecorator = new SpacingItemDecorator(15);
-        binding.RVSearchList.addItemDecoration(itemDecorator);
+        rv.addItemDecoration(itemDecorator);
+
         /**
          * Listener that should be triggered everytime the user changes anything in the search-field.
          * This is if we want continuous updates while writing.
          */
-        binding.searchInSearchTab.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-                //binding.RVSearchList.setAdapter(new CoffeeProductAdapter(model.filterList(s)));
+                //rv.setAdapter(new CoffeeProductAdapter(model.filterList(s)));
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                //binding.RVSearchList.setAdapter(new CoffeeProductAdapter(model.filterList(s)));
+                //rv.setAdapter(new CoffeeProductAdapter(model.filterList(s)));
                 return true;
             }
         });
