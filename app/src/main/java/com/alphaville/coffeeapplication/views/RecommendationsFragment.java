@@ -33,16 +33,20 @@ public class RecommendationsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
 
-        GridView gridView = findViewById(R.id.recGrid);
+        View view = inflater.inflate(R.layout.fragment_recommendations, container, false);
+        GridView gridView = view.findViewById(R.id.recGrid);
 
-        RecAdapter recAdapter = new RecAdapter(this, itemsarray);
+        RecAdapter recAdapter = new RecAdapter(this, fillGridView());
         gridView.setAdapter(recAdapter);
 
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         model = new RecTabViewModel();
 
+        return view;
+
         binding.recGrid.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         /**
          * This should initiate the adapter and recyclerview
          */
