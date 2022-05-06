@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication;
+package com.alphaville.coffeeapplication.views;
 
 import android.os.Bundle;
 
@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +16,11 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
-import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
+import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.SearchListFragmentBinding;
-import com.alphaville.coffeeapplication.views.HistoryResultAdapter;
-import com.alphaville.coffeeapplication.views.SpacingItemDecorator;
+import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
+import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
+import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

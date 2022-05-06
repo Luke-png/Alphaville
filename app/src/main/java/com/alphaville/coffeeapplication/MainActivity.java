@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.alphaville.coffeeapplication.views.HistoryFragment;
 import com.alphaville.coffeeapplication.views.RecommendationsFragment;
-import com.alphaville.coffeeapplication.views.SearchFragment;
+import com.alphaville.coffeeapplication.views.SearchListFragment;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
