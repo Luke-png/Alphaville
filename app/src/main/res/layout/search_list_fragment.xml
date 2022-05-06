@@ -10,28 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/frameLayout3"
-            android:layout_width="0dp"
-            android:layout_height="49dp"
-            android:background="#CC9191"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <SearchView
-                android:id="@+id/searchInSearchTab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:queryHint="Search here" />
-        </FrameLayout>
+        <SearchView
+            android:id="@+id/searchInSearchTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search here" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RV_SearchList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/searchInSearchTab">
 
         </androidx.recyclerview.widget.RecyclerView>
 
