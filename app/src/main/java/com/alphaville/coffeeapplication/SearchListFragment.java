@@ -20,6 +20,7 @@ import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
 import com.alphaville.coffeeapplication.databinding.SearchListFragmentBinding;
 import com.alphaville.coffeeapplication.views.HistoryResultAdapter;
+import com.alphaville.coffeeapplication.views.SpacingItemDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,8 @@ public class SearchListFragment extends Fragment {
         adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
 
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(15);
+        binding.RVSearchList.addItemDecoration(itemDecorator);
         /**
          * Listener that should be triggered everytime the user changes anything in the search-field.
          * This is if we want continuous updates while writing.
