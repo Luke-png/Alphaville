@@ -14,7 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
+
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
+import com.alphaville.coffeeapplication.databinding.SearchListFragmentBinding;
+import com.alphaville.coffeeapplication.views.HistoryResultAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +29,9 @@ public class SearchListFragment extends Fragment {
     private RecyclerView rv;
     private CoffeeProductAdapter adapter;
     private FragmentContainerView fcv;
-    List<CoffeeProduct> coffeeProducts = new ArrayList<>();
+    private SearchListFragmentBinding binding;
+    private SearchListViewModel model;
+    List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 
 
     @Override
@@ -35,7 +42,8 @@ public class SearchListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        binding = SearchListFragmentBinding.inflate(inflater, container, false);
+        model = new SearchListViewModel();
         coffeeProducts.add(new CoffeeProduct());
         coffeeProducts.add(new CoffeeProduct());
 
@@ -68,6 +76,25 @@ public class SearchListFragment extends Fragment {
 
         adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
+
+        /**
+         * Listener that should be triggered everytime the user changes anything in the search-field.
+         * This is if we want continuous updates while writing.
+         */
+        binding.searchInSearchTab.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                //binding.RVSearchList.setAdapter(new CoffeeProductAdapter(model.filterList(s)));
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                //binding.RVSearchList.setAdapter(new CoffeeProductAdapter(model.filterList(s)));
+                return true;
+            }
+        });
         return v; //inflater.inflate(R.layout.search_list_fragment, container, false);
     }
 }

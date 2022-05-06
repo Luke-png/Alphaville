@@ -12,11 +12,18 @@
 
         <FrameLayout
             android:id="@+id/frameLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="#934646"
+            android:layout_width="0dp"
+            android:layout_height="49dp"
+            android:background="#CC9191"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <SearchView
+                android:id="@+id/searchInSearchTab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:queryHint="Search here" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView

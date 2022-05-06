@@ -86,6 +86,8 @@ public class ReviewHandler {
         for(int i = 0; i < s.length() && i < r.getCoffeeProduct().getName().length(); i++){
             coffeeLetter = r.getCoffeeProduct().getName().charAt(i);
             stringLetter = s.charAt(i);
+            coffeeLetter = Character.toLowerCase(coffeeLetter);
+            stringLetter = Character.toLowerCase(stringLetter);
             if(Character.compare(coffeeLetter, stringLetter) != 0){
                 return false;
             }
