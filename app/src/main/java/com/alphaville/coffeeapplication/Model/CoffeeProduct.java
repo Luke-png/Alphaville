@@ -31,13 +31,20 @@ public class CoffeeProduct
     /** A list of all taste profiles that this product matches. */
     private final List<Taste> tastes;
 
+    /** Sweetness rating. */
+    private final int sweetness;
+    /** Fullness rating. */
+    private final int fullness;
+    /** Bitterness rating. */
+    private final int bitterness;
+
     /** Short description of the product. */
     private final String description;
 
     /** Whether the user likes the coffee product. */
     private final boolean isLiked;
 
-    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, List<Taste> tastes, String description, boolean isLiked){
+    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, List<Taste> tastes, int sweetness, int fullness, int bitterness, String description, boolean isLiked){
         this.name = name;
         this.roast = roast;
         this. country = country;
@@ -45,6 +52,10 @@ public class CoffeeProduct
         this.elevation = elevation;
         this.process = process;
         this.tastes = new ArrayList<>(tastes);
+
+        this.sweetness = sweetness;
+        this.fullness = fullness;
+        this.bitterness = bitterness;
 
         this.description = description;
         this.isLiked = isLiked;
@@ -80,5 +91,15 @@ public class CoffeeProduct
 
     public boolean isLiked() { return isLiked; }
 
+    public int getSweetness() {
+        return sweetness;
+    }
 
+    public int getFullness() {
+        return fullness;
+    }
+
+    public int getBitterness() {
+        return bitterness;
+    }
 }
