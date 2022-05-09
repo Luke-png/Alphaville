@@ -38,11 +38,10 @@ public class RecommendationsFragment extends Fragment {
 
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        /*RecAdapter recAdapter = new RecAdapter(getActivity(),fillGridView());
-        binding.recGrid.setAdapter(recAdapter);*/
+        RecAdapter recAdapter = new RecAdapter(getActivity(),fillGridView());
+        binding.recGrid.setAdapter(recAdapter);
 
 
-        //return view;
         return view;
     }
 
@@ -53,8 +52,6 @@ public class RecommendationsFragment extends Fragment {
         gridArrayList.add(new GridCard("JAVA", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("C++", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("Python", R.drawable.ic_filled_heart));
-        gridArrayList.add(new GridCard("Javascript", R.drawable.ic_filled_heart));
-        gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
         return gridArrayList;
     }
 

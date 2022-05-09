@@ -53,7 +53,6 @@
                         android:layout_width="211dp"
                         android:layout_height="82dp"
                         android:layout_marginBottom="272dp"
-                        android:background="@drawable/rounded_corner"
                         android:gravity="center_vertical|center"
                         android:text="Veckans Favoriter"
                         android:textSize="20sp"
@@ -66,7 +65,7 @@
 
                     <FrameLayout
                         android:layout_width="295dp"
-                        android:layout_height="253dp"
+                        android:layout_height="405dp"
                         android:layout_marginTop="4dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +79,7 @@
                             android:layout_height="match_parent"
                             android:horizontalSpacing="6dp"
                             android:numColumns="2"
-                            android:verticalSpacing="6dp"/>
+                            android:verticalSpacing="6dp" />
                     </FrameLayout>
 
                     <FrameLayout

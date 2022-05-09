@@ -1,9 +1,11 @@
 package com.alphaville.coffeeapplication.views.adapters;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -13,58 +15,31 @@ import androidx.annotation.NonNull;
 
 import com.alphaville.coffeeapplication.GridCard;
 import com.alphaville.coffeeapplication.R;
-import com.google.android.gms.ads.mediation.Adapter;
 
 import java.util.ArrayList;
 
-public class RecAdapter extends BaseAdapter {
+public class RecAdapter extends ArrayAdapter<GridCard> {
 
-    private ArrayList<GridCard> gridCardHolder;
-    private Context context;
-    private LayoutInflater inflter;
 
-    public RecAdapter(Context context, ArrayList<GridCard> gridCardHolder){
-        this.context = context;
-        this.gridCardHolder = gridCardHolder;
+    public RecAdapter(@NonNull Context context,@NonNull ArrayList<GridCard> gridCardHolder){
+        super(context,0, gridCardHolder);
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return gridCardHolder.size();
-    }
+    public View getView(int position, @NonNull View view, @NonNull ViewGroup viewGroup) {
 
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-
-        if (inflter == null){
-            inflter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View listitemView = view;
+        if (listitemView == null) {
+            // Layout Inflater inflates each item to be displayed in GridView.
+            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.rec_card, viewGroup, false);
         }
-
-        if (view == null){
-
-            view = inflter.inflate(R.layout.rec_card,null);
-
-        }
-
-        view = inflter.inflate(R.layout.fragment_recommendations, null); // inflate the layout
-        ImageView imageView = view.findViewById(R.id.gridCardImg);
-        TextView textField = view.findViewById(R.id.gridCardText);
-
-        //imageView.setImageResource(gridCardHolder);
-        textField.setText(gridCardHolder.get(i).getCourse_name());
-
-
-        return view;
+        GridCard courseModel = getItem(position);
+        TextView courseTV = listitemView.findViewById(R.id.gridCardText);
+        ImageView courseIV = listitemView.findViewById(R.id.gridCardImg);
+        courseTV.setText(courseModel.getCourse_name());
+        courseIV.setImageResource(courseModel.getImgid());
+        return listitemView;
     }
 
 }
