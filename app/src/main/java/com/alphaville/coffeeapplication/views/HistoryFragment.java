@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
+import com.alphaville.coffeeapplication.views.adapters.HistoryResultAdapter;
+import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
 
 public class HistoryFragment extends Fragment {
 
@@ -26,13 +28,14 @@ public class HistoryFragment extends Fragment {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         model = new HistoryTabViewModel();
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(15);
+        binding.reviewList.addItemDecoration(itemDecorator);
 
         binding.reviewList.setLayoutManager(new LinearLayoutManager(getActivity()));
         /**
          * This should initiate the adapter and recyclerview
          */
         binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews()));
-
         /**
          * Listener that should be triggered everytime the user changes anything in the search-field.
          * This is if we want continuous updates while writing.

@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.views;
+package com.alphaville.coffeeapplication.views.adapters;
 
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
-import com.alphaville.coffeeapplication.databinding.ReviewHistoryListItemBinding;
 
 import java.util.List;
 

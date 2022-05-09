@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -8,17 +9,17 @@
         android:id="@+id/sr_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/placeholder_beans"
         android:layout_margin="10dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder_beans" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="5dp">
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="8dp">
 
         <TextView
             android:id="@+id/sr_title"
@@ -36,7 +37,7 @@
             android:fontFamily="sans-serif"
             android:text="82% match"
             android:textSize="16sp"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -47,22 +48,21 @@
                 android:id="@+id/sr_height"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:textSize="13sp"
-                android:textStyle="italic"
                 android:layout_marginEnd="7dp"
-                android:text="Höjd: 12" />
+                android:fontFamily="sans-serif"
+                android:text="Höjd: 12"
+                android:textSize="13sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/sr_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:textSize="13sp"
-                android:textStyle="italic"
                 android:layout_marginEnd="7dp"
-                android:text="Land: Peru" />
-
+                android:fontFamily="sans-serif"
+                android:text="Land: Peru"
+                android:textSize="13sp"
+                android:textStyle="italic" />
 
 
         </LinearLayout>
@@ -72,9 +72,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
+            android:text="Process: asd"
             android:textSize="13sp"
-            android:textStyle="italic"
-            android:text="Process: asd" />
+            android:textStyle="italic" />
 
     </LinearLayout>
 
@@ -82,10 +82,10 @@
         android:id="@+id/sr_liked_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/empty_heart"
-        android:scaleType="centerCrop"
-        android:padding="3dp"
         android:layout_margin="5dp"
-        android:background="#FFFFFFFF"/>
+        android:background="#FFFFFFFF"
+        android:padding="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/empty_heart" />
 
 </LinearLayout>

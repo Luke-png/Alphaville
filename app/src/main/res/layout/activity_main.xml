@@ -9,7 +9,7 @@
 <!-- för searchlistan
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.alphaville.coffeeapplication.SearchListFragment"
+        android:name="com.alphaville.coffeeapplication.views.SearchListFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,5 +49,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     -->
--->
 </RelativeLayout>
