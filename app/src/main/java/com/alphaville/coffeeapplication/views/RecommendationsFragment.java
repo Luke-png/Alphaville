@@ -15,6 +15,8 @@ import com.alphaville.coffeeapplication.GridCard;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
+import com.alphaville.coffeeapplication.views.adapters.HistoryResultAdapter;
+import com.alphaville.coffeeapplication.views.adapters.RecAdapter;
 
 import java.util.ArrayList;
 
@@ -33,15 +35,17 @@ public class RecommendationsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_recommendations, container, false);
-        GridView gridView = view.findViewById(R.id.recGrid);
-
-        RecAdapter recAdapter = new RecAdapter(this, fillGridView());
-        gridView.setAdapter(recAdapter);
-
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         model = new RecTabViewModel();
+
+        //View view = inflater.inflate(R.layout.fragment_recommendations, container, false);
+        GridView gridView = view.findViewById(R.id.recGrid);
+
+        //RecAdapter recAdapter = new RecAdapter(this, fillGridView());
+        //gridView.setAdapter(recAdapter);
+        binding.recGrid.setAdapter(new RecAdapter(fillGridView()));
+
 
         return view;
 
@@ -50,7 +54,7 @@ public class RecommendationsFragment extends Fragment {
         /**
          * This should initiate the adapter and recyclerview
          */
-        binding.recGrid.setAdapter(new RecAdapter(model.getReviews(),fillGridView()));
+        binding.recGrid.setAdapter(new RecAdapter(fillGridView()));
         //GridView recGrid = this.findViewById(R.id.recGrid);
 
 
@@ -60,7 +64,7 @@ public class RecommendationsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_recommendations,container,false);
     }
 
-    private ArrayList fillGridView(){
+    private ArrayList<GridCard> fillGridView(){
         ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
         gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("JAVA", R.drawable.ic_filled_heart));

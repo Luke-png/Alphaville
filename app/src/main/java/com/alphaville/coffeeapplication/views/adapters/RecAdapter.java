@@ -1,24 +1,16 @@
-package com.alphaville.coffeeapplication.views;
+package com.alphaville.coffeeapplication.views.adapters;
 
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.alphaville.coffeeapplication.GridCard;
-import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
+import com.alphaville.coffeeapplication.views.adapters.RecAdapter.GridCardViewHolder;
 import com.google.android.gms.ads.mediation.Adapter;
 
 import java.util.ArrayList;
