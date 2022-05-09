@@ -48,7 +48,7 @@ public class SearchListFragment extends Fragment {
                              Bundle savedInstanceState) {
         //binding = SearchListFragmentBinding.inflate(inflater, container, false);
 
-        coffeeProducts.add(new CoffeeProduct());
+        coffeeProducts.add(new CoffeeProduct("Mollbergs Blandning", "Colombia",225,CoffeeProduct.Roast.light, CoffeeProduct.Process.dry,new ArrayList<>(),"This is our homemade coffee", true));
         coffeeProducts.add(new CoffeeProduct());
 
         viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);

@@ -24,18 +24,20 @@ import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 public class CoffeeInfoViewFragment extends Fragment {
 
     private CoffeeInfoViewFragmentBinding binding;
-    private SearchListViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
-
+    private SearchListViewModel viewModel;
     @Override
     public View onCreateView (LayoutInflater inflater,
                           ViewGroup container,
                           Bundle savedInstanceState) {
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        viewModel= new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
 
         CoffeeProduct selected = viewModel.getSelected().getValue();
-        setCoffeeAttributes(selected.getElevation()+"", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
-        setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
+        if (selected!=null) {
+            setCoffeeAttributes(selected.getElevation() + "", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
+            setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
+        }
         //setCoffeePicture(image);
         //setClockTexts(firstClockText, secondClockText, thirdClockText);
 
