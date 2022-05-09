@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alphaville.coffeeapplication.GridCard;
 import com.alphaville.coffeeapplication.R;
+import com.alphaville.coffeeapplication.databinding.ActivityMainBinding;
+import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
 import com.alphaville.coffeeapplication.views.adapters.HistoryResultAdapter;
@@ -25,9 +27,8 @@ import java.util.ArrayList;
 
 public class RecommendationsFragment extends Fragment {
 
+    FragmentRecommendationsBinding binding;
 
-    private RecTabViewModel model;
-    private GridView recGrid;
 
     @Nullable
     @Override
@@ -35,14 +36,14 @@ public class RecommendationsFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        RecAdapter recAdapter = new RecAdapter(getActivity(),fillGridView());
-        View view = inflater.inflate(R.layout.fragment_recommendations, container, false);
-        recGrid = (GridView) view.findViewById(R.id.recGrid);
-        recGrid.setAdapter(recAdapter);
+        /*binding = FragmentRecommendationsBinding.inflate(inflater, container, false);*/
+        View view = binding.getRoot();
+
+        /*RecAdapter recAdapter = new RecAdapter(getActivity(),fillGridView());
+        binding.recGrid.setAdapter(recAdapter);*/
 
 
         return view;
-
     }
 
     private ArrayList<GridCard> fillGridView(){

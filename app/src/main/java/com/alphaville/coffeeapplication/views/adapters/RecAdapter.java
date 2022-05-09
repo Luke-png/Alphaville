@@ -21,7 +21,7 @@ public class RecAdapter extends BaseAdapter {
 
     private ArrayList<GridCard> gridCardHolder;
     private Context context;
-    private LayoutInflater inflater;
+    private LayoutInflater inflter;
 
     public RecAdapter(Context context, ArrayList<GridCard> gridCardHolder){
         this.context = context;
@@ -45,7 +45,18 @@ public class RecAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflater.inflate(R.layout.fragment_recommendations, null); // inflate the layout
+
+        if (inflter == null){
+            inflter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        if (view == null){
+
+            view = inflter.inflate(R.layout.rec_card,null);
+
+        }
+
+        view = inflter.inflate(R.layout.fragment_recommendations, null); // inflate the layout
         ImageView imageView = view.findViewById(R.id.gridCardImg);
         TextView textField = view.findViewById(R.id.gridCardText);
 
