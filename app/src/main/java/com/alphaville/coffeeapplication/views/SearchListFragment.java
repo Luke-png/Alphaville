@@ -30,7 +30,10 @@ public class SearchListFragment extends Fragment {
     private RecyclerView rv;
     private CoffeeProductAdapter adapter;
     private FragmentContainerView fcv;
+
+    //Denna kommer väl antagligen ersättas av den sammanslagna viewModelen
     private SearchListViewModel viewModel;
+
     private SearchView sv;
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 

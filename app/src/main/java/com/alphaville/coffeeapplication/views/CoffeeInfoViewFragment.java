@@ -7,11 +7,16 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
 import com.alphaville.coffeeapplication.viewModels.CoffeeInfoViewModel;
+import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 /**
  * Class for handling a detailed view for a CoffeeProduct.
@@ -19,7 +24,7 @@ import com.alphaville.coffeeapplication.viewModels.CoffeeInfoViewModel;
 public class CoffeeInfoViewFragment extends Fragment {
 
     private CoffeeInfoViewFragmentBinding binding;
-    private CoffeeInfoViewModel model;
+    private SearchListViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
 
     @Override
     public View onCreateView (LayoutInflater inflater,
@@ -28,12 +33,11 @@ public class CoffeeInfoViewFragment extends Fragment {
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        /*
-        setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
-        setCoffeeInformation(name, info, description);
-        setCoffeePicture(image);
-        setClockTexts(firstClockText, secondClockText, thirdClockText);
-         */
+        CoffeeProduct selected = viewModel.getSelected().getValue();
+        setCoffeeAttributes(selected.getElevation()+"", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
+        setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
+        //setCoffeePicture(image);
+        //setClockTexts(firstClockText, secondClockText, thirdClockText);
 
         //listener for the review button
         binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
