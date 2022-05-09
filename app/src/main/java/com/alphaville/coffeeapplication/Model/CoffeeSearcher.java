@@ -12,37 +12,64 @@ import kotlin.Pair;
 public class CoffeeSearcher {
 
     /**
-     * Used to set the active product when clicking on a card
+     * Returns a list of found coffee products depending on search text AND filter
      * @param products list to search
      * @param searchString from the search bar
      * @param countries a list of countries, empty or null gives all
      * @param minElevation minimum required elevation
      * @param maxElevation maximum required elevation
+     * @param roasts list of roasts that should be listed
+     * @param tastes list of tastes that should be listed
+     * @param processes list of processes used that should be listed
      */
     public static List<CoffeeProduct> searchProducts (List<CoffeeProduct> products,
                                                       String searchString,
                                                       List<String> countries,
-                                                      int minElevation, int maxElevation
+                                                      int minElevation, int maxElevation,
+                                                      List<CoffeeProduct.Roast> roasts,
+                                                      List<CoffeeProduct.Taste> tastes,
+                                                      List<CoffeeProduct.Process> processes
                                                       ) {
 
         List<CoffeeProduct> itemsToRemove = new ArrayList<>();
-
+        List<CoffeeProduct> newList = new ArrayList<>(products);
 
         for (CoffeeProduct p : products) {
-
+    // kaffe: 1,2
+            // sök efter 0,1,3
             if (!(countries.contains(p.getCountry()))) itemsToRemove.add(p);
             if (!(p.getElevation() >= minElevation && p.getElevation() <= maxElevation)) itemsToRemove.add(p);
-            // Fortsätt kolla paramterar
+            if (!(roasts.contains(p.getRoast()))) itemsToRemove.add(p);
+            /*
+            for (CoffeeProduct.Taste t : p.getTastes()) {
+                if(!())
+            }
+            */
+            if (!(processes.contains(p.getProcess()))) itemsToRemove.add(p);
         }
 
-        products.removeAll(itemsToRemove);
-        
-        return null;
+        newList.removeAll(itemsToRemove);
+        return newList;
+    }
+
+    /**
+     * Returns a list of found coffee products depending on search text only
+     * @param products list of coffee products to search in
+     * @param s searchbar search (name of coffee)
+     * @return the active coffeeProduct
+     */
+    public static List<CoffeeProduct> searchProductsNoFilter(List<CoffeeProduct> products, String s) {
+        List<CoffeeProduct> newList = new ArrayList<>();
+
+        for (CoffeeProduct p : products) {
+            if (validProductStringSearch(p, s)) newList.add(p);
+        }
+        return newList;
     }
 
 
     /**
-     * Returns a list of found reviews depending on
+     * Returns a list of found reviews depending on search text only
      * @param reviews list of reviews to search in
      * @param s searchbar search (name of coffee)
      * @return the active coffeeProduct
