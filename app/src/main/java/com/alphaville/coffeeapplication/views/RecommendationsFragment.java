@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +26,8 @@ import java.util.ArrayList;
 public class RecommendationsFragment extends Fragment {
 
 
-    private FragmentRecommendationsBinding binding;
     private RecTabViewModel model;
+    private GridView recGrid;
 
     @Nullable
     @Override
@@ -34,34 +35,14 @@ public class RecommendationsFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-
-        binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        model = new RecTabViewModel();
-
-        //View view = inflater.inflate(R.layout.fragment_recommendations, container, false);
-        GridView gridView = view.findViewById(R.id.recGrid);
-
-        //RecAdapter recAdapter = new RecAdapter(this, fillGridView());
-        //gridView.setAdapter(recAdapter);
-        binding.recGrid.setAdapter(new RecAdapter(fillGridView()));
+        RecAdapter recAdapter = new RecAdapter(getActivity(),fillGridView());
+        View view = inflater.inflate(R.layout.fragment_recommendations, container, false);
+        recGrid = (GridView) view.findViewById(R.id.recGrid);
+        recGrid.setAdapter(recAdapter);
 
 
         return view;
 
-        binding.recGrid.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        /**
-         * This should initiate the adapter and recyclerview
-         */
-        binding.recGrid.setAdapter(new RecAdapter(fillGridView()));
-        //GridView recGrid = this.findViewById(R.id.recGrid);
-
-
-        //RecAdapter adapter = new RecAdapter(this, fillGridView());
-        //recGrid.setAdapter(adapter);
-
-        return inflater.inflate(R.layout.fragment_recommendations,container,false);
     }
 
     private ArrayList<GridCard> fillGridView(){

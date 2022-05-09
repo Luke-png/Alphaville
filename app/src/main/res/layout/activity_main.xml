@@ -36,7 +36,7 @@
         app:menu="@menu/bottom_navigation"
         android:background="?android:attr/windowBackground"/>
 
-  <!--Hardcoded fragment for demo purpose. Remove later
+<!--  Hardcoded fragment for demo purpose. Remove later-->
 
     <fragment
         android:id="@+id/coffee_info_view_fragment.xml"
@@ -48,5 +48,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    -->
 </RelativeLayout>
