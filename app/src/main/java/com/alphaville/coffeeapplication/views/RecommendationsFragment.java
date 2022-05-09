@@ -36,15 +36,16 @@ public class RecommendationsFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        /*binding = FragmentRecommendationsBinding.inflate(inflater, container, false);*/
+        binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-
         /*RecAdapter recAdapter = new RecAdapter(getActivity(),fillGridView());
         binding.recGrid.setAdapter(recAdapter);*/
 
 
+        //return view;
         return view;
     }
+
 
     private ArrayList<GridCard> fillGridView(){
         ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();

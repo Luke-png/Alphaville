@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
                     switch (item.getItemId()){
-                        case R.id.nav_recommendations:
-                            selectedFragment = new RecommendationsFragment();
-                            break;
                         case R.id.nav_search:
                             selectedFragment = new SearchListFragment();
+                            break;
+                        case R.id.nav_recommendations:
+                            selectedFragment = new RecommendationsFragment();
                             break;
                         case R.id.nav_history:
                             selectedFragment = new HistoryFragment();
