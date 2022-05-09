@@ -25,7 +25,7 @@ public class ReviewHandler {
         s.add(fruity);
         reviews.add(new Review(new CoffeeProduct("something", "Sweden", 1900,
                 CoffeeProduct.Roast.light, CoffeeProduct.Process.dry, s, "from the best beans", false),
-                "this tastes good", 3, "Johanneberg", "cappuccino", new Timestamp(2000)));
+                "this tastes good", 3, "Johanneberg", "cappuccino", 2000));
     }
 
     /**
@@ -39,7 +39,7 @@ public class ReviewHandler {
      */
     //TODO save to database when implemented.
     public void createReview(CoffeeProduct cp, String textReview, double rating, String location,
-                            String drinkCategory, Timestamp creationTime){
+                            String drinkCategory, long creationTime){
         Review newReview = new Review(cp, textReview, rating, location, drinkCategory, creationTime);
         reviews.add(newReview);
     }
@@ -55,7 +55,7 @@ public class ReviewHandler {
                 CoffeeProduct.Roast.light, CoffeeProduct.Process.fermented,
                 new ArrayList<CoffeeProduct.Taste>() {}, "Tastes great", false)
         ,"testReview", 3.5, "testLocation", "Cappuccino",
-                new Timestamp(System.currentTimeMillis()));
+               System.currentTimeMillis());
         return new ArrayList<>(reviews);
     }
 
