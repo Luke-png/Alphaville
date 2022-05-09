@@ -1,5 +1,7 @@
 package com.alphaville.coffeeapplication.Model;
 
+import androidx.room.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import java.util.List;
  *
  * Completely immutable to prevent logical errors.
  */
+@Entity
 public class CoffeeProduct
 {
     /** Possible ways for a coffee product to be processed. */

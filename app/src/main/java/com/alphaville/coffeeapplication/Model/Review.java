@@ -2,6 +2,10 @@ package com.alphaville.coffeeapplication.Model;
 
 import android.text.format.DateFormat;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Locale;
@@ -9,7 +13,18 @@ import java.util.Locale;
 /**
  * The Review class is a data class representing a review of a CoffeeProduct
  */
+@Entity(tableName = "reviews",
+        foreignKeys = {@ForeignKey(
+        entity = CoffeeProduct.class,
+        parentColumns = "id",
+        childColumns = "coffeeProduct"
+        //,onDelete = ForeignKey.CASCADE //Do we need?
+        )})
 public class Review {
+
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     private final CoffeeProduct coffeeProduct;
     /**
@@ -43,6 +58,10 @@ public class Review {
         this.location = location;
         this.drinkCategory = drinkCategory;
         this.creationTime = creationTime;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public CoffeeProduct getCoffeeProduct() {
