@@ -1,6 +1,8 @@
 package com.alphaville.coffeeapplication.Model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.List;
 @Entity
 public class CoffeeProduct
 {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     /** Possible ways for a coffee product to be processed. */
     public enum Process { dry, wet, fermented, honey }
     /** Possible tastes for a coffee product. */
@@ -21,24 +25,25 @@ public class CoffeeProduct
     public enum Roast { light, dark }
 
     /** The name of the coffee product */
-    private final String name;
+    private String name;
     /** The name of the country from which the product originates. */
-    private final String country;
+    private String country;
 
     /** Elevation above sea level of the product's roastery. */
-    private final int elevation;
+    private int elevation;
     /** The method by which the coffee bean is roasted. */
-    private final Roast roast;
+    private Roast roast;
     /** The way this product has been processed. */
-    private final Process process;
+    private Process process;
     /** A list of all taste profiles that this product matches. */
-    private final List<Taste> tastes;
+    @Ignore
+    private List<Taste> tastes;
 
     /** Short description of the product. */
-    private final String description;
+    private String description;
 
     /** Whether the user likes the coffee product. */
-    private final boolean isLiked;
+    private boolean isLiked;
 
     public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, List<Taste> tastes, String description, boolean isLiked){
         this.name = name;
@@ -83,5 +88,43 @@ public class CoffeeProduct
 
     public boolean isLiked() { return isLiked; }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setElevation(int elevation) {
+        this.elevation = elevation;
+    }
+
+    public void setRoast(Roast roast) {
+        this.roast = roast;
+    }
+
+    public void setProcess(Process process) {
+        this.process = process;
+    }
+
+    public void setTastes(List<Taste> tastes) {
+        this.tastes = tastes;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
 }

@@ -30,7 +30,7 @@ public class ReviewDataViewModel extends ViewModelEngine {
 
 
         reviewHandler.createReview(getActiveProduct(), textReview, rating, location,
-                "testCategory", new Timestamp(System.currentTimeMillis()));
+                "testCategory", System.currentTimeMillis());
 
     }
     public CoffeeProduct getActiveProduct(){
