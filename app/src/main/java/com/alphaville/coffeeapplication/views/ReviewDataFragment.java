@@ -3,6 +3,7 @@ package com.alphaville.coffeeapplication.views;
 import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Process.dry;
 import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Roast.light;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,10 +18,12 @@ import androidx.fragment.app.Fragment;
 //import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
 import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
+import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ public class ReviewDataFragment extends Fragment {
 
     private ReviewDataFragmentBinding binding;
     private ReviewDataViewModel viewModel;
+    private SearchListViewModel viewModel2;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class ReviewDataFragment extends Fragment {
         View view = binding.getRoot();
 
         viewModel = new ReviewDataViewModel();
+        viewModel2 = new SearchListViewModel();
 
         initInputBox();
         initLocationBox();
@@ -63,7 +68,9 @@ public class ReviewDataFragment extends Fragment {
     /**
      * Initiates the text of which coffeeproduct is being reviewed
      */
-    private void initProductText() {binding.currentProduct.setText("Reviewing "+viewModel.getActiveProduct().getName());
+    @SuppressLint("SetTextI18n")
+    private void initProductText() {binding.currentProduct.setText(
+            "Reviewing " + viewModel2.getSelected());
     }
 
     /**
@@ -105,16 +112,14 @@ public class ReviewDataFragment extends Fragment {
      * Method for saving a review. When pressing the save-button, the input information is sent to
      * the ViewModel for handling.
      */
-    //TODO:Fix category variable so the user can provide this.
+    //TODO:Fix category input box (of some kind) so the user can provide this.
     private void saveReview(){
         double rating = binding.ratingBar.getRating();
         String reviewText = binding.inputBox.getText().toString();
         String location = binding.locationBox.getText().toString();
+        //String category = binding.categoryBox.getValue().toString();
 
-        CoffeeProduct cp = new CoffeeProduct("placeHolder", "testCountry",
-                99999, light, dry, new ArrayList<>(), "testDesc", true);
-
-        viewModel.createReview(cp, reviewText, rating, location,
-                "testCategory", new Timestamp(System.currentTimeMillis()));
+        viewModel.createReview(viewModel2.getSelected().getValue(), reviewText, rating, location,
+                "randomCategory", new Timestamp(System.currentTimeMillis()));
     }
 }
