@@ -17,7 +17,6 @@ import android.widget.SearchView;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
-import com.alphaville.coffeeapplication.databinding.SearchListFragmentBinding;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
 import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
@@ -74,15 +73,12 @@ public class SearchListFragment extends Fragment {
         sv = (SearchView) v.findViewById(R.id.searchInSearchTab);
 
         fcv.setVisibility(View.INVISIBLE);
-
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
 
-        //This is for the spacing between the items in a recyclerview.
-        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(15);
-        rv.addItemDecoration(itemDecorator);
+        initItemSpacing(15);
 
         /**
          * Listener that should be triggered everytime the user changes anything in the search-field.
@@ -103,5 +99,13 @@ public class SearchListFragment extends Fragment {
             }
         });
         return v; //inflater.inflate(R.layout.search_list_fragment, container, false);
+    }
+
+    /**
+     * Adds some distance between the items in a RecyclerView
+     */
+    private void initItemSpacing(int spacing) {
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(spacing);
+        rv.addItemDecoration(itemDecorator);
     }
 }

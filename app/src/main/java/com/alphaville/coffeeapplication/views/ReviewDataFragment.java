@@ -3,10 +3,12 @@ package com.alphaville.coffeeapplication.views;
 import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Process.dry;
 import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Roast.light;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -84,20 +86,35 @@ public class ReviewDataFragment extends Fragment {
         binding.textSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("pressing save-button");
-                double rating = binding.ratingBar.getRating();
-                String reviewText = binding.inputBox.getText().toString();
-                String location = binding.locationBox.getText().toString();
-                //Test object
-                CoffeeProduct cp = new CoffeeProduct("placeHolder", "testCountry",
-                        99999, light, dry, new ArrayList<>(), "testDesc", true);
-
-                viewModel.createReview(cp, binding.inputBox.getText().toString(),
-                        binding.ratingBar.getRating(), binding.locationBox.getText().toString(),
-                        "testCategory", new Timestamp(System.currentTimeMillis())
-                        );
+                saveReview();
+                showToastMessage("Review has been saved");
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
     }
 
+    /**
+     * Method for showing a toast-message
+     */
+    private void showToastMessage(String message){
+        Context context = getContext();
+        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Method for saving a review. When pressing the save-button, the input information is sent to
+     * the ViewModel for handling.
+     */
+    //TODO:Fix category variable so the user can provide this.
+    private void saveReview(){
+        double rating = binding.ratingBar.getRating();
+        String reviewText = binding.inputBox.getText().toString();
+        String location = binding.locationBox.getText().toString();
+
+        CoffeeProduct cp = new CoffeeProduct("placeHolder", "testCountry",
+                99999, light, dry, new ArrayList<>(), "testDesc", true);
+
+        viewModel.createReview(cp, reviewText, rating, location,
+                "testCategory", new Timestamp(System.currentTimeMillis()));
+    }
 }
