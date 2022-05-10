@@ -35,8 +35,7 @@ public class CoffeeSearcher {
         List<CoffeeProduct> newList = new ArrayList<>(products);
 
         for (CoffeeProduct p : products) {
-    // kaffe: 1,2
-            // sök efter 0,1,3
+
             if (!(countries.contains(p.getCountry()))) itemsToRemove.add(p);
             if (!(p.getElevation() >= minElevation && p.getElevation() <= maxElevation)) itemsToRemove.add(p);
             if (!(roasts.contains(p.getRoast()))) itemsToRemove.add(p);
@@ -48,8 +47,16 @@ public class CoffeeSearcher {
             if (!(processes.contains(p.getProcess()))) itemsToRemove.add(p);
         }
 
+        // Makes new list from the filter
         newList.removeAll(itemsToRemove);
-        return newList;
+        List<CoffeeProduct> newListSearch = new ArrayList<>(products);
+
+        // Takes filtered list, then do text string based search
+        for (CoffeeProduct p : products) {
+            if (validProductStringSearch(p, searchString)) newListSearch.add(p);
+        }
+
+        return newListSearch;
     }
 
     /**
@@ -58,7 +65,7 @@ public class CoffeeSearcher {
      * @param s searchbar search (name of coffee)
      * @return the active coffeeProduct
      */
-    public static List<CoffeeProduct> searchProductsNoFilter(List<CoffeeProduct> products, String s) {
+    public static List<CoffeeProduct> searchProducts(List<CoffeeProduct> products, String s) {
         List<CoffeeProduct> newList = new ArrayList<>();
 
         for (CoffeeProduct p : products) {
