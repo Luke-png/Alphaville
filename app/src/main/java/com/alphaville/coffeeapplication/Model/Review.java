@@ -26,9 +26,15 @@ import java.util.Locale;
 public class Review {
 
 
+    /**
+     * The id of a specific review, used in database as primary key.
+     */
     @PrimaryKey(autoGenerate = true)
     private int reviewId;
 
+    /**
+     * The {@link CoffeeProduct} that the review is of
+     */
     @Embedded
     private final CoffeeProduct coffeeProduct;
     /**
@@ -95,6 +101,11 @@ public class Review {
     public long getCreationTime(){
         return creationTime;
     }
+
+    /**
+     * Returns the creation time of the review as a string in the format YYY-MM-DD
+     * @return the creation time of the review as a string in the format YYY-MM-DD
+     */
     public String getCreationTimeAsString() {
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(getCreationTime());
