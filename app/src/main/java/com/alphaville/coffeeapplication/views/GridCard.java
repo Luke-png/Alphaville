@@ -1,10 +1,8 @@
-package com.alphaville.coffeeapplication;
+package com.alphaville.coffeeapplication.views;
 
 
 public class GridCard {
 
-    // string course_name for storing course_name
-    // and imgid for storing image id.
     private String course_name;
     private int imgid;
 
