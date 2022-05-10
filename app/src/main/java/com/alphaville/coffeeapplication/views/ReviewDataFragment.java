@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 //import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
 import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
@@ -37,14 +38,24 @@ public class ReviewDataFragment extends Fragment {
 
         viewModel = new ReviewDataViewModel();
 
-        //initRatingbar();
         initInputBox();
         initLocationBox();
         initSaveButton();
         initProductText();
 
-
     return view;
+    }
+
+    @Override
+    public void onResume() {
+        getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.INVISIBLE);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
+        super.onPause();
     }
 
     /**
@@ -66,20 +77,17 @@ public class ReviewDataFragment extends Fragment {
         binding.inputBox.setHint("Enter your review");
     }
 
-   /* public void initRatingbar(View view){
-        ratingBar = view.findViewById(R.id.ratingBar);
-   }*/
-
     /**
      * Initiates save button for text review
      */
-    //TODO Remove test coffeeProduct
     public void initSaveButton() {
         binding.textSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("pressed");
-
+                System.out.println("pressing save-button");
+                double rating = binding.ratingBar.getRating();
+                String reviewText = binding.inputBox.getText().toString();
+                String location = binding.locationBox.getText().toString();
                 //Test object
                 CoffeeProduct cp = new CoffeeProduct("placeHolder", "testCountry",
                         99999, light, dry, new ArrayList<>(), "testDesc", true);
