@@ -80,6 +80,7 @@ public class SearchListFragment extends Fragment {
         adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
 
+        //This is for the spacing between the items in a recyclerview.
         SpacingItemDecorator itemDecorator = new SpacingItemDecorator(15);
         rv.addItemDecoration(itemDecorator);
 
