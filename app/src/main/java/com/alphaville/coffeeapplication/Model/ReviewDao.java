@@ -40,7 +40,7 @@ public interface ReviewDao {
     void delete(Review review);
 
     /**
-     * Returns an observable LiveData object containing all reviews in the database
+     * Returns an observable LiveData object containing all {@link Review} objects in the database
      * @return the observable LiveData object
      */
     @Query("SELECT * FROM reviews")
