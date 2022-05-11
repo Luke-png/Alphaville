@@ -11,7 +11,7 @@ public class CoffeeMatcher {
     //TODO: tester
     /** For each of sweetness, bitternss and fullness, the algorithm checks all previous review with
      * the same value and calculates the average rating for all those reviews. Then an average is takes for
-     * all three parameters to ge the match score.
+     * all three parameters to ge the match score. Note that reviews assume a scale from 0 to 10.
      * @param product The product to get match for
      * @param reviews List of all reviews
      * @return Match score
