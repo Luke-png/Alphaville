@@ -27,24 +27,43 @@ public class CoffeeSearcher {
                                                       List<String> countries,
                                                       int minElevation, int maxElevation,
                                                       List<CoffeeProduct.Roast> roasts,
-                                                      List<CoffeeProduct.Taste> tastes,
-                                                      List<CoffeeProduct.Process> processes
+                                                      List<CoffeeProduct.Process> processes,
+                                                      List<CoffeeProduct.Taste> tastes
                                                       ) {
 
         List<CoffeeProduct> itemsToRemove = new ArrayList<>();
         List<CoffeeProduct> newList = new ArrayList<>(products);
 
         for (CoffeeProduct p : products) {
-
-            if (!(countries.contains(p.getCountry()))) itemsToRemove.add(p);
-            if (!(p.getElevation() >= minElevation && p.getElevation() <= maxElevation)) itemsToRemove.add(p);
-            if (!(roasts.contains(p.getRoast()))) itemsToRemove.add(p);
-            /*
-            for (CoffeeProduct.Taste t : p.getTastes()) {
-                if(!())
+            if (countries != null) {
+                if (!(countries.contains(p.getCountry()))) itemsToRemove.add(p);
             }
-            */
-            if (!(processes.contains(p.getProcess()))) itemsToRemove.add(p);
+
+            if (!(minElevation == 0 && maxElevation == 0)) {
+                if (!(p.getElevation() >= minElevation && p.getElevation() <= maxElevation)) itemsToRemove.add(p);
+            }
+
+            if (roasts != null) {
+                if (!(roasts.contains(p.getRoast()))) itemsToRemove.add(p);
+            }
+
+            if (processes != null) {
+                if (!(processes.contains(p.getProcess()))) itemsToRemove.add(p);
+            }
+            // t har 2 1 (CoffeeProduct.Taste)
+            // vi söker med 3, 1 (tastes)
+            if (!(tastes == null)) {
+                int deleteP = 0;
+                for (CoffeeProduct.Taste t : p.getTastes()) {
+                    if(tastes.contains(t)) {
+                        break;
+                    }
+                    else {
+                        deleteP++;
+                    }
+                }
+                if (deleteP >= p.getTastes().size()) itemsToRemove.add(p);
+            }
         }
 
         // Makes new list from the filter
@@ -52,11 +71,11 @@ public class CoffeeSearcher {
         List<CoffeeProduct> newListSearch = new ArrayList<>(products);
 
         // Takes filtered list, then do text string based search
-        for (CoffeeProduct p : products) {
+        for (CoffeeProduct p : newList) {
             if (validProductStringSearch(p, searchString)) newListSearch.add(p);
         }
 
-        return newListSearch;
+        return newList;
     }
 
     /**
