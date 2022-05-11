@@ -1,7 +1,7 @@
 package com.alphaville.coffeeapplication.views;
 
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Process.dry;
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Roast.light;
+import static com.alphaville.coffeeapplication.Model.enums.Process.dry;
+import static com.alphaville.coffeeapplication.Model.enums.Roast.light;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

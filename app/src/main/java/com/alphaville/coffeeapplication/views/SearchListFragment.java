@@ -15,7 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import com.alphaville.coffeeapplication.Model.CoffeeDatabase;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.CoffeeProductRepository;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.SearchListFragmentBinding;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
@@ -45,8 +49,13 @@ public class SearchListFragment extends Fragment {
                              Bundle savedInstanceState) {
         //binding = SearchListFragmentBinding.inflate(inflater, container, false);
 
-        coffeeProducts.add(new CoffeeProduct());
-        coffeeProducts.add(new CoffeeProduct());
+        CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+                new ArrayList<>(), "test", true);
+        CoffeeProduct c2 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+                new ArrayList<>(), "test", true);
+
+        coffeeProducts.add(c1);
+        coffeeProducts.add(c2);
 
         viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
