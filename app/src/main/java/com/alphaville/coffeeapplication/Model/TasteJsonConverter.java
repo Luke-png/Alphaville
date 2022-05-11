@@ -2,6 +2,7 @@ package com.alphaville.coffeeapplication.Model;
 
 import androidx.room.TypeConverter;
 
+import com.alphaville.coffeeapplication.Model.enums.Taste;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;

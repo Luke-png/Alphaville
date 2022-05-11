@@ -16,13 +16,14 @@ public abstract class CoffeeDatabase extends RoomDatabase {
     private static final int NUMBER_OF_THREADS=4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
+    public abstract CoffeeDao coffeeDao();
     public abstract ReviewDao reviewDao();
 
     public static CoffeeDatabase getInstance(Context context) {
         if (instance == null) {
             synchronized (CoffeeDatabase.class){
                 instance= Room.databaseBuilder(context.getApplicationContext(),
-                        CoffeeDatabase.class,"coffee_database").build();
+                        CoffeeDatabase.class,"coffee_database").fallbackToDestructiveMigration().build();
             }
         }
         return instance;

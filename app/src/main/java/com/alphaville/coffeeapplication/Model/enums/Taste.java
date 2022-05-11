@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.Model;
+package com.alphaville.coffeeapplication.Model.enums;
 
 public enum Taste
 {
@@ -11,4 +11,6 @@ public enum Taste
     nutty_cocoa,
     sweet,
     other
+
+
 }

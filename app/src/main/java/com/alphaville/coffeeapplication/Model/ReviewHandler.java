@@ -1,8 +1,9 @@
 package com.alphaville.coffeeapplication.Model;
 
-import com.alphaville.coffeeapplication.Model.Taste;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Taste;
+import com.alphaville.coffeeapplication.Model.enums.Process;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class ReviewHandler {
     public ReviewHandler() {
 
         //testobject for checking recyclerview in history-tab.
-        List<Taste> s = new ArrayList<>();
+        ArrayList<Taste> s = new ArrayList<>();
         s.add(Taste.fruity);
         reviews.add(new Review(new CoffeeProduct("something", "Sweden", 1900,
-                CoffeeProduct.Roast.light, CoffeeProduct.Process.dry, s, "from the best beans", false),
+                Roast.light, Process.dry, s, "from the best beans", false),
                 "this tastes good", 3, "Johanneberg", "cappuccino", 2000));
     }
 
@@ -51,7 +52,7 @@ public class ReviewHandler {
         //TODO remove test
         //Test review
         createReview(new CoffeeProduct("Skånerost", "Colombia", 225,
-                CoffeeProduct.Roast.light, CoffeeProduct.Process.fermented,
+                Roast.light, Process.fermented,
                 new ArrayList<Taste>() {}, "Tastes great", false)
         ,"testReview", 3.5, "testLocation", "Cappuccino",
                System.currentTimeMillis());

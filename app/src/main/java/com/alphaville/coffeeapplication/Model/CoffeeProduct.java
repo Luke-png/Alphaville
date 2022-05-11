@@ -1,51 +1,49 @@
 package com.alphaville.coffeeapplication.Model;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.alphaville.coffeeapplication.Model.enums.Process;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Taste;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An object of the CoffeeProduct type represents a type of coffee bean and describes all its properties, along with whether the user likes it or not.
  *
  * Completely immutable to prevent logical errors.
  */
-@Entity
+@Entity(tableName = "products")
 public class CoffeeProduct
 {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    /** Possible ways for a coffee product to be processed. */
-    public enum Process { dry, wet, fermented, honey }
-    /** Possible roasts for each coffee product. */
-    public enum Roast { light, dark }
-
-    /** A list of all taste profiles that this product matches. */
-    @TypeConverters(TasteJsonConverter.class) // converter for conversion to json
-    private List<Taste> tastes;
 
     /** The name of the coffee product */
-    private String name;
+    private final String name;
     /** The name of the country from which the product originates. */
-    private String country;
+    private final String country;
 
     /** Elevation above sea level of the product's roastery. */
-    private int elevation;
+    private final int elevation;
     /** The method by which the coffee bean is roasted. */
-    private Roast roast;
+    private final Roast roast;
     /** The way this product has been processed. */
-    private Process process;
+    private final Process process;
+
+    /** A list of all taste profiles that this product matches. */
+    @TypeConverters(TasteJsonConverter.class) // converter for conversion to/from json string which is stored in db
+    private final ArrayList<Taste> tastes;
 
     /** Short description of the product. */
-    private String description;
+    private final String description;
 
     /** Whether the user likes the coffee product. */
-    private boolean isLiked;
+    private final boolean isLiked;
 
-    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, List<Taste> tastes, String description, boolean isLiked){
+    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, ArrayList<Taste> tastes, String description, boolean isLiked){
         this.name = name;
         this.roast = roast;
         this. country = country;
@@ -57,19 +55,7 @@ public class CoffeeProduct
         this.description = description;
         this.isLiked = isLiked;
     }
-    // Test constructor
-    public CoffeeProduct() {
-        this.name = "namn";
-        this.roast = Roast.light;
-        this.country = "Sweden";
 
-        this.elevation = 123;
-        this.process = Process.dry;
-        this.tastes = new ArrayList<>();
-
-        this.description = "test";
-        this.isLiked = true;
-    }
     // Getters ------------
 
     public String getName() { return name; }
@@ -82,49 +68,19 @@ public class CoffeeProduct
 
     public Process getProcess() { return process; }
 
-    public List<Taste> getTastes() { return tastes; }
+    public ArrayList<Taste> getTastes() { return tastes; }
 
     public String getDescription() { return description; }
 
     public boolean isLiked() { return isLiked; }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
+
+    // Setter -------------------
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setElevation(int elevation) {
-        this.elevation = elevation;
-    }
-
-    public void setRoast(Roast roast) {
-        this.roast = roast;
-    }
-
-    public void setProcess(Process process) {
-        this.process = process;
-    }
-
-    public void setTastes(List<Taste> tastes) {
-        this.tastes = tastes;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setLiked(boolean liked) {
-        isLiked = liked;
-    }
 }
