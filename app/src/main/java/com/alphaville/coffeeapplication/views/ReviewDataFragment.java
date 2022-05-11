@@ -1,8 +1,5 @@
 package com.alphaville.coffeeapplication.views;
 
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Process.dry;
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Roast.light;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -15,10 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-//import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
-
-import com.alphaville.coffeeapplication.Model.CoffeeProduct;
-import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
@@ -26,7 +19,6 @@ import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 /**
  * ReviewDataFragment is the fragment for inputting and saving a text review
@@ -34,7 +26,15 @@ import java.util.ArrayList;
 public class ReviewDataFragment extends Fragment {
 
     private ReviewDataFragmentBinding binding;
+
+    /**
+     * ViewModel reference for handling a new review creation
+     */
     private ReviewDataViewModel viewModel;
+
+    /**
+     * ViewModel for populating the review-tab with the right information
+     */
     private SearchListViewModel viewModel2;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -74,7 +74,7 @@ public class ReviewDataFragment extends Fragment {
     }
 
     /**
-     * Initiates the input box for inputting location of where the coffe drink was bought
+     * Initiates the input box for inputting location of where the coffee drink was bought
      */
     private void initLocationBox() {binding.locationBox.setHint("Enter location");
     }
