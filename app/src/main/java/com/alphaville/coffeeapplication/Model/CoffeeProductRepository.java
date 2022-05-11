@@ -6,9 +6,18 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+/**
+ * Repository for CoffeeProducts stored in the database.
+ */
 public class CoffeeProductRepository {
 
+    /**
+     * Data Access Object for CoffeeProducts.
+     */
     private CoffeeDao coffeeDao;
+    /**
+     * LiveData object for all CoffeeProducts in the database.
+     */
     private LiveData<List<CoffeeProduct>> allProducts;
 
     public CoffeeProductRepository(Application application){
@@ -17,19 +26,27 @@ public class CoffeeProductRepository {
         allProducts = coffeeDao.getAllProducts();
     }
 
+    /**
+     * Basic insertion of CoffeeProduct.
+     * @param product to insert
+     */
     public void insert(CoffeeProduct product){
-        CoffeeDatabase.databaseWriteExecutor.execute(()->{
-            coffeeDao.insert(product);
-        });
+        CoffeeDatabase.databaseWriteExecutor.execute(()-> coffeeDao.insert(product));
     }
 
+    /**
+     * Updates product with specified id with information in product object
+     * @param product contains id and new information of the product
+     */
     public void update(CoffeeProduct product){
-        CoffeeDatabase.databaseWriteExecutor.execute(()->{
-            coffeeDao.update(product);
-        });
+        CoffeeDatabase.databaseWriteExecutor.execute(()-> coffeeDao.update(product));
     }
 
-    public LiveData<List<CoffeeProduct>> getAllProducts(CoffeeProduct product){
+    /**
+     * Gets all CoffeeProducts (LiveData object)
+     * @return the LiveData object containing all CoffeeProducts
+     */
+    public LiveData<List<CoffeeProduct>> getAllProducts(){
         return allProducts;
     }
 }
