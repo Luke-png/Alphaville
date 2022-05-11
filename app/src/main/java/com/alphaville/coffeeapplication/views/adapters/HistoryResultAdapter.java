@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
+import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 
 import java.util.List;
 
@@ -25,13 +26,16 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
      * List of user reviews to fill the history-tab
      */
     private List<Review> reviewList;
+    private final HistoryTabViewModel viewModel;
 
     /**
      * class-constructor
      * @param reviewList the list of reviews that fills the recyclerview
+     * @param viewModel
      */
-    public HistoryResultAdapter(List<Review> reviewList){
+    public HistoryResultAdapter(List<Review> reviewList, HistoryTabViewModel viewModel){
         this.reviewList = reviewList;
+        this.viewModel = viewModel;
     }
 
     /**
@@ -50,6 +54,13 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onBindViewHolder(@NonNull ReviewCardViewHolder holder, int position) {
         holder.setReviewInfo(reviewList.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.selectItem(reviewList.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -89,7 +100,7 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
         }
 
         @RequiresApi(api = Build.VERSION_CODES.M)
-        public void setReviewInfo(Review item){
+        private void setReviewInfo(Review item){
             name.setText(item.getCoffeeProduct().getName());
             country.setText(item.getCoffeeProduct().getCountry());
             process.setText("Process: " + item.getCoffeeProduct().getProcess().toString());

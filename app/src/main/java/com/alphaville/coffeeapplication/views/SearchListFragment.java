@@ -112,6 +112,7 @@ public class SearchListFragment extends Fragment {
 
     /**
      * Adds some distance between the items in a RecyclerView
+     * @param spacing amount of spacing
      */
     private void initItemSpacing(int spacing) {
         SpacingItemDecorator itemDecorator = new SpacingItemDecorator(spacing);
