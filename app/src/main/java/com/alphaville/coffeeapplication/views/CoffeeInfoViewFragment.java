@@ -34,6 +34,9 @@ public class CoffeeInfoViewFragment extends Fragment{
         View view = binding.getRoot();
         viewModel= new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
 
+        /**
+         * Observer
+         */
         viewModel.getSelected().observe(getViewLifecycleOwner(), new Observer<CoffeeProduct>() {
             @Override
             public void onChanged(CoffeeProduct coffeeProduct) {
@@ -63,7 +66,7 @@ public class CoffeeInfoViewFragment extends Fragment{
         */
     }
 
-    
+
     public void rebuildCoffeeInfo(){
         CoffeeProduct selected = viewModel.getSelected().getValue();
         if (selected!=null) {
