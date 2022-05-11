@@ -29,10 +29,8 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
 
     /**
      * class-constructor
-     * @param reviewList the list of reviews that fills the recyclerview
-     */
-    public HistoryResultAdapter(List<Review> reviewList){
-        this.reviewList = reviewList;
+     * */
+    public HistoryResultAdapter(){
     }
 
     /**
@@ -58,6 +56,10 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
         return reviewList.size();
     }
 
+    /**
+     * Sets the reviews in the adapter
+     * @param reviews the reviews shown in the adapter
+     */
     public void setReviews(List<Review> reviews) {
         this.reviewList = reviews;
         notifyDataSetChanged();

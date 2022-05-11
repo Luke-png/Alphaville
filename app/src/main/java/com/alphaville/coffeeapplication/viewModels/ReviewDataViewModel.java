@@ -5,14 +5,19 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.CoffeeProductRepository;
 import com.alphaville.coffeeapplication.Model.Review;
-import com.alphaville.coffeeapplication.Model.ReviewHandler;
 import com.alphaville.coffeeapplication.Model.ReviewRepository;
+import com.alphaville.coffeeapplication.Model.enums.Process;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Taste;
 
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,33 +26,16 @@ import java.util.List;
  */
 public class ReviewDataViewModel extends AndroidViewModel {
 
-    private ReviewRepository repository;
-    private LiveData<List<Review>> allReviews;
+    ReviewRepository repository;
+
+    //TODO Move all use for reviewHandler
+    // Should not use reviewHandler anymore. Communicate with repository and logic classes instead
+    // ReviewHandler reviewHandler = new ReviewHandler();
 
     public ReviewDataViewModel(@NonNull Application application) {
         super(application);
         repository = new ReviewRepository(application);
-        allReviews = repository.getAllReviews();
     }
-
-    public void insert(Review review) {
-        repository.insert(review);
-    }
-
-    public void update(Review review) {
-        repository.update(review);
-    }
-
-    public void delete(Review review) {
-        repository.delete(review);
-    }
-
-    public LiveData<List<Review>> getAllReviews() {
-        return allReviews;
-    }
-    //TODO Initialize review handler in main activity or implement separate viewmodel
-    // that gives access to model etc.
-    ReviewHandler reviewHandler = new ReviewHandler();
 
     /**
      * Creates a review for a specific coffee product
@@ -61,8 +49,14 @@ public class ReviewDataViewModel extends AndroidViewModel {
     public void createReview(CoffeeProduct cp, String textReview,
                              double rating, String location, String drinkCategory,
                              long creationTime){
-        reviewHandler.createReview(cp, textReview, rating, location, drinkCategory, creationTime);
-    }
+
+        //TODO Replace this test coffee product with actual selected coffee product.
+        CoffeeProduct testCp = new CoffeeProduct("Skånerost", "Colombia",
+                225, Roast.light, Process.dry, new ArrayList<Taste>() {},
+                "Tastes great", false);
+
+        repository.insert(new Review(testCp,textReview, rating, location, drinkCategory, creationTime));
+          }
 
   /*  public CoffeeProduct getActiveProduct(){
         return getModel().getActive();

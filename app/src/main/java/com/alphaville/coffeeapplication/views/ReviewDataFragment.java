@@ -21,6 +21,7 @@ import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
+import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
@@ -49,21 +50,20 @@ public class ReviewDataFragment extends Fragment {
         binding = ReviewDataFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        //viewModel = new ReviewDataViewModel(getActivity().getApplication());
+        //Initializes ReviewDataViewModel used for creating and saving reviews
         viewModel = new ViewModelProvider(this).get(ReviewDataViewModel.class);
-        viewModel.getAllReviews().observe(getViewLifecycleOwner(), new Observer<List<Review>>() {
-            @Override
-            public void onChanged(List<Review> reviews) {
 
-            }
-        });
         viewModel2 = new SearchListViewModel();
 
         initInputBox();
         initLocationBox();
         initSaveButton();
+
+        //If statement to prevent crash at this stage
         if(viewModel2.getSelected().getValue() != null){
-        initProductText();}
+        initProductText();
+        }
+
 
     return view;
     }
