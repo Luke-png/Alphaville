@@ -24,12 +24,11 @@ public class CoffeeMatcher {
         ArrayList<Double> b_match = new ArrayList<>();
         ArrayList<Double> f_match = new ArrayList<>();
         for(Review r : reviews) {
+            if(r.getCoffeeProduct().getBitterness() == bitterness_ref) b_match.add(r.getRating());
             if(r.getCoffeeProduct().getSweetness() == sweetness_ref) s_match.add(r.getRating());
-            if(r.getCoffeeProduct().getSweetness() == bitterness_ref) b_match.add(r.getRating());
-            if(r.getCoffeeProduct().getSweetness() == fullness_ref) f_match.add(r.getRating());
+            if(r.getCoffeeProduct().getFullness() == fullness_ref) f_match.add(r.getRating());
         }
-        return (Mean(s_match) + Mean(b_match) + Mean(f_match))/3;
-
+        return (Mean(s_match) + Mean(b_match) + Mean(f_match))/30;
     }
 
     //TODO: tester
@@ -43,9 +42,7 @@ public class CoffeeMatcher {
         for (CoffeeProduct c : coffeeProducts) {
             res.add(new Tuple(c, getMatchPercentage(c, reviews)));
         }
-
         Collections.sort(res, Tuple::compareTo);
-
         return res;
     }
 
@@ -72,20 +69,6 @@ public class CoffeeMatcher {
             sum += value;
 
         return sum;
-    }
-
-    private static class Tuple implements Comparable<Tuple> {
-        private CoffeeProduct coffeeProduct;
-        private Double matchScore;
-
-        public Tuple(CoffeeProduct coffeeProduct, Double matchScore) {
-            this.coffeeProduct = coffeeProduct;
-            this.matchScore = matchScore;
-        }
-        @Override
-        public int compareTo(Tuple other) {
-            return other.matchScore.compareTo(matchScore); //rätt??
-        }
     }
 
 }

@@ -82,7 +82,7 @@ public class ReviewDataFragment extends Fragment {
 
                 //Test object
                 CoffeeProduct cp = new CoffeeProduct("placeHolder", "testCountry",
-                        99999, light, dry, new ArrayList<>(), "testDesc", true);
+                        99999, light, dry, new ArrayList<>(),1,1,1, "testDesc", true);
 
                 viewModel.createReview(cp, binding.inputBox.getText().toString(),
                         binding.ratingBar.getRating(), binding.locationBox.getText().toString(),

@@ -32,11 +32,11 @@ public class CoffeeProduct
     private final List<Taste> tastes;
 
     /** Sweetness rating. */
-    private final int sweetness;
+    private int sweetness;
     /** Fullness rating. */
-    private final int fullness;
+    private int fullness;
     /** Bitterness rating. */
-    private final int bitterness;
+    private int bitterness;
 
     /** Short description of the product. */
     private final String description;
