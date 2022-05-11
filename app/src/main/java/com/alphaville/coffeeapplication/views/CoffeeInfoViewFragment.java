@@ -22,7 +22,6 @@ import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 /**
  * Class for handling a detailed view for a CoffeeProduct.
  */
-public class CoffeeInfoViewFragment extends Fragment {
 public class CoffeeInfoViewFragment extends Fragment{
 
     private CoffeeInfoViewFragmentBinding binding;
