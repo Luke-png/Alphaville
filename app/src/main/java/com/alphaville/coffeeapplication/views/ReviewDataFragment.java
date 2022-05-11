@@ -123,6 +123,6 @@ public class ReviewDataFragment extends Fragment {
         //String category = binding.categoryBox.getValue().toString();
 
         viewModel.createReview(viewModel2.getSelected().getValue(), reviewText, rating, location,
-                "randomCategory", new Timestamp(System.currentTimeMillis()));
+                "randomCategory", System.currentTimeMillis());
     }
 }

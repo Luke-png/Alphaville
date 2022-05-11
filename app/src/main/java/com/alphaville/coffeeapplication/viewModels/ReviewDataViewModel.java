@@ -27,7 +27,7 @@ public class ReviewDataViewModel extends ViewModelEngine {
      */
     public void createReview(CoffeeProduct cp, String textReview,
                              double rating, String location, String drinkCategory,
-                             Timestamp creationTime){
+                             long creationTime){
         reviewHandler.createReview(cp, textReview, rating, location, drinkCategory, creationTime);
     }
 
