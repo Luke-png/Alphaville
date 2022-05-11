@@ -18,6 +18,9 @@ import java.util.ArrayList;
 @Entity(tableName = "products")
 public class CoffeeProduct
 {
+    /**
+     * Primary key for the products table.
+     */
     @PrimaryKey(autoGenerate = true)
     private int id;
 
