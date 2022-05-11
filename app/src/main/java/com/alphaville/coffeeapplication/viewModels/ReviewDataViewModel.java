@@ -26,13 +26,11 @@ public class ReviewDataViewModel extends ViewModelEngine {
      * @param creationTime the time the review was created
      */
     public void createReview(CoffeeProduct cp, String textReview,
-                             double rating, String location, String drinkCategory, Timestamp creationTime){
-
-
-        reviewHandler.createReview(getActiveProduct(), textReview, rating, location,
-                "testCategory", System.currentTimeMillis());
-
+                             double rating, String location, String drinkCategory,
+                             Timestamp creationTime){
+        reviewHandler.createReview(cp, textReview, rating, location, drinkCategory, creationTime);
     }
+
     public CoffeeProduct getActiveProduct(){
         return getModel().getActive();
     }

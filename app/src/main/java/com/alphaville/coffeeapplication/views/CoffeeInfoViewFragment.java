@@ -6,11 +6,18 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
+import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 import com.alphaville.coffeeapplication.viewModels.CoffeeInfoViewModel;
 
 /**
@@ -27,7 +34,6 @@ public class CoffeeInfoViewFragment extends Fragment {
                           Bundle savedInstanceState) {
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-
         /*
         setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
         setCoffeeInformation(name, info, description);
@@ -39,7 +45,7 @@ public class CoffeeInfoViewFragment extends Fragment {
         binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openReviewPage(); //What class should do this? Probably not the model.
+                openReviewPage();
             }
         });
         return view;
@@ -85,7 +91,18 @@ public class CoffeeInfoViewFragment extends Fragment {
 
     }
     private void openReviewPage(){
-        Intent intent = new Intent(getActivity(), ReviewActivity.class);
-        startActivity(intent);
+        try {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, ReviewDataFragment.class, null)
+                    .setReorderingAllowed(true)
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+        catch(NullPointerException e){
+            System.out.println("mainActivity missing FragmentManager or something");
+        }
+
     }
 }
