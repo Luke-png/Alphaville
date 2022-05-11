@@ -40,13 +40,21 @@ public class CoffeeProduct
     @TypeConverters(TasteJsonConverter.class) // converter for conversion to/from json string which is stored in db
     private final ArrayList<Taste> tastes;
 
+    /** Sweetness rating. */
+    private int sweetness;
+    /** Fullness rating. */
+    private int fullness;
+    /** Bitterness rating. */
+    private int bitterness;
+
     /** Short description of the product. */
     private final String description;
 
     /** Whether the user likes the coffee product. */
     private final boolean isLiked;
 
-    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, ArrayList<Taste> tastes, String description, boolean isLiked){
+    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, List<Taste> tastes, int sweetness, int fullness, int bitterness, String description, boolean isLiked){
+
         this.name = name;
         this.roast = roast;
         this. country = country;
@@ -54,6 +62,10 @@ public class CoffeeProduct
         this.elevation = elevation;
         this.process = process;
         this.tastes = new ArrayList<>(tastes);
+
+        this.sweetness = sweetness;
+        this.fullness = fullness;
+        this.bitterness = bitterness;
 
         this.description = description;
         this.isLiked = isLiked;
@@ -77,6 +89,15 @@ public class CoffeeProduct
 
     public boolean isLiked() { return isLiked; }
 
+
+    public int getSweetness() {
+        return sweetness;
+    }
+
+    public int getFullness() {
+        return fullness;
+    }
+
     public int getId() { return id; }
 
     // Setter -------------------
@@ -86,4 +107,7 @@ public class CoffeeProduct
     }
 
 
+    public int getBitterness() {
+        return bitterness;
+    }
 }
