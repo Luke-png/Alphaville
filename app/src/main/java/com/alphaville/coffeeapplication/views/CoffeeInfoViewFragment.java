@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
  * Class for handling a detailed view for a CoffeeProduct.
  */
 public class CoffeeInfoViewFragment extends Fragment {
+public class CoffeeInfoViewFragment extends Fragment{
 
     private CoffeeInfoViewFragmentBinding binding;
     private SearchListViewModel viewModel;
@@ -33,13 +35,14 @@ public class CoffeeInfoViewFragment extends Fragment {
         View view = binding.getRoot();
         viewModel= new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
 
-        CoffeeProduct selected = viewModel.getSelected().getValue();
-        if (selected!=null) {
-            setCoffeeAttributes(selected.getElevation() + "", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
-            setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
-        }
-        //setCoffeePicture(image);
-        //setClockTexts(firstClockText, secondClockText, thirdClockText);
+        viewModel.getSelected().observe(getViewLifecycleOwner(), new Observer<CoffeeProduct>() {
+            @Override
+            public void onChanged(CoffeeProduct coffeeProduct) {
+                rebuildCoffeeInfo();
+            }
+        });
+
+        rebuildCoffeeInfo();
 
         //listener for the review button
         binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +62,16 @@ public class CoffeeInfoViewFragment extends Fragment {
             }
         });
         */
+    }
+
+    public void rebuildCoffeeInfo(){
+        CoffeeProduct selected = viewModel.getSelected().getValue();
+        if (selected!=null) {
+            setCoffeeAttributes(selected.getElevation() + "", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
+            setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
+        }
+        //setCoffeePicture(image);
+        //setClockTexts(firstClockText, secondClockText, thirdClockText);
     }
 
     private void setCoffeeInformation(String name, String info, String description){
@@ -94,4 +107,5 @@ public class CoffeeInfoViewFragment extends Fragment {
         Intent intent = new Intent(getActivity(), ReviewActivity.class);
         startActivity(intent);
     }
+
 }
