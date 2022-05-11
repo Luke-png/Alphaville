@@ -3,6 +3,7 @@ package com.alphaville.coffeeapplication.Model;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,12 @@ public class CoffeeProduct
     private int id;
     /** Possible ways for a coffee product to be processed. */
     public enum Process { dry, wet, fermented, honey }
-    /** Possible tastes for a coffee product. */
-    public enum Taste { floral, fruity, sour_fermented, green_vegetative, roasted, spices, nutty_cocoa, sweet, other }
     /** Possible roasts for each coffee product. */
     public enum Roast { light, dark }
+
+    /** A list of all taste profiles that this product matches. */
+    @TypeConverters(TasteJsonConverter.class) // converter for conversion to json
+    private List<Taste> tastes;
 
     /** The name of the coffee product */
     private String name;
@@ -35,9 +38,6 @@ public class CoffeeProduct
     private Roast roast;
     /** The way this product has been processed. */
     private Process process;
-    /** A list of all taste profiles that this product matches. */
-    @Ignore
-    private List<Taste> tastes;
 
     /** Short description of the product. */
     private String description;

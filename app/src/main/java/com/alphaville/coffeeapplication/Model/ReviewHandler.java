@@ -1,7 +1,6 @@
 package com.alphaville.coffeeapplication.Model;
 
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Taste.floral;
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Taste.fruity;
+import com.alphaville.coffeeapplication.Model.Taste;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ public class ReviewHandler {
     public ReviewHandler() {
 
         //testobject for checking recyclerview in history-tab.
-        List<CoffeeProduct.Taste> s = new ArrayList<>();
-        s.add(fruity);
+        List<Taste> s = new ArrayList<>();
+        s.add(Taste.fruity);
         reviews.add(new Review(new CoffeeProduct("something", "Sweden", 1900,
                 CoffeeProduct.Roast.light, CoffeeProduct.Process.dry, s, "from the best beans", false),
                 "this tastes good", 3, "Johanneberg", "cappuccino", 2000));
@@ -53,7 +52,7 @@ public class ReviewHandler {
         //Test review
         createReview(new CoffeeProduct("Skånerost", "Colombia", 225,
                 CoffeeProduct.Roast.light, CoffeeProduct.Process.fermented,
-                new ArrayList<CoffeeProduct.Taste>() {}, "Tastes great", false)
+                new ArrayList<Taste>() {}, "Tastes great", false)
         ,"testReview", 3.5, "testLocation", "Cappuccino",
                System.currentTimeMillis());
         return new ArrayList<>(reviews);
