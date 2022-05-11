@@ -45,6 +45,7 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
 
         return new ReviewCardViewHolder(view);
     }
+
     @Override
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onBindViewHolder(@NonNull ReviewCardViewHolder holder, int position) {

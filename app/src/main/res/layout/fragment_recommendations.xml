@@ -1,12 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recommendations"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:contentDescription="recScroll">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="939dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="939dp">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="155dp"
+                        android:layout_height="35dp"
+                        android:text="Dagens Kaffe"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.059" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Test"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4"
+                        app:layout_constraintVertical_bias="0.968" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="211dp"
+                        android:layout_height="82dp"
+                        android:layout_marginBottom="272dp"
+                        android:gravity="center_vertical|center"
+                        android:text="Veckans Favoriter"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.503"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4"
+                        app:layout_constraintVertical_bias="0.543" />
+
+                    <FrameLayout
+                        android:layout_width="295dp"
+                        android:layout_height="405dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView5"
+                        app:layout_constraintVertical_bias="0.145">
+
+                        <GridView
+                            android:id="@+id/recGrid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:horizontalSpacing="6dp"
+                            android:numColumns="2"
+                            android:verticalSpacing="6dp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="261dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="51dp"
+                        android:background="#BD9898"
+                        app:layout_constraintBottom_toTopOf="@+id/textView5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.505"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4"
+                        app:layout_constraintVertical_bias="0.188">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/recDagensText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TextView"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.553"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.197" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <ImageView
+                            android:id="@+id/recDagensImg"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/placeholder_beans" />
+
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
