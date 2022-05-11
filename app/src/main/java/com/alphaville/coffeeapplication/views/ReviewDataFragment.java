@@ -70,7 +70,7 @@ public class ReviewDataFragment extends Fragment {
      */
     @SuppressLint("SetTextI18n")
     private void initProductText() {binding.currentProduct.setText(
-            "Reviewing " + viewModel2.getSelected());
+            "Reviewing " + viewModel2.getSelected().getValue().getName());
     }
 
     /**

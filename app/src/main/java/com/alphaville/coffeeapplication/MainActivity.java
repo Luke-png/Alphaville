@@ -16,15 +16,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragmentContainerView, SearchListFragment.class, null)
-                    .commit();
-        }
-*/
+        RecommendationsFragment recommendationsFragment = new RecommendationsFragment();
 
+        getSupportFragmentManager().beginTransaction().replace(
+                R.id.fragment_container,recommendationsFragment).commit();
         //add the navbar and connect the listener navlistener
         NavigationBarView barView = findViewById(R.id.bottom_navigation);
         barView.setOnItemSelectedListener(navlistener);
