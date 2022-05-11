@@ -8,6 +8,7 @@ import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ public class HistoryFragment extends Fragment {
 
     private FragmentHistoryBinding binding;
     private HistoryTabViewModel model;
+    private FragmentContainerView fcv;
 
     @Nullable
     @Override
@@ -32,29 +34,39 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        fcv = binding.fragmentContainerView2;
+        fcv.setVisibility(View.INVISIBLE);
 
         model = new ViewModelProvider(requireActivity()).get(HistoryTabViewModel.class);
-        model.getSelected().observe(getViewLifecycleOwner(), new Observer<Review>() {
-            @Override
-            public void onChanged(Review review) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, ReviewInfoTabFragment.class, null)
-                        .commit();
-            }
-        });
 
+        itemPressed();
         setItemSpacing(15);
+        onSearch();
 
         binding.reviewList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         /**
          * This should initiate the adapter and recyclerview
          */
         binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews(), model));
-        /**
-         * Listener that should be triggered everytime the user changes anything in the search-field.
-         * This is if we want continuous updates while writing.
-         */
+
+        return view;
+    }
+
+    /**
+     * Method for setting the space between objects in the history-tab recyclerview
+     * @param spacing amount of spacing
+     */
+    private void setItemSpacing(int spacing){
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(spacing);
+        binding.reviewList.addItemDecoration(itemDecorator);
+    }
+
+    /**
+     * Method that should be triggered everytime the user changes anything in the search-field.
+     * This is if we want continuous updates while writing.
+     */
+    private void onSearch(){
         binding.searchHistory.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
@@ -69,15 +81,18 @@ public class HistoryFragment extends Fragment {
                 return true;
             }
         });
-        return view;
     }
 
     /**
-     * Method for setting the space between objects in the history-tab recyclerview
-     * @param spacing amount of spacing
+     * Listener for when an object in the recyclerview is pressed. Then setting the
+     * FragmentContainerView to visible
      */
-    private void setItemSpacing(int spacing){
-        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(spacing);
-        binding.reviewList.addItemDecoration(itemDecorator);
+    private void itemPressed(){
+        model.getSelected().observe(getViewLifecycleOwner(), new Observer<Review>() {
+            @Override
+            public void onChanged(Review review) {
+                fcv.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }
