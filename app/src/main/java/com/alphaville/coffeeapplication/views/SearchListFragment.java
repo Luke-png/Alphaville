@@ -52,6 +52,10 @@ public class SearchListFragment extends Fragment {
         coffeeProducts.add(new CoffeeProduct());
 
         viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
+
+        /**
+         * Observer that changes active coffeProduct
+         */
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
             @Override
             public void onChanged(@Nullable List<CoffeeProduct> p) {

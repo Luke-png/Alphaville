@@ -63,6 +63,7 @@ public class CoffeeInfoViewFragment extends Fragment{
         */
     }
 
+    
     public void rebuildCoffeeInfo(){
         CoffeeProduct selected = viewModel.getSelected().getValue();
         if (selected!=null) {
