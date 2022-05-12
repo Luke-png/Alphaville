@@ -1,5 +1,9 @@
 package com.alphaville.coffeeapplication.Model;
 
+import com.alphaville.coffeeapplication.Model.enums.Process;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Taste;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +30,9 @@ public class CoffeeSearcher {
                                                       String searchString,
                                                       List<String> countries,
                                                       int minElevation, int maxElevation,
-                                                      List<CoffeeProduct.Roast> roasts,
-                                                      List<CoffeeProduct.Process> processes,
-                                                      List<CoffeeProduct.Taste> tastes
+                                                      List<Roast> roasts,
+                                                      List<Process> processes,
+                                                      List<Taste> tastes
                                                       ) {
 
         List<CoffeeProduct> itemsToRemove = new ArrayList<>();
@@ -54,7 +58,7 @@ public class CoffeeSearcher {
             // vi söker med 3, 1 (tastes)
             if (!(tastes == null)) {
                 int deleteP = 0;
-                for (CoffeeProduct.Taste t : p.getTastes()) {
+                for (Taste t : p.getTastes()) {
                     if(tastes.contains(t)) {
                         break;
                     }

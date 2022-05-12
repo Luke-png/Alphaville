@@ -43,11 +43,11 @@ public class CoffeeProduct
     private final ArrayList<Taste> tastes;
 
     /** Sweetness rating. */
-    private int sweetness;
+    private final int sweetness;
     /** Fullness rating. */
-    private int fullness;
+    private final int fullness;
     /** Bitterness rating. */
-    private int bitterness;
+    private final int bitterness;
 
     /** Short description of the product. */
     private final String description;
@@ -55,8 +55,9 @@ public class CoffeeProduct
     /** Whether the user likes the coffee product. */
     private final boolean isLiked;
 
-    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process,
-                         List<Taste> tastes, int sweetness, int fullness, int bitterness, String description, boolean isLiked){
+   /* public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process,
+                         List<Taste> tastes, int sweetness, int fullness,
+                         int bitterness, String description, boolean isLiked){
 
         this.name = name;
         this.roast = roast;
@@ -72,8 +73,21 @@ public class CoffeeProduct
 
         this.description = description;
         this.isLiked = isLiked;
-    }
+    }*/
 
+    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, ArrayList<Taste> tastes, int sweetness, int fullness, int bitterness, String description, boolean isLiked) {
+        this.name = name;
+        this.country = country;
+        this.elevation = elevation;
+        this.roast = roast;
+        this.process = process;
+        this.tastes = tastes;
+        this.sweetness = sweetness;
+        this.fullness = fullness;
+        this.bitterness = bitterness;
+        this.description = description;
+        this.isLiked = isLiked;
+    }
     // Getters ------------
 
     public String getName() { return name; }

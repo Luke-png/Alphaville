@@ -24,8 +24,8 @@ public class ReviewHandler {
         ArrayList<Taste> s = new ArrayList<>();
         s.add(Taste.fruity);
         reviews.add(new Review(new CoffeeProduct("something", "Sweden", 1900,
-                CoffeeProduct.Roast.light, CoffeeProduct.Process.dry, s, 1,1,1,"from the best beans", false),
-                "this tastes good", 3, "Johanneberg", "cappuccino", new Timestamp(2000)));
+                Roast.light, Process.dry, s, 1,1,1,"from the best beans", false),
+                "this tastes good", 3, "Johanneberg", "cappuccino", 2000));
     }
 
     /**
@@ -52,8 +52,8 @@ public class ReviewHandler {
         //TODO remove test
         //Test review
         createReview(new CoffeeProduct("Skånerost", "Colombia", 225,
-                CoffeeProduct.Roast.light, CoffeeProduct.Process.fermented,
-                new ArrayList<CoffeeProduct.Taste>() {},1,1,1, "Tastes great", false)
+                Roast.light, Process.fermented,
+                new ArrayList<Taste>() {},1,1,1, "Tastes great", false)
 
         ,"testReview", 3.5, "testLocation", "Cappuccino",
                System.currentTimeMillis());
