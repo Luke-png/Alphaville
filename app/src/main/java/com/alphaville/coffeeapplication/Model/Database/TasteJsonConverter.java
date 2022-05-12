@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.Model;
+package com.alphaville.coffeeapplication.Model.Database;
 
 import androidx.room.TypeConverter;
 

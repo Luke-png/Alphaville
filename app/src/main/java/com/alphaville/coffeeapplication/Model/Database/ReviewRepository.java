@@ -1,8 +1,12 @@
-package com.alphaville.coffeeapplication.Model;
+package com.alphaville.coffeeapplication.Model.Database;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+
+import com.alphaville.coffeeapplication.Model.Database.CoffeeDatabase;
+import com.alphaville.coffeeapplication.Model.Database.ReviewDao;
+import com.alphaville.coffeeapplication.Model.Review;
 
 import java.util.List;
 

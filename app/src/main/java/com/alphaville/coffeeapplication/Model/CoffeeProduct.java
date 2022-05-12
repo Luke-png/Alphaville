@@ -4,11 +4,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.alphaville.coffeeapplication.Model.Database.TasteJsonConverter;
 import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.Model.enums.Roast;
 import com.alphaville.coffeeapplication.Model.enums.Taste;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An object of the CoffeeProduct type represents a type of coffee bean and describes all its properties, along with whether the user likes it or not.
@@ -53,7 +55,8 @@ public class CoffeeProduct
     /** Whether the user likes the coffee product. */
     private final boolean isLiked;
 
-    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, List<Taste> tastes, int sweetness, int fullness, int bitterness, String description, boolean isLiked){
+    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process,
+                         List<Taste> tastes, int sweetness, int fullness, int bitterness, String description, boolean isLiked){
 
         this.name = name;
         this.roast = roast;

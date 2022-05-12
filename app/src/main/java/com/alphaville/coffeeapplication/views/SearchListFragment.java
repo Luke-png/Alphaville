@@ -15,9 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
-import com.alphaville.coffeeapplication.Model.CoffeeDatabase;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
-import com.alphaville.coffeeapplication.Model.CoffeeProductRepository;
 import com.alphaville.coffeeapplication.Model.enums.Roast;
 import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.R;
@@ -49,9 +47,9 @@ public class SearchListFragment extends Fragment {
         //binding = SearchListFragmentBinding.inflate(inflater, container, false);
 
         CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
-                new ArrayList<>(), "test", true);
+                new ArrayList<>(), 2,2,2, "test", true);
         CoffeeProduct c2 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
-                new ArrayList<>(), "test", true);
+                new ArrayList<>(),2, 2, 2, "test", true);
 
         coffeeProducts.add(c1);
         coffeeProducts.add(c2);

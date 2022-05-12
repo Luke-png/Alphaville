@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.alphaville.coffeeapplication.Model.Review;
-import com.alphaville.coffeeapplication.Model.ReviewRepository;
+import com.alphaville.coffeeapplication.Model.Database.ReviewRepository;
 
 import java.util.List;
 

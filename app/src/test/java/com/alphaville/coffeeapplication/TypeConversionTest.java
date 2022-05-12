@@ -3,7 +3,7 @@ package com.alphaville.coffeeapplication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.alphaville.coffeeapplication.Model.enums.Taste;
-import com.alphaville.coffeeapplication.Model.TasteJsonConverter;;
+import com.alphaville.coffeeapplication.Model.Database.TasteJsonConverter;;
 
 import org.junit.jupiter.api.Test;
 
