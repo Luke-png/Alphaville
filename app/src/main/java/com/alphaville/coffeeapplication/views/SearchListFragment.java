@@ -15,9 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import com.alphaville.coffeeapplication.Model.CoffeeDatabase;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.CoffeeProductRepository;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.R;
-import com.alphaville.coffeeapplication.databinding.SearchListFragmentBinding;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
 import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
@@ -45,8 +48,13 @@ public class SearchListFragment extends Fragment {
                              Bundle savedInstanceState) {
         //binding = SearchListFragmentBinding.inflate(inflater, container, false);
 
-        coffeeProducts.add(new CoffeeProduct());
-        coffeeProducts.add(new CoffeeProduct());
+        CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+                new ArrayList<>(), "test", true);
+        CoffeeProduct c2 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+                new ArrayList<>(), "test", true);
+
+        coffeeProducts.add(c1);
+        coffeeProducts.add(c2);
 
         viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
@@ -74,14 +82,12 @@ public class SearchListFragment extends Fragment {
         sv = (SearchView) v.findViewById(R.id.searchInSearchTab);
 
         fcv.setVisibility(View.INVISIBLE);
-
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
 
-        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(15);
-        rv.addItemDecoration(itemDecorator);
+        initItemSpacing(15);
 
         /**
          * Listener that should be triggered everytime the user changes anything in the search-field.
@@ -102,5 +108,13 @@ public class SearchListFragment extends Fragment {
             }
         });
         return v; //inflater.inflate(R.layout.search_list_fragment, container, false);
+    }
+
+    /**
+     * Adds some distance between the items in a RecyclerView
+     */
+    private void initItemSpacing(int spacing) {
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(spacing);
+        rv.addItemDecoration(itemDecorator);
     }
 }
