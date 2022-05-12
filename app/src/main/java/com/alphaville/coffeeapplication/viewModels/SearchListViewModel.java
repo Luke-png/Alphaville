@@ -1,5 +1,7 @@
 package com.alphaville.coffeeapplication.viewModels;
 
+import android.app.Application;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,6 +18,10 @@ public class SearchListViewModel extends ViewModelEngine {
 
     private final MutableLiveData<List<CoffeeProduct>> filteredList = new MutableLiveData<List<CoffeeProduct>>();
     private final MutableLiveData<CoffeeProduct> selected = new MutableLiveData<CoffeeProduct>();
+
+    public SearchListViewModel(Application application) {
+        super(application);
+    }
 
     public LiveData<List<CoffeeProduct>> getFilteredList() {
         return filteredList;

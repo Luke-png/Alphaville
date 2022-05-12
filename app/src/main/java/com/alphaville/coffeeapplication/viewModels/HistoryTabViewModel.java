@@ -34,6 +34,7 @@ public class HistoryTabViewModel extends ViewModelEngine{
     }
 
     //maybe not relevant anymore?
+    /*
     public List<Review> searchInReviews(String s){
         return getModel().searchInReviews(s);
     }

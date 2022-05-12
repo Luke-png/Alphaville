@@ -45,8 +45,7 @@ public class HistoryFragment extends Fragment {
         View view = binding.getRoot();
         fcv = binding.fragmentContainerView2;
         fcv.setVisibility(View.INVISIBLE);
-
-        model = new ViewModelProvider(requireActivity()).get(HistoryTabViewModel.class);
+        model = new ViewModelProvider(this).get(HistoryTabViewModel.class);
 
         itemPressed();
         setItemSpacing(15);
@@ -56,12 +55,10 @@ public class HistoryFragment extends Fragment {
         /**
          * This should initiate the adapter and recyclerview
          */
-        final HistoryResultAdapter adapter = new HistoryResultAdapter();
+        final HistoryResultAdapter adapter = new HistoryResultAdapter(model);
         binding.reviewList.setAdapter(adapter);
 
-        //Connects with HistoryTabViewModel
-        viewModel = new ViewModelProvider(this).get(HistoryTabViewModel.class);
-        viewModel.getAllReviews().observe(getViewLifecycleOwner(), new Observer<List<Review>>() {
+        model.getAllReviews().observe(getViewLifecycleOwner(), new Observer<List<Review>>() {
             @Override
             public void onChanged(List<Review> reviews) {
                 adapter.setReviews(reviews);
@@ -69,12 +66,6 @@ public class HistoryFragment extends Fragment {
         });
 
         binding.reviewList.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        /**
-         * This should initiate the adapter and recyclerview
-         */
-        binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews(), model));
-
 
         return view;
     }
@@ -92,18 +83,19 @@ public class HistoryFragment extends Fragment {
      * Method that should be triggered everytime the user changes anything in the search-field.
      * This is if we want continuous updates while writing.
      */
+    //TODO: fix search functionality with newly implemented classes.
     private void onSearch(){
         binding.searchHistory.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-                binding.reviewList.setAdapter(new HistoryResultAdapter(model.searchInReviews(s), model));
+                binding.reviewList.setAdapter(new HistoryResultAdapter(model));
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                binding.reviewList.setAdapter(new HistoryResultAdapter(model.searchInReviews(s), model));
+                binding.reviewList.setAdapter(new HistoryResultAdapter(model));
                 return true;
             }
         });

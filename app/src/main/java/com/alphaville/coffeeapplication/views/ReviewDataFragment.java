@@ -53,7 +53,7 @@ public class ReviewDataFragment extends Fragment {
         //Initializes ReviewDataViewModel used for creating and saving reviews
         viewModel = new ViewModelProvider(this).get(ReviewDataViewModel.class);
 
-        viewModel2 = new SearchListViewModel();
+        viewModel2 = new SearchListViewModel(getActivity().getApplication());
 
         initInputBox();
         initLocationBox();

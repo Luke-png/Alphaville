@@ -31,11 +31,9 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
 
     /**
      * class-constructor
-     * @param reviewList the list of reviews that fills the recyclerview
-     * @param viewModel
+     * @param viewModel ViewModel handling communication with the model
      */
-    public HistoryResultAdapter(List<Review> reviewList, HistoryTabViewModel viewModel){
-        this.reviewList = reviewList;
+    public HistoryResultAdapter(HistoryTabViewModel viewModel){
         this.viewModel = viewModel;
     }
 
