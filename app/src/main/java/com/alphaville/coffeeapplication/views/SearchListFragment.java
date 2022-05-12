@@ -76,7 +76,7 @@ public class SearchListFragment extends Fragment {
         //return inflater.inflate(R.layout.fragment_search,container,false);
         // Inflate the layout for this fragment
         rv = (RecyclerView) v.findViewById(R.id.RV_SearchList);
-        fcv = (FragmentContainerView) v.findViewById(R.id.FCV_DetailView);
+        fcv = (FragmentContainerView) v.findViewById(R.id.rec_DetailView);
         sv = (SearchView) v.findViewById(R.id.searchInSearchTab);
 
         fcv.setVisibility(View.INVISIBLE);

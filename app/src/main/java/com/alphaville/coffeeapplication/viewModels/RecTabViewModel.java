@@ -23,10 +23,10 @@ public class RecTabViewModel extends AndroidViewModel {
 
     public RecTabViewModel(@NonNull Application application) {
         super(application);
-        repository = new RecRepository(application);
-        allRec.add(repository.getAllReviews());
-        dag = allRec.get(0);
-        vecka = allRec.get(1);
+        //repository = new RecRepository(application);
+        //allRec.add(repository.getAllReviews());
+        //dag = allRec.get(0);
+        //vecka = allRec.get(1);
 
     }
 

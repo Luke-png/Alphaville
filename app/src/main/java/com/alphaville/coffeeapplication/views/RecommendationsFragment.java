@@ -8,18 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
-import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
 import com.alphaville.coffeeapplication.views.adapters.RecAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 //Placeholder class
 
@@ -27,6 +24,8 @@ public class RecommendationsFragment extends Fragment {
 
     private FragmentRecommendationsBinding binding;
     private RecTabViewModel viewModel;
+    private FragmentContainerView recDetail;
+    private View shadow;
 
 
     @Nullable
@@ -40,11 +39,18 @@ public class RecommendationsFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(RecTabViewModel.class);
 
+
+        recDetail = (FragmentContainerView) view.findViewById(R.id.rec_DetailView);
+        recDetail.setVisibility(View.INVISIBLE);
+        shadow = view.findViewById(R.id.shadowLayer);
+        shadow.setVisibility(View.INVISIBLE);
+
+
         /**
          * Creates the adepter with the appropriate data
          */
-        RecAdapter veckansAdapter = new RecAdapter(getActivity(),fillVeckans(),R.layout.rec_card);
-        RecAdapter dagensAdapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens);
+        RecAdapter veckansAdapter = new RecAdapter(getActivity(),fillVeckans(),R.layout.rec_card, recDetail,shadow);
+        RecAdapter dagensAdapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens, recDetail,shadow);
 
         /**
          * Binds recGrid with the adepter
@@ -52,6 +58,13 @@ public class RecommendationsFragment extends Fragment {
         binding.veckansRecGrid.setAdapter(veckansAdapter);
         binding.dagensRecGrid.setAdapter(dagensAdapter);
 
+        shadow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recDetail.setVisibility(View.INVISIBLE);
+                shadow.setVisibility(View.INVISIBLE);
+            }
+        });
 
         return view;
     }
