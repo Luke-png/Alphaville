@@ -59,10 +59,9 @@
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.503"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView4"
-                        app:layout_constraintVertical_bias="0.543" />
+                        app:layout_constraintVertical_bias="0.303" />
 
                     <FrameLayout
                         android:layout_width="295dp"
@@ -75,7 +74,7 @@
                         app:layout_constraintVertical_bias="0.145">
 
                         <GridView
-                            android:id="@+id/recGrid"
+                            android:id="@+id/veckansRecGrid"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:horizontalSpacing="6dp"
@@ -84,11 +83,11 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="261dp"
-                        android:layout_height="100dp"
+                        android:id="@+id/dagensKaffe"
+                        android:layout_width="280dp"
+                        android:layout_height="110dp"
                         android:layout_marginTop="25dp"
                         android:layout_marginBottom="51dp"
-                        android:background="#BD9898"
                         app:layout_constraintBottom_toTopOf="@+id/textView5"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.505"
@@ -96,28 +95,10 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView4"
                         app:layout_constraintVertical_bias="0.188">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <GridView
+                            android:id="@+id/dagensRecGrid"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/recDagensText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.553"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.197" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <ImageView
-                            android:id="@+id/recDagensImg"
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@drawable/placeholder_beans" />
+                            android:layout_height="match_parent" />
 
                     </FrameLayout>
 
