@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,6 +44,7 @@ public class HistoryFragment extends Fragment {
         itemPressed();
         setItemSpacing(15);
         onSearch();
+        detailedViewClosed();
 
         binding.reviewList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -49,6 +52,7 @@ public class HistoryFragment extends Fragment {
          * This should initiate the adapter and recyclerview
          */
         binding.reviewList.setAdapter(new HistoryResultAdapter(model.getReviews(), model));
+
 
         return view;
     }
@@ -94,5 +98,18 @@ public class HistoryFragment extends Fragment {
                 fcv.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    /**
+     *
+     */
+    private void detailedViewClosed(){
+        getActivity().getSupportFragmentManager().setFragmentResultListener(
+                "requestkey", this, new FragmentResultListener() {
+                    @Override
+                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                        fcv.setVisibility(View.INVISIBLE);
+                    }
+                });
     }
 }

@@ -25,8 +25,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView2"
         android:name="com.alphaville.coffeeapplication.views.ReviewInfoTabFragment"
-        android:layout_width="347dp"
-        android:layout_height="818dp"
+        android:layout_width="342dp"
+        android:layout_height="660dp"
         android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

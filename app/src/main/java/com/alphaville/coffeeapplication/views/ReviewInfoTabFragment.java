@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alphaville.coffeeapplication.Model.Review;
+import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentReviewInfoTabBinding;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 
@@ -30,6 +31,7 @@ public class ReviewInfoTabFragment extends Fragment {
         binding = FragmentReviewInfoTabBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         model = new ViewModelProvider(requireActivity()).get(HistoryTabViewModel.class);
+        closingView();
 
         model.getSelected().observe(getViewLifecycleOwner(), new Observer<Review>() {
             @Override
@@ -49,5 +51,28 @@ public class ReviewInfoTabFragment extends Fragment {
         binding.reviewText.setText(review.getTextReview());
         binding.locationText.setText(review.getLocation());
         binding.ratingBar2.setRating((float) review.getRating());
+        binding.countryText2.setText(review.getCoffeeProduct().getCountry());
+        binding.processText2.setText(review.getCoffeeProduct().getProcess().toString());
+        //binding.userImage.setImageDrawable(review.getCoffeeProduct().getPicture());
+        //binding.attributeText1.setText(review.getCoffeeProduct().getAttr1);
+        //binding.attributeText2.setText(review.getCoffeeProduct().getAttr2);
+        //binding.attributeText3.setText(review.getCoffeeProduct().getAttr3);
+        //binding.imageAttr1.setImageDrawable();
+        //binding.imageAttr2.setImageDrawable();
+        //binding.imageAttr3.setImageDrawable();
+    }
+
+    /**
+     * This method notifies HistoryFragment when the close button has been pressed
+     */
+    private void closingView(){
+        binding.closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle ping = new Bundle();
+                ping.putBoolean("closeBtn", true);
+                getActivity().getSupportFragmentManager().setFragmentResult("requestkey", ping);
+            }
+        });
     }
 }
