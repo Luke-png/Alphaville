@@ -55,27 +55,9 @@ public class CoffeeProduct
     /** Whether the user likes the coffee product. */
     private final boolean isLiked;
 
-   /* public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process,
-                         List<Taste> tastes, int sweetness, int fullness,
-                         int bitterness, String description, boolean isLiked){
-
-        this.name = name;
-        this.roast = roast;
-        this. country = country;
-
-        this.elevation = elevation;
-        this.process = process;
-        this.tastes = new ArrayList<>(tastes);
-
-        this.sweetness = sweetness;
-        this.fullness = fullness;
-        this.bitterness = bitterness;
-
-        this.description = description;
-        this.isLiked = isLiked;
-    }*/
-
-    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, ArrayList<Taste> tastes, int sweetness, int fullness, int bitterness, String description, boolean isLiked) {
+    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process,
+                         ArrayList<Taste> tastes, int sweetness, int fullness, int bitterness,
+                         String description, boolean isLiked) {
         this.name = name;
         this.country = country;
         this.elevation = elevation;
