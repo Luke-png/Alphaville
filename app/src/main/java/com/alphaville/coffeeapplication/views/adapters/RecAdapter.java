@@ -17,11 +17,12 @@ import java.util.ArrayList;
 
 public class RecAdapter extends ArrayAdapter<GridCard> {
 
-
+    private int layout;
     private GridCard gridCard;
 
-    public RecAdapter(@NonNull Context context,@NonNull ArrayList<GridCard> gridCardHolder){
+    public RecAdapter(@NonNull Context context,@NonNull ArrayList<GridCard> gridCardHolder,int layout){
         super(context,0, gridCardHolder);
+        this.layout = layout;
     }
 
     @NonNull
@@ -31,7 +32,7 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
         View listitemView = view;
         if (listitemView == null) {
             // Layout Inflater inflates each item to be displayed in GridView.
-            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.rec_card, viewGroup, false);
+            listitemView = LayoutInflater.from(getContext()).inflate(layout, viewGroup, false);
         }
 
         gridCard = getItem(position);
@@ -45,7 +46,7 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
     private void setupGridCard(View listitemView){
         TextView cardName = listitemView.findViewById(R.id.gridCardText);
         ImageView cardImage = listitemView.findViewById(R.id.gridCardImg);
-        cardName.setText(gridCard.getCourse_name());
+        cardName.setText(gridCard.get_name());
         cardImage.setImageResource(gridCard.getImgid());
     }
 

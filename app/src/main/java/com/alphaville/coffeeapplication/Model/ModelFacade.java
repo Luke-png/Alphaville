@@ -30,7 +30,11 @@ public class ModelFacade {
     public CoffeeProduct getActive() {
 
         //OBS hårdkodning för att slippa NullPointerException. Kommentera bort denna rad
-        active = new CoffeeProduct("Skånerost", "Colombia", 225, Roast.light, Process.dry, new ArrayList<Taste>() {}, "Tastes great", false);
+
+        active = new CoffeeProduct("Skånerost", "Colombia", 225,
+                Roast.light, Process.dry, new ArrayList<Taste>() {},1,1,
+                1, "Tastes great", false);
+
 
         return active;
     }

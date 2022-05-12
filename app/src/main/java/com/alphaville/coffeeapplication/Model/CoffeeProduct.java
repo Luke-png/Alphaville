@@ -4,11 +4,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.alphaville.coffeeapplication.Model.Database.TasteJsonConverter;
 import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.Model.enums.Roast;
 import com.alphaville.coffeeapplication.Model.enums.Taste;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An object of the CoffeeProduct type represents a type of coffee bean and describes all its properties, along with whether the user likes it or not.
@@ -40,25 +42,34 @@ public class CoffeeProduct
     @TypeConverters(TasteJsonConverter.class) // converter for conversion to/from json string which is stored in db
     private final ArrayList<Taste> tastes;
 
+    /** Sweetness rating. */
+    private final int sweetness;
+    /** Fullness rating. */
+    private final int fullness;
+    /** Bitterness rating. */
+    private final int bitterness;
+
     /** Short description of the product. */
     private final String description;
 
     /** Whether the user likes the coffee product. */
     private final boolean isLiked;
 
-    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process, ArrayList<Taste> tastes, String description, boolean isLiked){
+    public CoffeeProduct(String name, String country, int elevation, Roast roast, Process process,
+                         ArrayList<Taste> tastes, int sweetness, int fullness, int bitterness,
+                         String description, boolean isLiked) {
         this.name = name;
-        this.roast = roast;
-        this. country = country;
-
+        this.country = country;
         this.elevation = elevation;
+        this.roast = roast;
         this.process = process;
-        this.tastes = new ArrayList<>(tastes);
-
+        this.tastes = tastes;
+        this.sweetness = sweetness;
+        this.fullness = fullness;
+        this.bitterness = bitterness;
         this.description = description;
         this.isLiked = isLiked;
     }
-
     // Getters ------------
 
     public String getName() { return name; }
@@ -77,6 +88,15 @@ public class CoffeeProduct
 
     public boolean isLiked() { return isLiked; }
 
+
+    public int getSweetness() {
+        return sweetness;
+    }
+
+    public int getFullness() {
+        return fullness;
+    }
+
     public int getId() { return id; }
 
     // Setter -------------------
@@ -86,4 +106,7 @@ public class CoffeeProduct
     }
 
 
+    public int getBitterness() {
+        return bitterness;
+    }
 }

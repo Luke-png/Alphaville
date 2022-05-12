@@ -1,12 +1,14 @@
-package com.alphaville.coffeeapplication.Model;
+package com.alphaville.coffeeapplication.Model.Database;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Review;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,7 +16,7 @@ import java.util.concurrent.Executors;
 /**
  * Singleton class containing the Data Access Objects for every entity. Also handles asynchronous tasks from the repositories.
  */
-@Database(entities = {Review.class, CoffeeProduct.class}, version = 1)
+@Database(entities = {Review.class, CoffeeProduct.class}, version = 4)
 public abstract class CoffeeDatabase extends RoomDatabase {
 
     private static CoffeeDatabase instance;

@@ -13,15 +13,22 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.databinding.FragmentHistoryBinding;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
+import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 import com.alphaville.coffeeapplication.views.adapters.HistoryResultAdapter;
 import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
+
+import java.util.List;
 
 public class HistoryFragment extends Fragment {
 
@@ -45,6 +52,21 @@ public class HistoryFragment extends Fragment {
         setItemSpacing(15);
         onSearch();
         detailedViewClosed();
+
+        /**
+         * This should initiate the adapter and recyclerview
+         */
+        final HistoryResultAdapter adapter = new HistoryResultAdapter();
+        binding.reviewList.setAdapter(adapter);
+
+        //Connects with HistoryTabViewModel
+        viewModel = new ViewModelProvider(this).get(HistoryTabViewModel.class);
+        viewModel.getAllReviews().observe(getViewLifecycleOwner(), new Observer<List<Review>>() {
+            @Override
+            public void onChanged(List<Review> reviews) {
+                adapter.setReviews(reviews);
+            }
+        });
 
         binding.reviewList.setLayoutManager(new LinearLayoutManager(getActivity()));
 

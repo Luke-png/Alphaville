@@ -14,14 +14,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
+import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * ReviewDataFragment is the fragment for inputting and saving a text review
@@ -45,13 +50,20 @@ public class ReviewDataFragment extends Fragment {
         binding = ReviewDataFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        viewModel = new ReviewDataViewModel();
+        //Initializes ReviewDataViewModel used for creating and saving reviews
+        viewModel = new ViewModelProvider(this).get(ReviewDataViewModel.class);
+
         viewModel2 = new SearchListViewModel();
 
         initInputBox();
         initLocationBox();
         initSaveButton();
+
+        //If statement to prevent crash at this stage
+        if(viewModel2.getSelected().getValue() != null){
         initProductText();
+        }
+
 
     return view;
     }

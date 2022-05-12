@@ -34,12 +34,14 @@ public class RecommendationsFragment extends Fragment {
         /**
          * Creates the adepter with the appropriate data
          */
-        RecAdapter recAdapter = new RecAdapter(getActivity(),fillGridView());
+        RecAdapter veckansAdapter = new RecAdapter(getActivity(),fillVeckans(),R.layout.rec_card);
+        RecAdapter dagensAdapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens);
 
         /**
          * Binds recGrid with the adepter
          */
-        binding.recGrid.setAdapter(recAdapter);
+        binding.veckansRecGrid.setAdapter(veckansAdapter);
+        binding.dagensRecGrid.setAdapter(dagensAdapter);
 
 
         return view;
@@ -49,12 +51,18 @@ public class RecommendationsFragment extends Fragment {
     /**
      * Hardcoded test data
      */
-    private ArrayList<GridCard> fillGridView(){
+    private ArrayList<GridCard> fillVeckans(){
         ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
         gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("JAVA", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("C++", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("Python", R.drawable.ic_filled_heart));
+        return gridArrayList;
+    }
+
+    private ArrayList<GridCard> fillDagens(){
+        ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
+        gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
         return gridArrayList;
     }
 

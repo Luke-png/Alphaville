@@ -1,4 +1,4 @@
-package com.alphaville.coffeeapplication.Model;
+package com.alphaville.coffeeapplication.Model.Database;
 
 import static android.icu.text.MessagePattern.ArgType.SELECT;
 
@@ -8,6 +8,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.alphaville.coffeeapplication.Model.Review;
 
 import java.util.List;
 

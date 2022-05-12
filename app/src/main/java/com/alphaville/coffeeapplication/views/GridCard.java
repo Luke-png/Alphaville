@@ -3,20 +3,20 @@ package com.alphaville.coffeeapplication.views;
 
 public class GridCard {
 
-    private String course_name;
+    private String name;
     private int imgid;
 
-    public GridCard(String course_name, int imgid) {
-        this.course_name = course_name;
+    public GridCard(String name, int imgid) {
+        this.name = name;
         this.imgid = imgid;
     }
 
-    public String getCourse_name() {
-        return course_name;
+    public String get_name() {
+        return name;
     }
 
-    public void setCourse_name(String course_name) {
-        this.course_name = course_name;
+    public void set_name(String name) {
+        this.name = name;
     }
 
     public int getImgid() {

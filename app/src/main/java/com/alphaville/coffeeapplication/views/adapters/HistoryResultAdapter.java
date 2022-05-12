@@ -15,6 +15,7 @@ import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,6 +70,15 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
     }
 
     /**
+     * Sets the reviews in the adapter
+     * @param reviews the reviews shown in the adapter
+     */
+    public void setReviews(List<Review> reviews) {
+        this.reviewList = reviews;
+        notifyDataSetChanged();
+    }
+
+    /**
      * ViewHolder class for setting all the fields with the right information on the review cards.
      */
     public static class ReviewCardViewHolder extends RecyclerView.ViewHolder {
@@ -100,7 +110,7 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
         }
 
         @RequiresApi(api = Build.VERSION_CODES.M)
-        private void setReviewInfo(Review item){
+        public void setReviewInfo(Review item){
             name.setText(item.getCoffeeProduct().getName());
             country.setText(item.getCoffeeProduct().getCountry());
             process.setText("Process: " + item.getCoffeeProduct().getProcess().toString());
