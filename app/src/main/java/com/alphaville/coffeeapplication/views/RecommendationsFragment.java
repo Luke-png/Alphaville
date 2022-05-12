@@ -8,18 +8,25 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
+import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
+import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
 import com.alphaville.coffeeapplication.views.adapters.RecAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //Placeholder class
 
 public class RecommendationsFragment extends Fragment {
 
-    FragmentRecommendationsBinding binding;
+    private FragmentRecommendationsBinding binding;
+    private RecTabViewModel viewModel;
 
 
     @Nullable
@@ -30,6 +37,8 @@ public class RecommendationsFragment extends Fragment {
 
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        viewModel = new ViewModelProvider(this).get(RecTabViewModel.class);
 
         /**
          * Creates the adepter with the appropriate data
@@ -52,17 +61,25 @@ public class RecommendationsFragment extends Fragment {
      * Hardcoded test data
      */
     private ArrayList<GridCard> fillVeckans(){
-        ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
+        ArrayList<GridCard> gridArrayList = new ArrayList();
         gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("JAVA", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("C++", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("Python", R.drawable.ic_filled_heart));
+
+        //gridArrayList = viewModel.getRectVecka().getValue();
+
         return gridArrayList;
     }
 
     private ArrayList<GridCard> fillDagens(){
         ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
         gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
+
+        //gridArrayList = viewModel.getRectVecka().getValue();
+
+        viewModel.getRectDag();
+
         return gridArrayList;
     }
 

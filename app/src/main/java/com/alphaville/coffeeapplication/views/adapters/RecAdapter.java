@@ -37,6 +37,16 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
 
         gridCard = getItem(position);
         setupGridCard(listitemView);
+        TextView cardName = listitemView.findViewById(R.id.gridCardText);
+
+        /*listitemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardName.setText("asd");
+
+            }
+        });*/
+
         return listitemView;
     }
 
@@ -48,6 +58,7 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
         ImageView cardImage = listitemView.findViewById(R.id.gridCardImg);
         cardName.setText(gridCard.get_name());
         cardImage.setImageResource(gridCard.getImgid());
+
     }
 
 }
