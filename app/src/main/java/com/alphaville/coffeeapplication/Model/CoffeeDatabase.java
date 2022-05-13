@@ -72,6 +72,7 @@ public abstract class CoffeeDatabase extends RoomDatabase {
             for(CoffeeProduct product : reader.getCoffeeProducts())
                 coffeeDao().insert(product);
 
+            reader.close();
         }
         catch (Exception e){
             Log.d("database", "error in pre-population stage of database: " + e.toString());

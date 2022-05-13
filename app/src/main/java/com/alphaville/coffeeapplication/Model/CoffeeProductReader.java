@@ -5,14 +5,12 @@ import android.content.Context;
 import com.alphaville.coffeeapplication.R;
 import com.opencsv.CSVReader;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +19,7 @@ import java.util.List;
  */
 public class CoffeeProductReader
 {
-
-
-    private static final int[] accepted_columns = { 0, 1, 2, 3, 4, 9, 10, 11, 16, 19, 20, 21, 22, 23, 24, 25, 26 ,27, 29, 32};
-
+    private static final int[] accepted_columns = { 2, 3, 9, 10, 15, 19, 20, 21, 22, 23, 24, 25, 26, 28, 31};
     private final List<Integer> accepted; // corresponding list
 
     /** Reader object for reading csv file. */
@@ -79,22 +74,65 @@ public class CoffeeProductReader
      */
     public CoffeeProduct getCoffeeProduct(String[] row)
     {
-        int id = Integer.parseInt(row[0]);
-        // species?
-        // owner?
-        String country = row[3];
-        // company?
-        int elevation = Integer.parseInt(row[5]);
-        // region?
-        // harvest year?
-        // variety?
-        String process = row[9];
-        // aroma, flavor, aftertaste, acidity, body, balance, uniformity, sweetness, moisture?
+        String owner = row[0];
+        String country = row[1];
+        int elevation = getNumber(filter('.', row[2])); // parses first number stored
+        String process = row[5];
+        float aroma = Float.parseFloat(row[6]);
+        float flavor = Float.parseFloat(row[7]);
+        float aftertaste = Float.parseFloat(row[8]);
+        float acidity = Float.parseFloat(row[9]);
+        float body = Float.parseFloat(row[10]);
+        float balance = Float.parseFloat(row[11]);
+        float uniformity = Float.parseFloat(row[12]);
+        float sweetness = Float.parseFloat(row[13]);
+        float moisture = Float.parseFloat(row[14]);
 
-        CoffeeProduct product = new CoffeeProduct("", country, elevation, null,
-                        null, new ArrayList<>(), "", false);
+        // add maybe?
+        String region = row[3];
+        int harvest_year = getNumber(filter('.', row[4]));
 
-        return product;
+        return new CoffeeProduct(owner, country, elevation, process, aroma, flavor, aftertaste, acidity,
+                                 body, balance, uniformity, sweetness, moisture, false);
+    }
+
+    /**
+     * Gets the first integer found in string.
+     * @param s string to parse integer from
+     * @return parsed integer
+     */
+    static int getNumber(String s) {
+
+        String[] n = s.split(""); //array of strings
+        StringBuffer f = new StringBuffer(); // buffer to store numbers
+
+        for (int i = 0; i < n.length; i++) {
+            if((n[i].matches("[0-9]+"))) {// validating numbers
+                f.append(n[i]); //appending
+            }else {
+                //parsing to int and returning value
+                return Integer.parseInt(f.toString());
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Filters all instances of given character from string.
+     * @param f filter char
+     * @param str string to filter
+     * @return filtered string
+     */
+    static String filter(char f, String str)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        for(char c : str.toCharArray()){
+            if(c != f)
+                sb.append(c);
+        }
+
+        return sb.toString();
     }
 
 
