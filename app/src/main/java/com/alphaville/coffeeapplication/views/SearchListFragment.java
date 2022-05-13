@@ -51,7 +51,7 @@ public class SearchListFragment extends Fragment {
 
         CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
                 new ArrayList<>(), 2,2,2, "test", true);
-        CoffeeProduct c2 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+        CoffeeProduct c2 = new CoffeeProduct("namn2", "Sweden", 123, Roast.light, Process.dry,
                 new ArrayList<>(),2, 2, 2, "test", true);
 
         coffeeProducts.add(c1);
