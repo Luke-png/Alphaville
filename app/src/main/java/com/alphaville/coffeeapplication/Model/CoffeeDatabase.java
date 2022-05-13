@@ -1,6 +1,8 @@
 package com.alphaville.coffeeapplication.Model;
 
+
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -8,6 +10,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.alphaville.coffeeapplication.R;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -40,12 +47,34 @@ public abstract class CoffeeDatabase extends RoomDatabase {
         if (instance == null) {
             synchronized (CoffeeDatabase.class){
                 instance= Room.databaseBuilder(context.getApplicationContext(),
-                        CoffeeDatabase.class,"coffee_database").fallbackToDestructiveMigration().build();
+                        CoffeeDatabase.class,"coffee_database")
+                        .addCallback(new Callback() // makes sure database gets populated on creation
+                        {
+                            @Override
+                            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                super.onCreate(db);
+                                databaseWriteExecutor.execute(() -> CoffeeDatabase.getInstance(context).prepopulate(context));
+                            }
+                        })
+                        .fallbackToDestructiveMigration().build();
             }
         }
         return instance;
     }
 
     // todo pre-populate database with coffee product data on creation
+    private void prepopulate(Context context) {
+        try {
+            // creates reader for data
+            CoffeeProductReader reader = new CoffeeProductReader(context);
 
+            // inserts all products read into database
+            for(CoffeeProduct product : reader.getCoffeeProducts())
+                coffeeDao().insert(product);
+
+        }
+        catch (Exception e){
+            Log.d("database", "error in pre-population stage of database: " + e.toString());
+        }
+    }
 }
