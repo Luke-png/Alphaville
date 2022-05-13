@@ -16,8 +16,9 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.R;
-import com.alphaville.coffeeapplication.databinding.SearchListFragmentBinding;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
 import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
@@ -43,45 +44,40 @@ public class SearchListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         //binding = SearchListFragmentBinding.inflate(inflater, container, false);
+/*
+        CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+                new ArrayList<>(), 2,2,2, "test", true);
+        CoffeeProduct c2 = new CoffeeProduct("namn2", "Sweden", 123, Roast.light, Process.dry,
+                new ArrayList<>(),2, 2, 2, "test", true);
 
-        coffeeProducts.add(new CoffeeProduct());
-        coffeeProducts.add(new CoffeeProduct());
-
-        viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
+        coffeeProducts.add(c1);
+        coffeeProducts.add(c2);
+*/
+        viewModel = new ViewModelProvider(this).get(SearchListViewModel.class);
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
             @Override
-            public void onChanged(@Nullable List<CoffeeProduct> p) {
-                coffeeProducts = p;
-                // kanske måste notifya adapter / rv, men osäker borde gå utan
+            public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
+                adapter.setProducts(coffeeProducts);
             }
         });
-
-        /*
-        final Observer<List<CoffeeProduct>> nameObserver = new Observer<List<CoffeeProduct>>() {
-            @Override
-            public void onChanged(@Nullable List<CoffeeProduct> t) {
-                coffeProducts = t;
-                // kanske måste notifya adapter / rv, men osäker borde gå utan
-            }
-        };*/
 
         View v = inflater.inflate(R.layout.search_list_fragment,container,false);
         //return inflater.inflate(R.layout.fragment_search,container,false);
         // Inflate the layout for this fragment
         rv = (RecyclerView) v.findViewById(R.id.RV_SearchList);
-        fcv = (FragmentContainerView) v.findViewById(R.id.FCV_DetailView);
+        fcv = (FragmentContainerView) v.findViewById(R.id.rec_DetailView);
         sv = (SearchView) v.findViewById(R.id.searchInSearchTab);
 
         fcv.setVisibility(View.INVISIBLE);
-
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
 
-        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(15);
-        rv.addItemDecoration(itemDecorator);
+        initItemSpacing(15);
 
         /**
          * Listener that should be triggered everytime the user changes anything in the search-field.
@@ -102,5 +98,14 @@ public class SearchListFragment extends Fragment {
             }
         });
         return v; //inflater.inflate(R.layout.search_list_fragment, container, false);
+    }
+
+    /**
+     * Adds some distance between the items in a RecyclerView
+     * @param spacing amount of spacing
+     */
+    private void initItemSpacing(int spacing) {
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(spacing);
+        rv.addItemDecoration(itemDecorator);
     }
 }

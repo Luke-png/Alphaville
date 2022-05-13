@@ -1,26 +1,33 @@
 package com.alphaville.coffeeapplication.views;
 
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Process.dry;
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Roast.light;
+import static com.alphaville.coffeeapplication.Model.enums.Process.dry;
+import static com.alphaville.coffeeapplication.Model.enums.Roast.light;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
-//import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
-
-import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Review;
+import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 
+import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
+import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ReviewDataFragment is the fragment for inputting and saving a text review
@@ -28,33 +35,62 @@ import java.util.ArrayList;
 public class ReviewDataFragment extends Fragment {
 
     private ReviewDataFragmentBinding binding;
+
+    /**
+     * ViewModel reference for handling a new review creation
+     */
     private ReviewDataViewModel viewModel;
+
+    /**
+     * ViewModel for populating the review-tab with the right information
+     */
+    private SearchListViewModel viewModel2;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = ReviewDataFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        viewModel = new ReviewDataViewModel();
+        //Initializes ReviewDataViewModel used for creating and saving reviews
+        viewModel = new ViewModelProvider(this).get(ReviewDataViewModel.class);
 
-        //initRatingbar();
+        viewModel2 = new ViewModelProvider(this).get(SearchListViewModel.class);
+
         initInputBox();
         initLocationBox();
         initSaveButton();
+
+        //If statement to prevent crash at this stage
+        if(viewModel2.getSelected().getValue() != null){
         initProductText();
+        }
 
 
     return view;
     }
 
-    /**
-     * Initiates the text of which coffeeproduct is being reviewed
-     */
-    private void initProductText() {binding.currentProduct.setText("Reviewing "+viewModel.getActiveProduct().getName());
+    @Override
+    public void onResume() {
+        getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.INVISIBLE);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
+        super.onPause();
     }
 
     /**
-     * Initiates the input box for inputting location of where the coffe drink was bought
+     * Initiates the text of which coffeeproduct is being reviewed
+     */
+    @SuppressLint("SetTextI18n")
+    private void initProductText() {binding.currentProduct.setText(
+            "Reviewing " + viewModel2.getSelected().getValue().getName());
+    }
+
+    /**
+     * Initiates the input box for inputting location of where the coffee drink was bought
      */
     private void initLocationBox() {binding.locationBox.setHint("Enter location");
     }
@@ -66,30 +102,40 @@ public class ReviewDataFragment extends Fragment {
         binding.inputBox.setHint("Enter your review");
     }
 
-   /* public void initRatingbar(View view){
-        ratingBar = view.findViewById(R.id.ratingBar);
-   }*/
-
     /**
      * Initiates save button for text review
      */
-    //TODO Remove test coffeeProduct
     public void initSaveButton() {
         binding.textSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("pressed");
-
-                //Test object
-                CoffeeProduct cp = new CoffeeProduct("placeHolder", "testCountry",
-                        99999, light, dry, new ArrayList<>(), "testDesc", true);
-
-                viewModel.createReview(cp, binding.inputBox.getText().toString(),
-                        binding.ratingBar.getRating(), binding.locationBox.getText().toString(),
-                        "testCategory", new Timestamp(System.currentTimeMillis())
-                        );
+                saveReview();
+                showToastMessage("Review has been saved");
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
     }
 
+    /**
+     * Method for showing a toast-message
+     */
+    private void showToastMessage(String message){
+        Context context = getContext();
+        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Method for saving a review. When pressing the save-button, the input information is sent to
+     * the ViewModel for handling.
+     */
+    //TODO:Fix category input box (of some kind) so the user can provide this.
+    private void saveReview(){
+        double rating = binding.ratingBar.getRating();
+        String reviewText = binding.inputBox.getText().toString();
+        String location = binding.locationBox.getText().toString();
+        //String category = binding.categoryBox.getValue().toString();
+
+        viewModel.createReview(viewModel2.getSelected().getValue(), reviewText, rating, location,
+                "randomCategory", System.currentTimeMillis());
+    }
 }

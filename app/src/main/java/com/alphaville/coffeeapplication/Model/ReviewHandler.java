@@ -1,9 +1,9 @@
 package com.alphaville.coffeeapplication.Model;
 
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Taste.floral;
-import static com.alphaville.coffeeapplication.Model.CoffeeProduct.Taste.fruity;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Taste;
+import com.alphaville.coffeeapplication.Model.enums.Process;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +21,11 @@ public class ReviewHandler {
     public ReviewHandler() {
 
         //testobject for checking recyclerview in history-tab.
-        List<CoffeeProduct.Taste> s = new ArrayList<>();
-        s.add(fruity);
+        ArrayList<Taste> s = new ArrayList<>();
+        s.add(Taste.fruity);
         reviews.add(new Review(new CoffeeProduct("something", "Sweden", 1900,
-                CoffeeProduct.Roast.light, CoffeeProduct.Process.dry, s, "from the best beans", false),
-                "this tastes good", 3, "Johanneberg", "cappuccino", new Timestamp(2000)));
+                Roast.light, Process.dry, s, 1,1,1,"from the best beans", false),
+                "this tastes good", 3, "Johanneberg", "cappuccino", 2000));
     }
 
     /**
@@ -39,7 +39,7 @@ public class ReviewHandler {
      */
     //TODO save to database when implemented.
     public void createReview(CoffeeProduct cp, String textReview, double rating, String location,
-                            String drinkCategory, Timestamp creationTime){
+                            String drinkCategory, long creationTime){
         Review newReview = new Review(cp, textReview, rating, location, drinkCategory, creationTime);
         reviews.add(newReview);
     }
@@ -52,10 +52,11 @@ public class ReviewHandler {
         //TODO remove test
         //Test review
         createReview(new CoffeeProduct("Skånerost", "Colombia", 225,
-                CoffeeProduct.Roast.light, CoffeeProduct.Process.fermented,
-                new ArrayList<CoffeeProduct.Taste>() {}, "Tastes great", false)
+                Roast.light, Process.fermented,
+                new ArrayList<Taste>() {},1,1,1, "Tastes great", false)
+
         ,"testReview", 3.5, "testLocation", "Cappuccino",
-                new Timestamp(System.currentTimeMillis()));
+               System.currentTimeMillis());
         return new ArrayList<>(reviews);
     }
 

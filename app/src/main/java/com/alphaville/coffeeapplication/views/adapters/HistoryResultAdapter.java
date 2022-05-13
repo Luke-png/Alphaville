@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
+import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,13 +27,14 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
      * List of user reviews to fill the history-tab
      */
     private List<Review> reviewList;
+    private final HistoryTabViewModel viewModel;
 
     /**
      * class-constructor
-     * @param reviewList the list of reviews that fills the recyclerview
+     * @param viewModel ViewModel handling communication with the model
      */
-    public HistoryResultAdapter(List<Review> reviewList){
-        this.reviewList = reviewList;
+    public HistoryResultAdapter(HistoryTabViewModel viewModel){
+        this.viewModel = viewModel;
     }
 
     /**
@@ -45,15 +48,36 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
 
         return new ReviewCardViewHolder(view);
     }
+
     @Override
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onBindViewHolder(@NonNull ReviewCardViewHolder holder, int position) {
         holder.setReviewInfo(reviewList.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("pressed review item");
+                viewModel.selectItem(reviewList.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return reviewList.size();
+        if(reviewList != null)
+            return reviewList.size();
+        else
+            return 0;
+    }
+
+    /**
+     * Sets the reviews in the adapter
+     * @param reviews the reviews shown in the adapter
+     */
+    public void setReviews(List<Review> reviews) {
+        this.reviewList = reviews;
+        notifyDataSetChanged();
     }
 
     /**

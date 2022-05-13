@@ -18,19 +18,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragmentContainerView, SearchListFragment.class, null)
-                    .commit();
-        }
-*/
+        RecommendationsFragment recommendationsFragment = new RecommendationsFragment();
 
+        getSupportFragmentManager().beginTransaction().replace(
+                R.id.fragment_container,recommendationsFragment).commit();
         //add the navbar and connect the listener navlistener
         NavigationBarView barView = findViewById(R.id.bottom_navigation);
         barView.setOnItemSelectedListener(navlistener);
-
     }
 
     //create the navbar with appropriate buttons
@@ -40,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
                     switch (item.getItemId()){
-                        case R.id.nav_recommendations:
-                            selectedFragment = new RecommendationsFragment();
-                            break;
                         case R.id.nav_search:
                             selectedFragment = new SearchListFragment();
+                            break;
+                        case R.id.nav_recommendations:
+                            selectedFragment = new RecommendationsFragment();
                             break;
                         case R.id.nav_history:
                             selectedFragment = new HistoryFragment();
