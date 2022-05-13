@@ -57,6 +57,7 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("pressed review item");
                 viewModel.selectItem(reviewList.get(holder.getAdapterPosition()));
             }
         });
@@ -64,7 +65,10 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
 
     @Override
     public int getItemCount() {
-        return reviewList.size();
+        if(reviewList != null)
+            return reviewList.size();
+        else
+            return 0;
     }
 
     /**
