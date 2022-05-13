@@ -30,12 +30,13 @@ public class ReviewInfoTabFragment extends Fragment {
                               Bundle savedInstanceState) {
         binding = FragmentReviewInfoTabBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        model = new ViewModelProvider(requireActivity()).get(HistoryTabViewModel.class);
+        model = new ViewModelProvider(this).get(HistoryTabViewModel.class);
         closingView();
 
         model.getSelected().observe(getViewLifecycleOwner(), new Observer<Review>() {
             @Override
             public void onChanged(Review review) {
+                System.out.println("setting values");
                 initValues(review);
             }
         });

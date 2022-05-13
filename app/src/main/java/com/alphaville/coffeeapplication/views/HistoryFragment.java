@@ -108,7 +108,8 @@ public class HistoryFragment extends Fragment {
     private void itemPressed(){
         model.getSelected().observe(getViewLifecycleOwner(), new Observer<Review>() {
             @Override
-            public void onChanged(Review review) {
+            public void onChanged(@Nullable Review review) {
+                System.out.println("displaying info tab");
                 fcv.setVisibility(View.VISIBLE);
             }
         });

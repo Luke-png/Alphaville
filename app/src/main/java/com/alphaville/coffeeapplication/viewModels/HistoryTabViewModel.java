@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import android.app.Application;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
