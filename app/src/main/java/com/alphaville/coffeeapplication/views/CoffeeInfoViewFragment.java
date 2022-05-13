@@ -38,14 +38,16 @@ public class CoffeeInfoViewFragment extends Fragment{
         View view = binding.getRoot();
         viewModel= new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
 
-        /**
-         * Observer
          /*
          setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
          setCoffeeInformation(name, info, description);
          setCoffeePicture(image);
          setClockTexts(firstClockText, secondClockText, thirdClockText);
          */
+
+        /*
+         * Observer
+        */
         viewModel.getSelected().observe(getViewLifecycleOwner(), new Observer<CoffeeProduct>() {
             @Override
             public void onChanged(CoffeeProduct coffeeProduct) {
