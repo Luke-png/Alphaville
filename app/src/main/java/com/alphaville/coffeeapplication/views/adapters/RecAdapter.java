@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentContainerView;
 
 import com.alphaville.coffeeapplication.views.GridCard;
 import com.alphaville.coffeeapplication.R;
@@ -19,10 +20,15 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
 
     private int layout;
     private GridCard gridCard;
+    private FragmentContainerView recDetail;
+    private View shadow;
 
-    public RecAdapter(@NonNull Context context,@NonNull ArrayList<GridCard> gridCardHolder,int layout){
+    public RecAdapter(@NonNull Context context,@NonNull ArrayList<GridCard> gridCardHolder,int layout,
+                      FragmentContainerView recDetail, View shadow){
         super(context,0, gridCardHolder);
         this.layout = layout;
+        this.recDetail = recDetail;
+        this.shadow = shadow;
     }
 
     @NonNull
@@ -37,6 +43,17 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
 
         gridCard = getItem(position);
         setupGridCard(listitemView);
+        TextView cardName = listitemView.findViewById(R.id.gridCardText);
+
+
+        listitemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recDetail.setVisibility(View.VISIBLE);
+                shadow.setVisibility(View.VISIBLE);
+            }
+        });
+
         return listitemView;
     }
 
@@ -48,6 +65,7 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
         ImageView cardImage = listitemView.findViewById(R.id.gridCardImg);
         cardName.setText(gridCard.get_name());
         cardImage.setImageResource(gridCard.getImgid());
+
     }
 
 }

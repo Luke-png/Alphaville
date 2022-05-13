@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
+import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
 import com.alphaville.coffeeapplication.views.adapters.RecAdapter;
 
 import java.util.ArrayList;
@@ -19,7 +22,10 @@ import java.util.ArrayList;
 
 public class RecommendationsFragment extends Fragment {
 
-    FragmentRecommendationsBinding binding;
+    private FragmentRecommendationsBinding binding;
+    private RecTabViewModel viewModel;
+    private FragmentContainerView recDetail;
+    private View shadow;
 
 
     @Nullable
@@ -31,11 +37,20 @@ public class RecommendationsFragment extends Fragment {
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        viewModel = new ViewModelProvider(this).get(RecTabViewModel.class);
+
+
+        recDetail = (FragmentContainerView) view.findViewById(R.id.rec_DetailView);
+        recDetail.setVisibility(View.INVISIBLE);
+        shadow = view.findViewById(R.id.shadowLayer);
+        shadow.setVisibility(View.INVISIBLE);
+
+
         /**
          * Creates the adepter with the appropriate data
          */
-        RecAdapter veckansAdapter = new RecAdapter(getActivity(),fillVeckans(),R.layout.rec_card);
-        RecAdapter dagensAdapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens);
+        RecAdapter veckansAdapter = new RecAdapter(getActivity(),fillVeckans(),R.layout.rec_card, recDetail,shadow);
+        RecAdapter dagensAdapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens, recDetail,shadow);
 
         /**
          * Binds recGrid with the adepter
@@ -43,6 +58,13 @@ public class RecommendationsFragment extends Fragment {
         binding.veckansRecGrid.setAdapter(veckansAdapter);
         binding.dagensRecGrid.setAdapter(dagensAdapter);
 
+        shadow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recDetail.setVisibility(View.INVISIBLE);
+                shadow.setVisibility(View.INVISIBLE);
+            }
+        });
 
         return view;
     }
@@ -52,17 +74,25 @@ public class RecommendationsFragment extends Fragment {
      * Hardcoded test data
      */
     private ArrayList<GridCard> fillVeckans(){
-        ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
+        ArrayList<GridCard> gridArrayList = new ArrayList();
         gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("JAVA", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("C++", R.drawable.ic_filled_heart));
         gridArrayList.add(new GridCard("Python", R.drawable.ic_filled_heart));
+
+        //gridArrayList = viewModel.getRectVecka().getValue();
+
         return gridArrayList;
     }
 
     private ArrayList<GridCard> fillDagens(){
         ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
         gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
+
+        //gridArrayList = viewModel.getRectVecka().getValue();
+
+        viewModel.getRectDag();
+
         return gridArrayList;
     }
 
