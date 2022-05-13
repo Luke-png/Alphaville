@@ -79,7 +79,7 @@ public abstract class CoffeeDatabase extends RoomDatabase {
             reader.close();
         }
         catch (Exception e){
-            Log.d("database", "error in pre-population stage of database: " + e.toString());
+            Log.e("database", "error in pre-population stage of database: " + e.toString());
         }
     }
 }

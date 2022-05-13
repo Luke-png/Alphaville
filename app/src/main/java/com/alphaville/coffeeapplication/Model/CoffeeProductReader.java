@@ -23,8 +23,7 @@ public class CoffeeProductReader
     /**
      * Integers representing the columns (attributes) of interest in the csv file.
      */
-    private static final int[] accepted_columns = { 2, 3, 9, 10, 15, 19, 20, 21, 22, 23, 24, 25, 26, 28, 31};
-    private final List<Integer> accepted; // corresponding list
+    private final List<Integer> accepted;
 
     /** Reader object for reading csv file. */
     private final CSVReader reader;
@@ -34,6 +33,7 @@ public class CoffeeProductReader
      */
     public CoffeeProductReader(Context context) throws Exception
     {
+        int[] accepted_columns = { 2, 3, 9, 10, 15, 19, 20, 21, 22, 23, 24, 25, 26, 28, 31};
         accepted = populate_accepted_list(accepted_columns);
 
         // reads file from resources
