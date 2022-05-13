@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
@@ -53,7 +54,7 @@ public class ReviewDataFragment extends Fragment {
         //Initializes ReviewDataViewModel used for creating and saving reviews
         viewModel = new ViewModelProvider(this).get(ReviewDataViewModel.class);
 
-        viewModel2 = new SearchListViewModel();
+        viewModel2 = new ViewModelProvider(this).get(SearchListViewModel.class);
 
         initInputBox();
         initLocationBox();

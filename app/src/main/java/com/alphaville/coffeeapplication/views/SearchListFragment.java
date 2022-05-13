@@ -44,8 +44,10 @@ public class SearchListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //binding = SearchListFragmentBinding.inflate(inflater, container, false);
 
+
+        //binding = SearchListFragmentBinding.inflate(inflater, container, false);
+/*
         CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
                 new ArrayList<>(), 2,2,2, "test", true);
         CoffeeProduct c2 = new CoffeeProduct("namn2", "Sweden", 123, Roast.light, Process.dry,
@@ -53,24 +55,14 @@ public class SearchListFragment extends Fragment {
 
         coffeeProducts.add(c1);
         coffeeProducts.add(c2);
-
-        viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
+*/
+        viewModel = new ViewModelProvider(this).get(SearchListViewModel.class);
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
             @Override
-            public void onChanged(@Nullable List<CoffeeProduct> p) {
-                coffeeProducts = p;
-                // kanske måste notifya adapter / rv, men osäker borde gå utan
+            public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
+                adapter.setProducts(coffeeProducts);
             }
         });
-
-        /*
-        final Observer<List<CoffeeProduct>> nameObserver = new Observer<List<CoffeeProduct>>() {
-            @Override
-            public void onChanged(@Nullable List<CoffeeProduct> t) {
-                coffeProducts = t;
-                // kanske måste notifya adapter / rv, men osäker borde gå utan
-            }
-        };*/
 
         View v = inflater.inflate(R.layout.search_list_fragment,container,false);
         //return inflater.inflate(R.layout.fragment_search,container,false);
