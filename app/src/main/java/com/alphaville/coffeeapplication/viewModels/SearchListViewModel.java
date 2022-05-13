@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModel;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.Model.Database.CoffeeProductRepository;
 import com.alphaville.coffeeapplication.Model.Review;
-import com.alphaville.coffeeapplication.viewModels.ViewModelEngine;
 
 import java.util.ArrayList;
 import java.util.List;
