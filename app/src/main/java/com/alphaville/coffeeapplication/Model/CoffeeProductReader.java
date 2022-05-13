@@ -1,6 +1,7 @@
 package com.alphaville.coffeeapplication.Model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.alphaville.coffeeapplication.R;
 import com.opencsv.CSVReader;
@@ -60,7 +61,13 @@ public class CoffeeProductReader
         List<String[]> rows = getRows(); // gets rows
         List<CoffeeProduct> products = new ArrayList<>(); // result
 
+        boolean columnheaders = true;
+
         for(String[] row : rows){
+            if(columnheaders){ // to skip row with only column headers
+                columnheaders = false;
+                continue;
+            }
             products.add(getCoffeeProduct(row)); // converts each row to object
         }
 
@@ -76,24 +83,44 @@ public class CoffeeProductReader
     {
         String owner = row[0];
         String country = row[1];
-        int elevation = getNumber(filter('.', row[2])); // parses first number stored
+        int elevation;
+        try {
+            elevation = getNumber(filter('.', row[2])); // parses first number stored
+        } catch(Exception e)
+        {
+            elevation = 0;
+        }
         String process = row[5];
-        float aroma = Float.parseFloat(row[6]);
-        float flavor = Float.parseFloat(row[7]);
-        float aftertaste = Float.parseFloat(row[8]);
-        float acidity = Float.parseFloat(row[9]);
-        float body = Float.parseFloat(row[10]);
-        float balance = Float.parseFloat(row[11]);
-        float uniformity = Float.parseFloat(row[12]);
-        float sweetness = Float.parseFloat(row[13]);
-        float moisture = Float.parseFloat(row[14]);
+
+        float aroma =       parseFloat(row[6]);
+        float flavor =      parseFloat(row[7]);
+        float aftertaste =  parseFloat(row[8]);
+        float acidity =     parseFloat(row[9]);
+        float body =        parseFloat(row[10]);
+        float balance =     parseFloat(row[11]);
+        float uniformity =  parseFloat(row[12]);
+        float sweetness =   parseFloat(row[13]);
+        float moisture =    parseFloat(row[14]);
 
         // todo add maybe?
-        String region = row[3];
-        int harvest_year = getNumber(filter('.', row[4]));
+        //String region = row[3];
+        //int harvest_year = getNumber(filter('.', row[4]));
 
         return new CoffeeProduct(owner, country, elevation, process, aroma, flavor, aftertaste, acidity,
                                  body, balance, uniformity, sweetness, moisture, false);
+    }
+
+    /**
+     * Parses float, parse exception returns 0
+     * @param str to parse
+     * @return parsed float
+     */
+    private float parseFloat(String str){
+        try{
+            return Float.parseFloat(str);
+        } catch (Exception e){
+            return 0;
+        }
     }
 
     /**

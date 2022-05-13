@@ -1,5 +1,6 @@
 package com.alphaville.coffeeapplication.Model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -121,25 +122,23 @@ public class CoffeeProduct
         this.id = id;
     }
 
+    @NonNull
     @Override
     public String toString(){
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("owner: " + owner + " | ");
-        sb.append("country: " + country + " | ");
-        sb.append("elevation: " + elevation + " | ");
-        sb.append("process: " + process + " | ");
-        sb.append("aroma: " + aroma + " | ");
-        sb.append("flavor: " + flavor + " | ");
-        sb.append("aftertaste: " + aftertaste + " | ");
-        sb.append("acidity: " + acidity + " | ");
-        sb.append("body: " + body + " | ");
-        sb.append("balance: " + balance + " | ");
-        sb.append("uniformity: " + uniformity + " | ");
-        sb.append("sweetness: " + sweetness + " | ");
-        sb.append("moisture: " + moisture + " | ");
-        sb.append("liked: " + isLiked);
-
-        return sb.toString();
+        return "owner: " + owner + " | " +
+                "country: " + country + " | " +
+                "elevation: " + elevation + " | " +
+                "process: " + process + " | " +
+                "aroma: " + aroma + " | " +
+                "flavor: " + flavor + " | " +
+                "aftertaste: " + aftertaste + " | " +
+                "acidity: " + acidity + " | " +
+                "body: " + body + " | " +
+                "balance: " + balance + " | " +
+                "uniformity: " + uniformity + " | " +
+                "sweetness: " + sweetness + " | " +
+                "moisture: " + moisture + " | " +
+                "liked: " + isLiked;
     }
 }
