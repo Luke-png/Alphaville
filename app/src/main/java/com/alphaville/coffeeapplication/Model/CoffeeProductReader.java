@@ -20,6 +20,9 @@ import java.util.List;
  */
 public class CoffeeProductReader
 {
+    /**
+     * Integers representing the columns (attributes) of interest in the csv file.
+     */
     private static final int[] accepted_columns = { 2, 3, 9, 10, 15, 19, 20, 21, 22, 23, 24, 25, 26, 28, 31};
     private final List<Integer> accepted; // corresponding list
 
