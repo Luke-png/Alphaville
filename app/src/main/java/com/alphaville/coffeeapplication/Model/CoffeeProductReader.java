@@ -88,7 +88,7 @@ public class CoffeeProductReader
         float sweetness = Float.parseFloat(row[13]);
         float moisture = Float.parseFloat(row[14]);
 
-        // add maybe?
+        // todo add maybe?
         String region = row[3];
         int harvest_year = getNumber(filter('.', row[4]));
 
@@ -101,7 +101,7 @@ public class CoffeeProductReader
      * @param s string to parse integer from
      * @return parsed integer
      */
-    static int getNumber(String s) {
+    private static int getNumber(String s) {
 
         String[] n = s.split(""); //array of strings
         StringBuffer f = new StringBuffer(); // buffer to store numbers
@@ -123,7 +123,7 @@ public class CoffeeProductReader
      * @param str string to filter
      * @return filtered string
      */
-    static String filter(char f, String str)
+    private static String filter(char f, String str)
     {
         StringBuilder sb = new StringBuilder();
 

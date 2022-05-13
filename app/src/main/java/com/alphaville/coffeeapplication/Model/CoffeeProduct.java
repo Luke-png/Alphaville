@@ -23,7 +23,7 @@ public class CoffeeProduct
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    /** The name of the coffee product */
+    /** The owner of the coffee product */
     private final String owner;
     /** The name of the country from which the product originates. */
     private final String country;
@@ -40,7 +40,7 @@ public class CoffeeProduct
     //private final ArrayList<Taste> tastes;
 
     /**
-     * Taste attributes, 0.0-10.0
+     * Taste attributes, [0.0, 10.0]
      */
     private final float aroma, flavor, aftertaste, acidity, body, balance, uniformity, sweetness, moisture;
 
@@ -50,7 +50,7 @@ public class CoffeeProduct
     public CoffeeProduct(String owner, String country, int elevation, String process, float aroma, float flavor, float aftertaste,
                          float acidity, float body, float balance, float uniformity, float sweetness, float moisture, boolean isLiked){
         this.owner = owner;
-        this. country = country;
+        this.country = country;
         this.elevation = elevation;
         this.process = process;
         this.aroma = aroma;

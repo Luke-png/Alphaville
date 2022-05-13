@@ -53,6 +53,7 @@ public abstract class CoffeeDatabase extends RoomDatabase {
                             @Override
                             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                                 super.onCreate(db);
+                                // on creation, pre-populate with data
                                 databaseWriteExecutor.execute(() -> CoffeeDatabase.getInstance(context).prepopulate(context));
                             }
                         })
@@ -62,7 +63,10 @@ public abstract class CoffeeDatabase extends RoomDatabase {
         return instance;
     }
 
-    // todo pre-populate database with coffee product data on creation
+    /**
+     * Reads CoffeeProducts from CSV file in resources and inserts them into database.
+     * @param context context through which to reach resources
+     */
     private void prepopulate(Context context) {
         try {
             // creates reader for data
