@@ -16,7 +16,7 @@ import com.alphaville.coffeeapplication.Model.Database.ReviewRepository;
 
 import java.util.List;
 
-public class HistoryTabViewModel extends ViewModelEngine{
+public class HistoryTabViewModel extends AndroidViewModel{
     private final MutableLiveData<Review> selected = new MutableLiveData<Review>();
     private ReviewRepository repository;
     private LiveData<List<Review>> allReviews;

@@ -20,7 +20,7 @@ import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
-import com.alphaville.coffeeapplication.viewModels.CoffeeInfoViewModel;
+
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 /**
