@@ -9,5 +9,8 @@ public class CoffeeInfoViewModel extends AndroidViewModel {
     public CoffeeInfoViewModel(Application application) {
         super(application);
     }
+        public void changeLikeStatus(boolean value){
+        // changes status
+    }
 
 }
