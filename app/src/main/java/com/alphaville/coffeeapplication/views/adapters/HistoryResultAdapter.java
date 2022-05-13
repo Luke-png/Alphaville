@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,14 +25,12 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
     /**
      * List of user reviews to fill the history-tab
      */
-    private List<Review> reviewList;
+    private List<Review> reviewList = new ArrayList<>();
 
     /**
      * class-constructor
-     * @param reviewList the list of reviews that fills the recyclerview
-     */
-    public HistoryResultAdapter(List<Review> reviewList){
-        this.reviewList = reviewList;
+     * */
+    public HistoryResultAdapter(){
     }
 
     /**
@@ -45,6 +44,7 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
 
         return new ReviewCardViewHolder(view);
     }
+
     @Override
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onBindViewHolder(@NonNull ReviewCardViewHolder holder, int position) {
@@ -54,6 +54,15 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
     @Override
     public int getItemCount() {
         return reviewList.size();
+    }
+
+    /**
+     * Sets the reviews in the adapter
+     * @param reviews the reviews shown in the adapter
+     */
+    public void setReviews(List<Review> reviews) {
+        this.reviewList = reviews;
+        notifyDataSetChanged();
     }
 
     /**

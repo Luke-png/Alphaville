@@ -1,5 +1,9 @@
 package com.alphaville.coffeeapplication.Model;
 
+import com.alphaville.coffeeapplication.Model.enums.Roast;
+import com.alphaville.coffeeapplication.Model.enums.Taste;
+import com.alphaville.coffeeapplication.Model.enums.Process;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +30,11 @@ public class ModelFacade {
     public CoffeeProduct getActive() {
 
         //OBS hårdkodning för att slippa NullPointerException. Kommentera bort denna rad
-        active = new CoffeeProduct("Skånerost", "Colombia", 225, CoffeeProduct.Roast.light, CoffeeProduct.Process.dry, new ArrayList<CoffeeProduct.Taste>() {}, "Tastes great", false);
+
+        active = new CoffeeProduct("Skånerost", "Colombia", 225,
+                Roast.light, Process.dry, new ArrayList<Taste>() {},1,1,
+                1, "Tastes great", false);
+
 
         return active;
     }

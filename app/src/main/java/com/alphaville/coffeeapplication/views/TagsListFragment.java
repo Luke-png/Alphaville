@@ -19,7 +19,6 @@ import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 public class TagsListFragment extends Fragment {
 
     private RecyclerView tagsList;
-    private ReviewDataViewModel viewModel;
 
     public TagsListFragment() {
         // Required empty public constructor
@@ -28,9 +27,6 @@ public class TagsListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tags_list, container, false);
-
-        viewModel = new ReviewDataViewModel();
-
 
         initList(view);
 
