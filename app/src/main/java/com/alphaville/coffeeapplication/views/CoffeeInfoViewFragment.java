@@ -8,52 +8,38 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
 import com.alphaville.coffeeapplication.databinding.ReviewDataFragmentBinding;
 import com.alphaville.coffeeapplication.viewModels.CoffeeInfoViewModel;
-import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 /**
  * Class for handling a detailed view for a CoffeeProduct.
  */
-public class CoffeeInfoViewFragment extends Fragment{
+public class CoffeeInfoViewFragment extends Fragment {
 
     private CoffeeInfoViewFragmentBinding binding;
-    private SearchListViewModel viewModel;
+    private CoffeeInfoViewModel model;
+
     @Override
     public View onCreateView (LayoutInflater inflater,
                           ViewGroup container,
                           Bundle savedInstanceState) {
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        viewModel= new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
-
-        /**
-         * Observer
         /*
         setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
         setCoffeeInformation(name, info, description);
         setCoffeePicture(image);
         setClockTexts(firstClockText, secondClockText, thirdClockText);
          */
-        viewModel.getSelected().observe(getViewLifecycleOwner(), new Observer<CoffeeProduct>() {
-            @Override
-            public void onChanged(CoffeeProduct coffeeProduct) {
-                rebuildCoffeeInfo();
-            }
-        });
-
-        rebuildCoffeeInfo();
 
         //listener for the review button
         binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,17 +59,6 @@ public class CoffeeInfoViewFragment extends Fragment{
             }
         });
         */
-    }
-
-
-    public void rebuildCoffeeInfo(){
-        CoffeeProduct selected = viewModel.getSelected().getValue();
-        if (selected!=null) {
-            setCoffeeAttributes(selected.getElevation() + "", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
-            setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
-        }
-        //setCoffeePicture(image);
-        //setClockTexts(firstClockText, secondClockText, thirdClockText);
     }
 
     private void setCoffeeInformation(String name, String info, String description){
@@ -130,5 +105,4 @@ public class CoffeeInfoViewFragment extends Fragment{
         }
 
     }
-
 }
