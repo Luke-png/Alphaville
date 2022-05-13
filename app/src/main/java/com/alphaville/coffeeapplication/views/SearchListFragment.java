@@ -31,10 +31,7 @@ public class SearchListFragment extends Fragment {
     private RecyclerView rv;
     private CoffeeProductAdapter adapter;
     private FragmentContainerView fcv;
-
-    //Denna kommer väl antagligen ersättas av den sammanslagna viewModelen
     private SearchListViewModel viewModel;
-
     private SearchView sv;
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 
@@ -58,10 +55,6 @@ public class SearchListFragment extends Fragment {
         coffeeProducts.add(c2);
 
         viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
-
-        /**
-         * Observer that changes active coffeProduct
-         */
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
             @Override
             public void onChanged(@Nullable List<CoffeeProduct> p) {
