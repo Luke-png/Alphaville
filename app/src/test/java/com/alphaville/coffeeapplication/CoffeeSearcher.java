@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.enums.Process;
+import com.alphaville.coffeeapplication.Model.enums.Roast;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +20,10 @@ import java.util.List;
 public class CoffeeSearcher {
 
                                                 // name, country, elevation, roast, process, tastes
-    CoffeeProduct kaffe1 = new CoffeeProduct(); // namn  sweden   123        light  dry      null
-    CoffeeProduct kaffe2 = new CoffeeProduct(); //
+                                                CoffeeProduct kaffe2 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+                                                        new ArrayList<>(), 2,2,2, "test", true);
+    CoffeeProduct kaff1 = new CoffeeProduct("namn2", "Sweden", 123, Roast.light, Process.dry,
+            new ArrayList<>(),2, 2, 2, "test", true);/
 
     //List<CoffeeProduct.Taste> tastes1 = Arrays.asList(CoffeeProduct.Taste.floral, CoffeeProduct.Taste.fruity);
     // hej   danmark  345        dark   dry      floral,fruity
