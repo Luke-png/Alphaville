@@ -71,6 +71,7 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
     public int getItemCount() {
         return coffeeProducts.size();
     }
+
     public void setProducts(List<CoffeeProduct> products) {
         this.coffeeProducts = products;
         notifyDataSetChanged();

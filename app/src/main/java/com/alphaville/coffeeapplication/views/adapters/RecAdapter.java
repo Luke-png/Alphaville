@@ -11,10 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentContainerView;
 
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.views.GridCard;
 import com.alphaville.coffeeapplication.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecAdapter extends ArrayAdapter<GridCard> {
 
@@ -22,6 +24,8 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
     private GridCard gridCard;
     private FragmentContainerView recDetail;
     private View shadow;
+    private CoffeeProduct coffeeProdcut;
+    private ArrayList<CoffeeProduct> coffeeProducts;
 
     public RecAdapter(@NonNull Context context,@NonNull ArrayList<GridCard> gridCardHolder,int layout,
                       FragmentContainerView recDetail, View shadow){
@@ -55,6 +59,12 @@ public class RecAdapter extends ArrayAdapter<GridCard> {
         });
 
         return listitemView;
+    }
+
+
+    public void setProducts(List<CoffeeProduct> products) {
+        this.coffeeProducts = new ArrayList<>(products);
+        notifyDataSetChanged();
     }
 
     /**
