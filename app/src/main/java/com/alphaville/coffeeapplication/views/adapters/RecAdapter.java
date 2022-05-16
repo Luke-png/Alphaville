@@ -21,7 +21,7 @@ import java.util.List;
 public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
 
     private int layout;
-    private CoffeeProduct gridCard;
+    private GridCard gridCard;
     private FragmentContainerView recDetail;
     private View shadow;
     private CoffeeProduct coffeeProduct;
@@ -73,8 +73,8 @@ public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
     private void setupGridCard(View listitemView){
         TextView cardName = listitemView.findViewById(R.id.gridCardText);
         ImageView cardImage = listitemView.findViewById(R.id.gridCardImg);
-        cardName.setText(gridCard.getName());
-        //cardImage.setImageResource(gridCard.getImg());
+        cardName.setText(gridCard.get_name());
+        cardImage.setImageResource(gridCard.getImgid());
 
     }
 
