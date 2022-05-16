@@ -19,6 +19,7 @@ import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
 import com.alphaville.coffeeapplication.views.adapters.RecAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //Placeholder class
@@ -26,7 +27,8 @@ import java.util.List;
 public class RecommendationsFragment extends Fragment {
 
     private FragmentRecommendationsBinding binding;
-    private RecAdapter adapter;
+    private RecAdapter adapterDay;
+    private RecAdapter adapterWeek;
     private RecTabViewModel viewModel;
     private FragmentContainerView recDetail;
     private View shadow;
@@ -72,39 +74,29 @@ public class RecommendationsFragment extends Fragment {
         /**
          * Creates the adepter with the appropriate data
          */
-        RecAdapter veckansAdapter = new RecAdapter(getActivity(),coffeeProducts,R.layout.rec_card, recDetail,shadow);
-        adapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens, recDetail,shadow);
+        adapterWeek = new RecAdapter(getActivity(),fillWeek(coffeeProducts),R.layout.rec_card, recDetail,shadow);
+        adapterDay = new RecAdapter(getActivity(),fillDay(coffeeProducts),R.layout.dagens, recDetail,shadow);
 
         /**
          * Binds recGrid with the adepter
          */
-        binding.veckansRecGrid.setAdapter(veckansAdapter);
-        binding.dagensRecGrid.setAdapter(adapter);
+        binding.veckansRecGrid.setAdapter(adapterWeek);
+        binding.dagensRecGrid.setAdapter(adapterDay);
     }
 
 
-    /**
-     * Hardcoded test data
-     */
-    private ArrayList<GridCard> fillVeckans(){
-        ArrayList<GridCard> gridArrayList = new ArrayList();
-        gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
-        gridArrayList.add(new GridCard("JAVA", R.drawable.ic_filled_heart));
-        gridArrayList.add(new GridCard("C++", R.drawable.ic_filled_heart));
-        gridArrayList.add(new GridCard("Python", R.drawable.ic_filled_heart));
+    private ArrayList<CoffeeProduct> fillWeek(ArrayList<CoffeeProduct> coffeeProducts){
+        ArrayList<CoffeeProduct> coffee = new ArrayList<>(coffeeProducts);
+        Collections.shuffle(coffee);
 
-        //gridArrayList = viewModel.getRectVecka().getValue();
-
-        return gridArrayList;
+        return coffee;
     }
 
-    private ArrayList<GridCard> fillDagens(){
-        ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
-        gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
+    private ArrayList<CoffeeProduct> fillDay(ArrayList<CoffeeProduct> coffeeProducts){
+        ArrayList<CoffeeProduct> coffee = new ArrayList<>();
+        coffee.add(coffeeProducts.get(0));
 
-        //gridArrayList = viewModel.getRectVecka().getValue();
-
-        return gridArrayList;
+        return coffee;
     }
 
 }
