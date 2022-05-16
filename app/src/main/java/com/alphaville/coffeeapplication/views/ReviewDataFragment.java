@@ -134,7 +134,6 @@ public class ReviewDataFragment extends Fragment {
         String location = binding.locationBox.getText().toString();
         String category = binding.categoryBox.getText().toString();
 
-        viewModel.createReview(viewModel2.getSelected().getValue(), reviewText, rating, location,
-                "randomCategory", System.currentTimeMillis());
+        viewModel.createReview(viewModel2.getSelected().getValue(), reviewText, rating, location, category, System.currentTimeMillis());
     }
 }
