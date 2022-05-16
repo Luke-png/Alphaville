@@ -128,12 +128,11 @@ public class ReviewDataFragment extends Fragment {
      * Method for saving a review. When pressing the save-button, the input information is sent to
      * the ViewModel for handling.
      */
-    //TODO:Fix category input box (of some kind) so the user can provide this.
     private void saveReview(){
         double rating = binding.ratingBar.getRating();
         String reviewText = binding.inputBox.getText().toString();
         String location = binding.locationBox.getText().toString();
-        //String category = binding.categoryBox.getValue().toString();
+        String category = binding.categoryBox.getText().toString();
 
         viewModel.createReview(viewModel2.getSelected().getValue(), reviewText, rating, location,
                 "randomCategory", System.currentTimeMillis());
