@@ -1,0 +1,198 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "3957eb541636606d083111d1605a69b0",
+    "entities": [
+      {
+        "tableName": "reviews",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`reviewId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `textReview` TEXT, `rating` REAL NOT NULL, `location` TEXT, `drinkCategory` TEXT, `creationTime` INTEGER NOT NULL, `id` INTEGER, `name` TEXT, `country` TEXT, `elevation` INTEGER, `process` TEXT, `acidity` REAL, `body` REAL, `sweetness` REAL, `taste` TEXT, `isLiked` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "reviewId",
+            "columnName": "reviewId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "textReview",
+            "columnName": "textReview",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "drinkCategory",
+            "columnName": "drinkCategory",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "creationTime",
+            "columnName": "creationTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "coffeeProduct.id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.elevation",
+            "columnName": "elevation",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.process",
+            "columnName": "process",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.acidity",
+            "columnName": "acidity",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.body",
+            "columnName": "body",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.sweetness",
+            "columnName": "sweetness",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.taste",
+            "columnName": "taste",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coffeeProduct.isLiked",
+            "columnName": "isLiked",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "reviewId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "products",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `country` TEXT, `elevation` INTEGER NOT NULL, `process` TEXT, `acidity` REAL NOT NULL, `body` REAL NOT NULL, `sweetness` REAL NOT NULL, `taste` TEXT, `isLiked` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "elevation",
+            "columnName": "elevation",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "process",
+            "columnName": "process",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "acidity",
+            "columnName": "acidity",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "body",
+            "columnName": "body",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sweetness",
+            "columnName": "sweetness",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "taste",
+            "columnName": "taste",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isLiked",
+            "columnName": "isLiked",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3957eb541636606d083111d1605a69b0')"
+    ]
+  }
+}

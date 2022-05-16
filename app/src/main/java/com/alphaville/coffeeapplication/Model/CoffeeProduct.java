@@ -49,10 +49,10 @@ public class CoffeeProduct
     private final String taste;
 
     /** Whether the user likes the coffee product. */
-    private final boolean isLiked;
+    private boolean isLiked;
 
     public CoffeeProduct(String name, String country, int elevation, String process, float acidity,
-                         float body, float sweetness, String taste, boolean isLiked){
+                         float body, float sweetness, String taste){
         this.name = name;
         this.country = country;
         this.elevation = elevation;
@@ -62,7 +62,7 @@ public class CoffeeProduct
         this.sweetness = sweetness;
         this.taste = taste;
 
-        this.isLiked = isLiked;
+        this.isLiked = false;
     }
 
     // Getters ------------
@@ -96,6 +96,8 @@ public class CoffeeProduct
     public void setId(int id) {
         this.id = id;
     }
+
+    public void setLiked(boolean liked){this.isLiked=liked;}
 
     @NonNull
     @Override
