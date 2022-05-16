@@ -9,20 +9,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
 import com.alphaville.coffeeapplication.views.adapters.RecAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 //Placeholder class
 
 public class RecommendationsFragment extends Fragment {
 
     private FragmentRecommendationsBinding binding;
+    private RecAdapter adapterDay;
+    private RecAdapter adapterWeek;
     private RecTabViewModel viewModel;
     private FragmentContainerView recDetail;
     private View shadow;
@@ -45,18 +51,13 @@ public class RecommendationsFragment extends Fragment {
         shadow = view.findViewById(R.id.shadowLayer);
         shadow.setVisibility(View.INVISIBLE);
 
-
-        /**
-         * Creates the adepter with the appropriate data
-         */
-        RecAdapter veckansAdapter = new RecAdapter(getActivity(),fillVeckans(),R.layout.rec_card, recDetail,shadow);
-        RecAdapter dagensAdapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens, recDetail,shadow);
-
-        /**
-         * Binds recGrid with the adepter
-         */
-        binding.veckansRecGrid.setAdapter(veckansAdapter);
-        binding.dagensRecGrid.setAdapter(dagensAdapter);
+        viewModel.getRankedList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
+            @Override
+            public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
+                //adapter.setProducts(coffeeProducts);
+                setUpAdapter(new ArrayList<>(coffeeProducts));
+            }
+        });
 
         shadow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,31 +70,33 @@ public class RecommendationsFragment extends Fragment {
         return view;
     }
 
+    private void setUpAdapter(ArrayList<CoffeeProduct> coffeeProducts){
+        /**
+         * Creates the adepter with the appropriate data
+         */
+        adapterWeek = new RecAdapter(getActivity(),fillWeek(coffeeProducts),R.layout.rec_card, recDetail,shadow);
+        adapterDay = new RecAdapter(getActivity(),fillDay(coffeeProducts),R.layout.dagens, recDetail,shadow);
 
-    /**
-     * Hardcoded test data
-     */
-    private ArrayList<GridCard> fillVeckans(){
-        ArrayList<GridCard> gridArrayList = new ArrayList();
-        gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
-        gridArrayList.add(new GridCard("JAVA", R.drawable.ic_filled_heart));
-        gridArrayList.add(new GridCard("C++", R.drawable.ic_filled_heart));
-        gridArrayList.add(new GridCard("Python", R.drawable.ic_filled_heart));
-
-        //gridArrayList = viewModel.getRectVecka().getValue();
-
-        return gridArrayList;
+        /**
+         * Binds recGrid with the adepter
+         */
+        binding.veckansRecGrid.setAdapter(adapterWeek);
+        binding.dagensRecGrid.setAdapter(adapterDay);
     }
 
-    private ArrayList<GridCard> fillDagens(){
-        ArrayList<GridCard> gridArrayList = new ArrayList<GridCard>();
-        gridArrayList.add(new GridCard("DSA", R.drawable.ic_filled_heart));
 
-        //gridArrayList = viewModel.getRectVecka().getValue();
+    private ArrayList<CoffeeProduct> fillWeek(ArrayList<CoffeeProduct> coffeeProducts){
+        ArrayList<CoffeeProduct> coffee = new ArrayList<>(coffeeProducts);
+        Collections.shuffle(coffee);
 
-        viewModel.getRectDag();
+        return coffee;
+    }
 
-        return gridArrayList;
+    private ArrayList<CoffeeProduct> fillDay(ArrayList<CoffeeProduct> coffeeProducts){
+        ArrayList<CoffeeProduct> coffee = new ArrayList<>();
+        coffee.add(coffeeProducts.get(0));
+
+        return coffee;
     }
 
 }
