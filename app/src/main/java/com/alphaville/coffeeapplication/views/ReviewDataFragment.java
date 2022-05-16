@@ -103,6 +103,11 @@ public class ReviewDataFragment extends Fragment {
     }
 
     /**
+     * Initiates the input box for inputting the category of the coffedrink
+     */
+    public void initCategoryBox() {binding.categoryBox.setHint("Enter the category of the coffee");}
+    
+    /**
      * Initiates save button for text review
      */
     public void initSaveButton() {
