@@ -101,10 +101,7 @@ public class CoffeeInfoViewFragment extends Fragment{
         binding.hightText.setText(hight);
         binding.flavourText.setText(flavour);
         binding.countryText.setText(country);
-        binding.regionText.setText("delete");
         binding.processText.setText(process);
-        binding.rosteryText.setText("delete");
-        binding.brandText.setText("delete");
     }
 
     //Don't know which setImage-method to use here
