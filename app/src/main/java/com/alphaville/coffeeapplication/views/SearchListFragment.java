@@ -47,15 +47,18 @@ public class SearchListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         //binding = SearchListFragmentBinding.inflate(inflater, container, false);
 
-        CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
-                new ArrayList<>(), "test", true);
-        CoffeeProduct c2 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
-                new ArrayList<>(), "test", true);
+        // todo I removed hardcoded stuff here, assume it should be replaced with something else.
 
-        coffeeProducts.add(c1);
-        coffeeProducts.add(c2);
+        //CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+        //        new ArrayList<>(), "test", true);
+        //CoffeeProduct c2 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
+        //        new ArrayList<>(), "test", true);
+
+        //coffeeProducts.add(c1);
+        //coffeeProducts.add(c2);
 
         viewModel = new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {

@@ -25,7 +25,7 @@ public class CoffeeProduct
     private int id;
 
     /** The owner of the coffee product */
-    private final String owner;
+    private final String name;
     /** The name of the country from which the product originates. */
     private final String country;
 
@@ -43,26 +43,24 @@ public class CoffeeProduct
     /**
      * Taste attributes, [0.0, 10.0]
      */
-    private final float aroma, flavor, aftertaste, acidity, body, balance, uniformity, sweetness, moisture;
+    private final float acidity, body, sweetness;
+
+    /** General description of taste. */
+    private final String taste;
 
     /** Whether the user likes the coffee product. */
     private final boolean isLiked;
 
-    public CoffeeProduct(String owner, String country, int elevation, String process, float aroma, float flavor, float aftertaste,
-                         float acidity, float body, float balance, float uniformity, float sweetness, float moisture, boolean isLiked){
-        this.owner = owner;
+    public CoffeeProduct(String name, String country, int elevation, String process, float acidity,
+                         float body, float sweetness, String taste, boolean isLiked){
+        this.name = name;
         this.country = country;
         this.elevation = elevation;
         this.process = process;
-        this.aroma = aroma;
-        this.flavor = flavor;
-        this.aftertaste = aftertaste;
         this.acidity = acidity;
         this.body = body;
-        this.balance = balance;
-        this.uniformity = uniformity;
         this.sweetness = sweetness;
-        this.moisture = moisture;
+        this.taste = taste;
 
         this.isLiked = isLiked;
     }
@@ -71,26 +69,15 @@ public class CoffeeProduct
 
     public int getId() { return id; }
 
-    public String getOwner() { return owner; }
+    public String getName() { return name; }
 
     public String getCountry() { return country; }
 
     public int getElevation() { return elevation; }
+
     public String getProcess() { return process; }
 
     public boolean isLiked() { return isLiked; }
-
-    public float getAroma() {
-        return aroma;
-    }
-
-    public float getFlavor() {
-        return flavor;
-    }
-
-    public float getAftertaste() {
-        return aftertaste;
-    }
 
     public float getAcidity() {
         return acidity;
@@ -100,20 +87,8 @@ public class CoffeeProduct
         return body;
     }
 
-    public float getBalance() {
-        return balance;
-    }
-
-    public float getUniformity() {
-        return uniformity;
-    }
-
     public float getSweetness() {
         return sweetness;
-    }
-
-    public float getMoisture() {
-        return moisture;
     }
 
     // Setter -------------------
@@ -126,19 +101,13 @@ public class CoffeeProduct
     @Override
     public String toString(){
 
-        return "owner: " + owner + " | " +
+        return "name: " + name + " | " +
                 "country: " + country + " | " +
                 "elevation: " + elevation + " | " +
                 "process: " + process + " | " +
-                "aroma: " + aroma + " | " +
-                "flavor: " + flavor + " | " +
-                "aftertaste: " + aftertaste + " | " +
                 "acidity: " + acidity + " | " +
                 "body: " + body + " | " +
-                "balance: " + balance + " | " +
-                "uniformity: " + uniformity + " | " +
                 "sweetness: " + sweetness + " | " +
-                "moisture: " + moisture + " | " +
                 "liked: " + isLiked;
     }
 }
