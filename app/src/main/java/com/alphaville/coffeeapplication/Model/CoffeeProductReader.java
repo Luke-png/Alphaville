@@ -109,8 +109,9 @@ public class CoffeeProductReader
         //String region = row[3];
         //int harvest_year = getNumber(filter('.', row[4]));
 
-        return new CoffeeProduct(owner, country, elevation, process, aroma, flavor, aftertaste, acidity,
-                                 body, balance, uniformity, sweetness, moisture, false);
+        String random_taste = "choklad"; // todo change?
+
+        return new CoffeeProduct(owner, country, elevation, process, acidity, body, sweetness, random_taste, false);
     }
 
     /**

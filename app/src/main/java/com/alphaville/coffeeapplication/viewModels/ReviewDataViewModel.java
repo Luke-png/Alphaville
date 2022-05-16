@@ -46,14 +46,14 @@ public class ReviewDataViewModel extends AndroidViewModel {
                              long creationTime){
 
         //TODO Replace this test coffee product with actual selected coffee product.
-        CoffeeProduct testCp = new CoffeeProduct("Skånerost", "Colombia",
-                225, Roast.light, Process.dry, new ArrayList<Taste>() {},
-                2, 3, 4, "Tastes great", false);
+        //CoffeeProduct testCp = new CoffeeProduct("Skånerost", "Colombia",
+         //       225, Roast.light, Process.dry, new ArrayList<Taste>() {},
+        //        2, 3, 4, "Tastes great", false);
 
-        repository.insert(new Review(testCp,textReview, rating, location, drinkCategory, creationTime));
-          }
+        //repository.insert(new Review(testCp,textReview, rating, location, drinkCategory, creationTime));
+        //  }
 
   /*  public CoffeeProduct getActiveProduct(){
         return getModel().getActive();
-    }*/
+    */}
 }

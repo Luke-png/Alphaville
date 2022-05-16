@@ -81,8 +81,9 @@ public class CoffeeInfoViewFragment extends Fragment{
     public void rebuildCoffeeInfo(){
         CoffeeProduct selected = viewModel.getSelected().getValue();
         if (selected!=null) {
-            setCoffeeAttributes(selected.getElevation() + "", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
-            setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
+            // todo change to real attributes
+            //setCoffeeAttributes(selected.getElevation() + "", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
+            //setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
         }
         //setCoffeePicture(image);
         //setClockTexts(firstClockText, secondClockText, thirdClockText);

@@ -17,16 +17,16 @@ public class CoffeeMatcher {
      * @return Match score
      */
     public static double getMatchPercentage(CoffeeProduct product, List<Review> reviews){
-        int sweetness_ref = product.getSweetness();
-        int bitterness_ref = product.getBitterness();
-        int fullness_ref = product.getFullness();
+        float sweetness_ref = product.getSweetness();
+        float acidity_ref = product.getAcidity();
+        float body_ref = product.getBody();
         ArrayList<Double> s_match = new ArrayList<>();
         ArrayList<Double> b_match = new ArrayList<>();
         ArrayList<Double> f_match = new ArrayList<>();
         for(Review r : reviews) {
-            if(r.getCoffeeProduct().getBitterness() == bitterness_ref) b_match.add(r.getRating());
+            if(r.getCoffeeProduct().getAcidity() == acidity_ref) b_match.add(r.getRating());
             if(r.getCoffeeProduct().getSweetness() == sweetness_ref) s_match.add(r.getRating());
-            if(r.getCoffeeProduct().getFullness() == fullness_ref) f_match.add(r.getRating());
+            if(r.getCoffeeProduct().getBody() == body_ref) f_match.add(r.getRating());
         }
         return (Mean(s_match) + Mean(b_match) + Mean(f_match))/30;
     }

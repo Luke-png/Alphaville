@@ -110,4 +110,8 @@ public class CoffeeProduct
                 "sweetness: " + sweetness + " | " +
                 "liked: " + isLiked;
     }
+
+    public String getTaste() {
+        return taste;
+    }
 }
