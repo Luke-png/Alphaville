@@ -34,6 +34,6 @@ public interface CoffeeDao {
      * Query for all CoffeeProducts in the database.
      * @return a list of all CoffeeProducts
      */
-    @Query("SELECT * FROM products ORDER BY name DESC")
+    @Query("SELECT * FROM products ORDER BY owner DESC")
     LiveData<List<CoffeeProduct>> getAllProducts();
 }
