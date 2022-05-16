@@ -19,7 +19,7 @@ import java.util.List;
 public class SearchListViewModel extends AndroidViewModel {
 
     private LiveData<List<CoffeeProduct>> filteredList;
-    private MutableLiveData<CoffeeProduct> selected;
+    private final MutableLiveData<CoffeeProduct> selected;
     private CoffeeProductRepository repository;
 
     public SearchListViewModel(@NonNull Application application) {

@@ -36,8 +36,9 @@ public class CoffeeInfoViewFragment extends Fragment{
                               Bundle savedInstanceState) {
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        viewModel= new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
-         /*
+        viewModel= new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
+        /*
+
          setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
          setCoffeeInformation(name, info, description);
          setCoffeePicture(image);
