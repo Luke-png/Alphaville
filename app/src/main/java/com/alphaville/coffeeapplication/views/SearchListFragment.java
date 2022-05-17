@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.SeekBar;
+
+import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.RangeSlider;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
@@ -125,7 +127,34 @@ public class SearchListFragment extends Fragment {
         filterDialog.setContentView(R.layout.filter_dialog);
         RangeSlider acid_slider = filterDialog.findViewById(R.id.acid_slider);
         RangeSlider body_slider = filterDialog.findViewById(R.id.body_slider);
-        RangeSlider sweet_slider = filter_button.findViewById(R.id.sweet_slider);
+        RangeSlider sweet_slider = filterDialog.findViewById(R.id.sweet_slider);
+
+        //Changes label of slider value to match 0-10
+        acid_slider.setLabelFormatter(new LabelFormatter() {
+            @NonNull
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf(value / 10);
+            }
+        });
+
+        //Changes label of slider value to match 0-10
+        body_slider.setLabelFormatter(new LabelFormatter() {
+            @NonNull
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf(value / 10);
+            }
+        });
+
+        //Changes label of slider value to match 0-10
+        sweet_slider.setLabelFormatter(new LabelFormatter() {
+            @NonNull
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf(value / 10);
+            }
+        });
 
         //Acidity listener
         acid_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
