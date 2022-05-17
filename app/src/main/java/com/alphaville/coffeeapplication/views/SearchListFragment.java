@@ -1,5 +1,6 @@
 package com.alphaville.coffeeapplication.views;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.SeekBar;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.Model.enums.Roast;
@@ -33,6 +36,8 @@ public class SearchListFragment extends Fragment {
     private FragmentContainerView fcv;
     private SearchListViewModel viewModel;
     private SearchView sv;
+    private ImageButton filter_button;
+    private Dialog filterDialog;
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 
 
@@ -70,6 +75,7 @@ public class SearchListFragment extends Fragment {
         rv = (RecyclerView) v.findViewById(R.id.RV_SearchList);
         fcv = (FragmentContainerView) v.findViewById(R.id.rec_DetailView);
         sv = (SearchView) v.findViewById(R.id.searchInSearchTab);
+        filter_button = v.findViewById((R.id.filter_button));
 
         fcv.setVisibility(View.INVISIBLE);
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -78,6 +84,9 @@ public class SearchListFragment extends Fragment {
         rv.setAdapter(adapter);
 
         initItemSpacing(15);
+        initFilterDialog();
+        initFilterButton();
+
 
         /**
          * Listener that should be triggered everytime the user changes anything in the search-field.
@@ -98,6 +107,77 @@ public class SearchListFragment extends Fragment {
             }
         });
         return v; //inflater.inflate(R.layout.search_list_fragment, container, false);
+    }
+
+    private void initFilterButton() {
+        filter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterDialog.show();
+            }
+        });
+    }
+
+    private void initFilterDialog() {
+        filterDialog = new Dialog(getActivity());
+        filterDialog.setContentView(R.layout.filter_dialog);
+        SeekBar acid_slider = filterDialog.findViewById(R.id.acid_slider);
+        SeekBar body_slider = filterDialog.findViewById(R.id.body_slider);
+        SeekBar sweet_slider = filter_button.findViewById(R.id.sweet_slider);
+
+        //Acidity listener
+        acid_slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        //Body listener
+        body_slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        //Sweetness listener
+        sweet_slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     /**
