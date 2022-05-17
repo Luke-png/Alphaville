@@ -41,7 +41,7 @@ public class RecommendationsFragment extends Fragment {
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        viewModel = new ViewModelProvider(this).get(RecTabViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(RecTabViewModel.class);
 
 
         recDetail = (FragmentContainerView) view.findViewById(R.id.rec_DetailView);
@@ -53,7 +53,7 @@ public class RecommendationsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
                 //adapter.setProducts(coffeeProducts);
-                setUpAdapter(new ArrayList<>(coffeeProducts));
+                //setUpAdapter(new ArrayList<>(coffeeProducts));
             }
         });
 
@@ -68,19 +68,19 @@ public class RecommendationsFragment extends Fragment {
         return view;
     }
 
-    private void setUpAdapter(ArrayList<CoffeeProduct> coffeeProducts){
+    //private void setUpAdapter(ArrayList<CoffeeProduct> coffeeProducts){
         /**
          * Creates the adepter with the appropriate data
          */
-        RecAdapter veckansAdapter = new RecAdapter(getActivity(),coffeeProducts,R.layout.rec_card, recDetail,shadow);
-        adapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens, recDetail,shadow);
+        //RecAdapter veckansAdapter = new RecAdapter(getActivity(),coffeeProducts,R.layout.rec_card, recDetail,shadow);
+        //adapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens, recDetail,shadow);
 
         /**
          * Binds recGrid with the adepter
          */
-        binding.veckansRecGrid.setAdapter(veckansAdapter);
-        binding.dagensRecGrid.setAdapter(adapter);
-    }
+        //binding.veckansRecGrid.setAdapter(veckansAdapter);
+        //binding.dagensRecGrid.setAdapter(adapter);
+    //}
 
 
     /**
@@ -106,5 +106,4 @@ public class RecommendationsFragment extends Fragment {
 
         return gridArrayList;
     }
-
 }

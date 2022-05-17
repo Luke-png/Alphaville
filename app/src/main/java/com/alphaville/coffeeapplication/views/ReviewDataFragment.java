@@ -52,7 +52,7 @@ public class ReviewDataFragment extends Fragment {
         View view = binding.getRoot();
 
         //Initializes ReviewDataViewModel used for creating and saving reviews
-        viewModel = new ViewModelProvider(this).get(ReviewDataViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(ReviewDataViewModel.class);
 
         viewModel2 = new ViewModelProvider(this).get(SearchListViewModel.class);
 
