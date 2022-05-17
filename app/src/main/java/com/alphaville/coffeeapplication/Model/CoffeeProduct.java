@@ -52,7 +52,7 @@ public class CoffeeProduct
     private boolean isLiked;
 
     public CoffeeProduct(String name, String country, int elevation, String process, float acidity,
-                         float body, float sweetness, String taste){
+                         float body, float sweetness, String taste, boolean isLiked){
         this.name = name;
         this.country = country;
         this.elevation = elevation;
@@ -61,8 +61,7 @@ public class CoffeeProduct
         this.body = body;
         this.sweetness = sweetness;
         this.taste = taste;
-
-        this.isLiked = false;
+        this.isLiked = isLiked;
     }
 
     // Getters ------------

@@ -111,7 +111,7 @@ public class CoffeeProductReader
 
         String random_taste = "choklad"; // todo change?
 
-        return new CoffeeProduct(owner, country, elevation, process, acidity, body, sweetness, random_taste);
+        return new CoffeeProduct(owner, country, elevation, process, acidity, body, sweetness, random_taste, false);
     }
 
     /**
