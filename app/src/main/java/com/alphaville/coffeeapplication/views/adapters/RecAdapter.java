@@ -18,18 +18,18 @@ import com.alphaville.coffeeapplication.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
+public class RecAdapter extends ArrayAdapter<GridCard> {
 
     private int layout;
-    private CoffeeProduct gridCard;
+    private GridCard gridCard;
     private FragmentContainerView recDetail;
     private View shadow;
-    private CoffeeProduct coffeeProduct;
+    private CoffeeProduct coffeeProdcut;
     private ArrayList<CoffeeProduct> coffeeProducts;
 
-    public RecAdapter(@NonNull Context context,@NonNull ArrayList<CoffeeProduct> coffeeProducts,int layout,
+    public RecAdapter(@NonNull Context context,@NonNull ArrayList<GridCard> gridCardHolder,int layout,
                       FragmentContainerView recDetail, View shadow){
-        super(context,0, coffeeProducts);
+        super(context,0, gridCardHolder);
         this.layout = layout;
         this.recDetail = recDetail;
         this.shadow = shadow;
@@ -73,8 +73,8 @@ public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
     private void setupGridCard(View listitemView){
         TextView cardName = listitemView.findViewById(R.id.gridCardText);
         ImageView cardImage = listitemView.findViewById(R.id.gridCardImg);
-        cardName.setText(gridCard.getName());
-        //cardImage.setImageResource(gridCard.getImg());
+        cardName.setText(gridCard.get_name());
+        cardImage.setImageResource(gridCard.getImgid());
 
     }
 
