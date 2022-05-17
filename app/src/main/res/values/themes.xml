@@ -17,4 +17,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.App" parent="Theme.MaterialComponents">
+        <item name="colorPrimary">#9C6644</item>
+        <item name="colorOnPrimary">#000000</item>
+        <item name="colorOnSurface">#000000</item>
+    </style>
 </resources>

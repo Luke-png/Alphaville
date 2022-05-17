@@ -3,6 +3,7 @@ package com.alphaville.coffeeapplication.views;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.SeekBar;
+import com.google.android.material.slider.RangeSlider;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.Model.enums.Roast;
@@ -121,60 +123,30 @@ public class SearchListFragment extends Fragment {
     private void initFilterDialog() {
         filterDialog = new Dialog(getActivity());
         filterDialog.setContentView(R.layout.filter_dialog);
-        SeekBar acid_slider = filterDialog.findViewById(R.id.acid_slider);
-        SeekBar body_slider = filterDialog.findViewById(R.id.body_slider);
-        SeekBar sweet_slider = filter_button.findViewById(R.id.sweet_slider);
+        RangeSlider acid_slider = filterDialog.findViewById(R.id.acid_slider);
+        RangeSlider body_slider = filterDialog.findViewById(R.id.body_slider);
+        RangeSlider sweet_slider = filter_button.findViewById(R.id.sweet_slider);
 
         //Acidity listener
-        acid_slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        acid_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 
             }
         });
 
         //Body listener
-        body_slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        body_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 
             }
         });
 
         //Sweetness listener
-        sweet_slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        sweet_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 
             }
         });

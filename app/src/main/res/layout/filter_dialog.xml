@@ -6,15 +6,19 @@
     android:layout_height="wrap_content"
     android:background="#EDE0D4">
 
-    <SeekBar
+
+    <com.google.android.material.slider.RangeSlider
         android:id="@+id/body_slider"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:theme="@style/Theme.App"
         android:layout_width="158dp"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:max="5"
+        android:valueFrom="0.0"
+        android:valueTo="100.0"
+        android:stepSize="20.0"
+        app:values="@array/initial_slider_values"
         android:progress="1"
-        android:theme="@style/SeekBarColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/acid_slider" />
@@ -35,18 +39,21 @@
         app:layout_constraintBottom_toTopOf="@+id/sweet_slider"
         app:layout_constraintStart_toStartOf="@+id/sweet_slider" />
 
-    <SeekBar
+    <com.google.android.material.slider.RangeSlider
         android:id="@+id/sweet_slider"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:theme="@style/Theme.App"
         android:layout_width="158dp"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:max="5"
         android:progress="1"
-        android:theme="@style/SeekBarColor"
+        android:stepSize="20.0"
+        android:valueFrom="0.0"
+        android:valueTo="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/body_slider" />
+        app:layout_constraintTop_toBottomOf="@+id/body_slider"
+        app:values="@array/initial_slider_values" />
 
     <TextView
         android:id="@+id/textView9"
@@ -58,18 +65,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SeekBar
+    <com.google.android.material.slider.RangeSlider
         android:id="@+id/acid_slider"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="158dp"
         android:layout_height="0dp"
         android:layout_marginTop="36dp"
+        android:backgroundTint="#FF0303"
         android:max="5"
         android:progress="1"
-        android:theme="@style/SeekBarColor"
+        android:stepSize="20.0"
+        android:theme="@style/Theme.App"
+        android:valueFrom="0.0"
+        android:valueTo="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:values="@array/initial_slider_values" />
 
     <TextView
         android:id="@+id/textView11"
