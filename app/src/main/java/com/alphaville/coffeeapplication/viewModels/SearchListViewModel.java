@@ -19,14 +19,13 @@ import java.util.List;
 public class SearchListViewModel extends AndroidViewModel {
 
     private LiveData<List<CoffeeProduct>> filteredList;
-    private final MutableLiveData<CoffeeProduct> selected;
+    private final MutableLiveData<CoffeeProduct> selected = new MutableLiveData<CoffeeProduct>();
     private CoffeeProductRepository repository;
 
     public SearchListViewModel(@NonNull Application application) {
         super(application);
         repository = new CoffeeProductRepository(application);
         filteredList = repository.getAllProducts();
-        selected = new MutableLiveData<CoffeeProduct>();
     }
 
     public LiveData<List<CoffeeProduct>> getFilteredList() {

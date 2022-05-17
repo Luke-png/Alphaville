@@ -36,15 +36,14 @@ public class CoffeeInfoViewFragment extends Fragment{
                               Bundle savedInstanceState) {
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        viewModel= new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
-        /*
+        viewModel= new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
 
+         /*
          setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
          setCoffeeInformation(name, info, description);
          setCoffeePicture(image);
          setClockTexts(firstClockText, secondClockText, thirdClockText);
          */
-
 
         /*
          * Observer
@@ -56,7 +55,7 @@ public class CoffeeInfoViewFragment extends Fragment{
             }
         });
 
-        //rebuildCoffeeInfo();
+        rebuildCoffeeInfo();
 
         //listener for the review button
         binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
@@ -83,25 +82,28 @@ public class CoffeeInfoViewFragment extends Fragment{
         CoffeeProduct selected = viewModel.getSelected().getValue();
         if (selected!=null) {
             // todo change to real attributes
-            setCoffeeInformation(selected.getName());
-            setCoffeeAttributes(selected.getElevation()+"", selected.getTaste(), selected.getCountry(), selected.getProcess());
+            //setCoffeeAttributes(selected.getElevation() + "", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
+            //setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
         }
         //setCoffeePicture(image);
         //setClockTexts(firstClockText, secondClockText, thirdClockText);
     }
 
-    private void setCoffeeInformation(String name){
+    private void setCoffeeInformation(String name, String info, String description){
         binding.coffeenameText.setText(name);
-        binding.infoText.setText("infotext");
-        binding.descriptionText.setText("description");
+        binding.infoText.setText(info);
+        binding.descriptionText.setText(description);
     }
 
-    private void setCoffeeAttributes(String hight, String flavour, String country,
-                                     String process){
+    private void setCoffeeAttributes(String hight, String flavour, String country, String region,
+                                     String process, String rostery, String brand){
         binding.hightText.setText(hight);
         binding.flavourText.setText(flavour);
         binding.countryText.setText(country);
+        binding.regionText.setText(region);
         binding.processText.setText(process);
+        binding.rosteryText.setText(rostery);
+        binding.brandText.setText(brand);
     }
 
     //Don't know which setImage-method to use here

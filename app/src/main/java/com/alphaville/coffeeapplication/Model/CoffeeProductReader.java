@@ -33,7 +33,7 @@ public class CoffeeProductReader
      */
     public CoffeeProductReader(Context context) throws Exception
     {
-        int[] accepted_columns = { 14, 3, 9, 19, 23, 24, 28}; // index positions of attributes of interest
+        int[] accepted_columns = { 2, 3, 9, 10, 15, 19, 20, 21, 22, 23, 24, 25, 26, 28, 31};
         accepted = populate_accepted_list(accepted_columns);
 
         // reads file from resources
@@ -62,9 +62,6 @@ public class CoffeeProductReader
     public List<CoffeeProduct> getCoffeeProducts() throws Exception
     {
         List<String[]> rows = getRows(); // gets rows
-
-        setRanges(rows); // used to calculate attribute values
-
         List<CoffeeProduct> products = new ArrayList<>(); // result
 
         boolean columnheaders = true;
@@ -74,67 +71,20 @@ public class CoffeeProductReader
                 columnheaders = false;
                 continue;
             }
-
-            // rows without values in attributes get ignored
-            CoffeeProduct product = getCoffeeProduct(row);
-            if(product != null)
-                products.add(getCoffeeProduct(row)); // converts each row to object
+            products.add(getCoffeeProduct(row)); // converts each row to object
         }
 
         return products;
     }
 
     /**
-     * Sets min,max range of float attributes in CoffeeProduct
-     * @param rows rows containing attribute values
-     */
-    private void setRanges(List<String[]> rows){
-        acidity_range = getRange(9, rows);
-        body_range = getRange(10, rows);
-        sweetness_range = getRange(13, rows);
-    }
-
-    /**
-     * Gets minimum and maximum value of attribute at index i from list of rows.
-     * @param i index of attribute
-     * @param rows list of rows, attribute values
-     *
-     * @return min and max value in range, format: [min, max]
-     */
-    private float[] getRange(int i, List<String[]> rows)
-    {
-        float min = 10, max = 0;
-
-        for(String[] row : rows)
-        {
-            float parsed = parseFloat(row[i]);
-            if(parsed < min)
-                min = parsed;
-            if (parsed > max)
-                max = parsed;
-        }
-
-        return new float[]{ min, max };
-    }
-
-    // ranges [min, max] of every attribute
-    private float[] acidity_range;
-    private float[] body_range;
-    private float[] sweetness_range;
-
-    /**
      * Converts row in the form of a String array into a CoffeeProduct object
      * @param row array
      * @return interpreted CoffeeProduct object
      */
-    private CoffeeProduct getCoffeeProduct(String[] row)
+    public CoffeeProduct getCoffeeProduct(String[] row)
     {
-        // if any empty/null values, return null
-        for(String value : row)
-            if (value.equals(""))
-                return null;
-
-        String name = row[0]; // name of company
+        String owner = row[0];
         String country = row[1];
         int elevation;
         try {
@@ -145,14 +95,23 @@ public class CoffeeProductReader
         }
         String process = row[5];
 
-        // adjusting to 0-10 scale where 0 means it's the product with the lowest attribute and 10 the highest
-        float acidity =     (parseFloat(row[9]) - acidity_range[0]) * 10 / (acidity_range[1] - acidity_range[0]);
-        float body =        (parseFloat(row[10]) - body_range[0]) * 10 / (body_range[1] - body_range[0]);
-        float sweetness =   (parseFloat(row[13]) - sweetness_range[0]) * 10 / (sweetness_range[1] - sweetness_range[0]);
+        float aroma =       parseFloat(row[6]);
+        float flavor =      parseFloat(row[7]);
+        float aftertaste =  parseFloat(row[8]);
+        float acidity =     parseFloat(row[9]);
+        float body =        parseFloat(row[10]);
+        float balance =     parseFloat(row[11]);
+        float uniformity =  parseFloat(row[12]);
+        float sweetness =   parseFloat(row[13]);
+        float moisture =    parseFloat(row[14]);
+
+        // todo add maybe?
+        //String region = row[3];
+        //int harvest_year = getNumber(filter('.', row[4]));
 
         String random_taste = "choklad"; // todo change?
 
-        return new CoffeeProduct(name, country, elevation, process, acidity, body, sweetness, random_taste);
+        return new CoffeeProduct(owner, country, elevation, process, acidity, body, sweetness, random_taste, false);
     }
 
     /**
@@ -182,18 +141,11 @@ public class CoffeeProductReader
             if((n[i].matches("[0-9]+"))) {// validating numbers
                 f.append(n[i]); //appending
             }else {
-                if(f.length() == 0) // if no numbers found yet, move on to next char
-                    continue;
-
                 //parsing to int and returning value
                 return Integer.parseInt(f.toString());
             }
         }
-
-        if(f.length() > 0)
-            return Integer.parseInt(f.toString());
-
-        return 0; // if no numbers found
+        return 0;
     }
 
     /**
@@ -220,7 +172,7 @@ public class CoffeeProductReader
      * @return a list of string arrays, where each array represents a row
      * @throws Exception reading exception when reading file
      */
-    private List<String[]> getRows() throws Exception
+    public List<String[]> getRows() throws Exception
     {
         // to be returned
         List<String[]> rows = new ArrayList<>();
