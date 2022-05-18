@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
@@ -13,7 +12,6 @@ import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,6 +44,7 @@ public class SearchListFragment extends Fragment {
     private RangeSlider sweet_slider;
 
     private AutoCompleteTextView taste_actv;
+    private AutoCompleteTextView country_actv;
 
     // Makes thumbvalues between 0-10
     private int valueDenominator = 10;
@@ -118,14 +117,17 @@ public class SearchListFragment extends Fragment {
     }
 
     /**
-     * Initiates filter dialog by setting sliders and options
+     * Initiates filter dialog
      */
     private void initFilterDialog() {
-
-        initDropDown();
         initSliders();
+        initTasteDropDown();
+        initCountryDropDown();
     }
 
+    /**
+     * Initiates sliders for acidity, body and sweetness
+     */
     private void initSliders() {
         float valueFrom = 0.0F;
         float valueTo = 100.0F;
@@ -180,14 +182,17 @@ public class SearchListFragment extends Fragment {
         });
     }
 
-    private void initDropDown() {
+    /**
+     * Initiates dropdown menu for tastes
+     */
+    private void initTasteDropDown() {
         taste_actv = filterDialog.findViewById(R.id.taste_actv);
 
         viewModel.getTasteList().observe(getViewLifecycleOwner(), tastes -> {
             Set<String> removedDuplicates = new HashSet<>(tastes);
             tastes.clear();
             tastes.addAll(removedDuplicates);
-            ArrayAdapter<String> tasteAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_taste_list_item,
+            ArrayAdapter<String> tasteAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
                     tastes);
             taste_actv.setAdapter(tasteAdapter);
         });
@@ -196,6 +201,28 @@ public class SearchListFragment extends Fragment {
             filterSearch();
             adapter.notifyDataSetChanged();
         });
+    }
+
+    /**
+     * Initiates dropdown menu for countries
+     */
+    private void initCountryDropDown() {
+        country_actv = filterDialog.findViewById(R.id.country_actv);
+
+        viewModel.getCountryList().observe(getViewLifecycleOwner(), countries -> {
+            Set<String> removedDuplicates = new HashSet<>(countries);
+            countries.clear();
+            countries.addAll(removedDuplicates);
+            ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
+                    countries);
+            country_actv.setAdapter(countryAdapter);
+        });
+
+        country_actv.setOnItemClickListener((adapterView, view, i, l) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+
     }
 
     /**
@@ -216,9 +243,9 @@ public class SearchListFragment extends Fragment {
         boolean isLiked = false;
 
         //TODO Create filters for taste, country, process, isliked, elevation.
-        viewModel.setFilter(sv.getQuery().toString(), taste_actv.getText().toString(), "", "",
-                acidUpper, acidLower, bodyUpper, bodyLower, sweetUpper, sweetLower, minElevation, maxElevation,
-                isLiked);
+        viewModel.setFilter(sv.getQuery().toString(), taste_actv.getText().toString(),
+                country_actv.getText().toString(), "", acidUpper, acidLower, bodyUpper,
+                bodyLower, sweetUpper, sweetLower, minElevation, maxElevation, isLiked);
     }
 
     /**

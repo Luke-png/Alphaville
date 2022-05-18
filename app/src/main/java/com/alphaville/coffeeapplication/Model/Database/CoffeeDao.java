@@ -59,9 +59,9 @@ public interface CoffeeDao {
      * @return
      */
     @Query("SELECT * FROM products WHERE name LIKE '%' || :name || '%' " +
-            "AND acidity >= :acidityFloor AND acidity < :acidityRoof " +
-            "AND body >= :bodyFloor AND body < :bodyRoof " +
-            "AND sweetness >= :sweetnessFloor AND sweetness < :sweetnessRoof " +
+            "AND acidity >= :acidityFloor AND acidity <= :acidityRoof " +
+            "AND body >= :bodyFloor AND body <= :bodyRoof " +
+            "AND sweetness >= :sweetnessFloor AND sweetness <= :sweetnessRoof " +
             "AND Taste = CASE WHEN :taste = '' THEN Taste ELSE :taste END " +
             "AND Country = CASE WHEN :country = '' THEN Country ELSE :country END " +
             "AND isLiked = :isLiked " +
@@ -81,6 +81,14 @@ public interface CoffeeDao {
      */
     @Query("SELECT taste FROM products")
     LiveData<List<String>> getTasteList();
+
+    /**
+     * Returns a LiveData object containing a list of all values in country column
+     *
+     * @return the LiveData object
+     */
+    @Query("SELECT country FROM products")
+    LiveData<List<String>> getCountryList();
 
 
 }

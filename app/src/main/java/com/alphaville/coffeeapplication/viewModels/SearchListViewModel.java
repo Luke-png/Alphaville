@@ -57,6 +57,15 @@ public class SearchListViewModel extends AndroidViewModel {
         return repository.getTasteList();
     }
 
+    /**
+     * Returns a LiveData object containing a list of all values in country column
+     *
+     * @return the LiveData object
+     */
+    public LiveData<List<String>> getCountryList() {
+        return repository.getCountryList();
+    }
+
 
     /**
      * Sets the values for MutableLiveData object for filtering

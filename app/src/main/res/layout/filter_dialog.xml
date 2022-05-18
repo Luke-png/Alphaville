@@ -7,6 +7,25 @@
     android:background="#EDE0D4">
 
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/country_menu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:hint="Country"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taste_menu">
+
+        <AutoCompleteTextView
+            android:id="@+id/country_actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/body_slider"
         android:layout_width="158dp"
@@ -86,7 +105,7 @@
         app:layout_constraintStart_toStartOf="@+id/acid_slider" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menu"
+        android:id="@+id/taste_menu"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="158dp"
         android:layout_height="wrap_content"

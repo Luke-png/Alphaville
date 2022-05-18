@@ -95,6 +95,12 @@ public class CoffeeProductRepository {
     }
 
     /**
+     * Returns a LiveData object containing a list of all values in country column
+     *
+     * @return the LiveData object
+     */
+    public LiveData<List<String>> getCountryList() {return coffeeDao.getCountryList();}
+    /**
      * Calculates lower bound, will probably be replaced
      *
      * @param i
