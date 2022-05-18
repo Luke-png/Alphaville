@@ -9,20 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
 import com.alphaville.coffeeapplication.views.adapters.RecAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //Placeholder class
 
 public class RecommendationsFragment extends Fragment {
 
     private FragmentRecommendationsBinding binding;
+    private RecAdapter adapter;
     private RecTabViewModel viewModel;
     private FragmentContainerView recDetail;
     private View shadow;
@@ -37,7 +41,7 @@ public class RecommendationsFragment extends Fragment {
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        viewModel = new ViewModelProvider(this).get(RecTabViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(RecTabViewModel.class);
 
 
         recDetail = (FragmentContainerView) view.findViewById(R.id.rec_DetailView);
@@ -45,18 +49,13 @@ public class RecommendationsFragment extends Fragment {
         shadow = view.findViewById(R.id.shadowLayer);
         shadow.setVisibility(View.INVISIBLE);
 
-
-        /**
-         * Creates the adepter with the appropriate data
-         */
-        RecAdapter veckansAdapter = new RecAdapter(getActivity(),fillVeckans(),R.layout.rec_card, recDetail,shadow);
-        RecAdapter dagensAdapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens, recDetail,shadow);
-
-        /**
-         * Binds recGrid with the adepter
-         */
-        binding.veckansRecGrid.setAdapter(veckansAdapter);
-        binding.dagensRecGrid.setAdapter(dagensAdapter);
+        viewModel.getRankedList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
+            @Override
+            public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
+                //adapter.setProducts(coffeeProducts);
+                //setUpAdapter(new ArrayList<>(coffeeProducts));
+            }
+        });
 
         shadow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +67,20 @@ public class RecommendationsFragment extends Fragment {
 
         return view;
     }
+
+    //private void setUpAdapter(ArrayList<CoffeeProduct> coffeeProducts){
+        /**
+         * Creates the adepter with the appropriate data
+         */
+        //RecAdapter veckansAdapter = new RecAdapter(getActivity(),coffeeProducts,R.layout.rec_card, recDetail,shadow);
+        //adapter = new RecAdapter(getActivity(),fillDagens(),R.layout.dagens, recDetail,shadow);
+
+        /**
+         * Binds recGrid with the adepter
+         */
+        //binding.veckansRecGrid.setAdapter(veckansAdapter);
+        //binding.dagensRecGrid.setAdapter(adapter);
+    //}
 
 
     /**
@@ -91,9 +104,6 @@ public class RecommendationsFragment extends Fragment {
 
         //gridArrayList = viewModel.getRectVecka().getValue();
 
-        viewModel.getRectDag();
-
         return gridArrayList;
     }
-
 }

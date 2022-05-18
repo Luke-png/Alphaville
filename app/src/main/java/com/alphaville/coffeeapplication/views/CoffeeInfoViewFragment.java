@@ -39,14 +39,14 @@ public class CoffeeInfoViewFragment extends Fragment{
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         viewModel= new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
+
         /*
-
-         setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
-         setCoffeeInformation(name, info, description);
-         setCoffeePicture(image);
-         setClockTexts(firstClockText, secondClockText, thirdClockText);
-         */
-
+        setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
+        setCoffeeInformation(name, info, description);
+        setCoffeePicture(image);
+        setClockTexts(firstClockText, secondClockText, thirdClockText);
+        initLikeButton(viewModel.getSelected().getValue().isLiked());
+        */
 
         /*
          * Observer
@@ -58,7 +58,7 @@ public class CoffeeInfoViewFragment extends Fragment{
             }
         });
 
-        //rebuildCoffeeInfo();
+        rebuildCoffeeInfo();
 
         //listener for the review button
         binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,19 +67,17 @@ public class CoffeeInfoViewFragment extends Fragment{
                 openReviewPage();
             }
         });
-        return view;
 
-/*
-        //listener for the heart button (the boolean value in model needs to reverse)
         binding.likeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                model.changeLikeStatus(binding.likeBtn.isChecked());
+                CoffeeProduct selected = viewModel.getSelected().getValue();
+                selected.setLiked(binding.likeBtn.isChecked());
             }
         });
-        */
-    }
 
+        return view;
+    }
 
     public void rebuildCoffeeInfo(){
         CoffeeProduct selected = viewModel.getSelected().getValue();
@@ -93,7 +91,11 @@ public class CoffeeInfoViewFragment extends Fragment{
         //setClockTexts(firstClockText, secondClockText, thirdClockText);
     }
 
-    private void setCoffeeInformation(String name){
+    private void initLikeButton(boolean liked) {
+        binding.likeBtn.setChecked(liked);
+    }
+
+    private void setCoffeeInformation(String name, String info, String description){
         binding.coffeenameText.setText(name);
         binding.infoText.setText("infotext");
         binding.descriptionText.setText("description");

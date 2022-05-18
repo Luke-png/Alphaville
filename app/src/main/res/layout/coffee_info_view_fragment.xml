@@ -224,7 +224,6 @@
                         app:layout_constraintStart_toStartOf="@+id/hardcoded2"
                         app:layout_constraintTop_toBottomOf="@+id/hardcoded2" />
 
-                    <!--
                     <TextView
                         android:id="@+id/hardcoded4"
                         android:layout_width="wrap_content"
@@ -249,7 +248,6 @@
                         android:text="•Brand:"
                         app:layout_constraintStart_toStartOf="@+id/hardcoded6"
                         app:layout_constraintTop_toTopOf="@+id/hardcoded3" />
-                        -->
 
                     <TextView
                         android:id="@+id/hightText"
@@ -264,7 +262,6 @@
                         android:id="@+id/processText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
                         android:layout_marginStart="8dp"
                         android:text="TextView"
                         app:layout_constraintBottom_toBottomOf="@+id/hardcoded5"
@@ -287,7 +284,7 @@
                         android:text="TextView"
                         app:layout_constraintBottom_toBottomOf="@+id/hardcoded3"
                         app:layout_constraintStart_toEndOf="@+id/hardcoded3" />
-                    <!--
+
                     <TextView
                         android:id="@+id/regionText"
                         android:layout_width="wrap_content"
@@ -296,7 +293,6 @@
                         android:text="TextView"
                         app:layout_constraintBottom_toBottomOf="@+id/hardcoded4"
                         app:layout_constraintStart_toEndOf="@+id/hardcoded4" />
-
 
                     <TextView
                         android:id="@+id/rosteryText"
@@ -315,7 +311,7 @@
                         android:text="TextView"
                         app:layout_constraintBottom_toBottomOf="@+id/hardcoded7"
                         app:layout_constraintStart_toEndOf="@+id/hardcoded7" />
-                        -->
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </FrameLayout>
 
@@ -342,7 +338,6 @@
                         android:layout_width="370dp"
                         android:layout_height="213dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginLeft="20dp"
                         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
                         app:layout_constraintEnd_toEndOf="@+id/view3"
                         app:layout_constraintHorizontal_bias="0.39"
