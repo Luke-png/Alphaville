@@ -55,18 +55,8 @@ public class SearchListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        //binding = SearchListFragmentBinding.inflate(inflater, container, false);
-/*
-        CoffeeProduct c1 = new CoffeeProduct("namn", "Sweden", 123, Roast.light, Process.dry,
-                new ArrayList<>(), 2,2,2, "test", true);
-        CoffeeProduct c2 = new CoffeeProduct("namn2", "Sweden", 123, Roast.light, Process.dry,
-                new ArrayList<>(),2, 2, 2, "test", true);
-
-        coffeeProducts.add(c1);
-        coffeeProducts.add(c2);
-*/
-        viewModel= new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
+        viewModel.setFilter("",0,0, 0, "", "Peru", false, 0, 10000, "");
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
             @Override
             public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
@@ -75,8 +65,7 @@ public class SearchListFragment extends Fragment {
         });
 
         View v = inflater.inflate(R.layout.search_list_fragment,container,false);
-        //return inflater.inflate(R.layout.fragment_search,container,false);
-        // Inflate the layout for this fragment
+
         rv = (RecyclerView) v.findViewById(R.id.RV_SearchList);
         fcv = (FragmentContainerView) v.findViewById(R.id.rec_DetailView);
         sv = (SearchView) v.findViewById(R.id.searchInSearchTab);
@@ -101,17 +90,19 @@ public class SearchListFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-                //rv.setAdapter(new CoffeeProductAdapter(model.filterList(s)));
+                viewModel.setFilter(s, 0, 0, 0, "", "Ethiopia", false, 0, 10000, "");
+                adapter.notifyDataSetChanged();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                //rv.setAdapter(new CoffeeProductAdapter(model.filterList(s)));
+                viewModel.setFilter(s, 0, 0, 0, "", "Ethiopia", false, 0, 10000, "");
+                adapter.notifyDataSetChanged();
                 return true;
             }
         });
-        return v; //inflater.inflate(R.layout.search_list_fragment, container, false);
+        return v;
     }
 
     private void initFilterButton() {
