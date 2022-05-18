@@ -75,28 +75,28 @@ public interface CoffeeDao {
                                          String process);
 
     /**
-     * Returns a LiveData object containing a list of all values in taste column
+     * Returns a LiveData object containing a list of distinct values in taste column
      *
      * @return the LiveData object
      */
-    @Query("SELECT taste FROM products")
-    LiveData<List<String>> getTasteList();
+    @Query("SELECT DISTINCT taste FROM products")
+    LiveData<List<String>> getNoDupesTasteList();
 
     /**
-     * Returns a LiveData object containing a list of all values in country column
+     * Returns a LiveData object containing a list of distinct values in country column
      *
      * @return the LiveData object
      */
-    @Query("SELECT country FROM products")
-    LiveData<List<String>> getCountryList();
+    @Query("SELECT DISTINCT country FROM products")
+    LiveData<List<String>> getNoDupesCountryList();
 
     /**
-     * Returns a LiveData object containing a list of all values in process column
+     * Returns a LiveData object containing a list of distinct values in process column
      *
      * @return the LiveData object
      */
-    @Query("SELECT process FROM products")
-    LiveData<List<String>> getProcessList();
+    @Query("SELECT DISTINCT process FROM products")
+    LiveData<List<String>> getNoDupesProcessList();
 
 
 }

@@ -207,10 +207,7 @@ public class SearchListFragment extends Fragment {
     private void initTasteDropDown() {
         taste_actv = filterDialog.findViewById(R.id.taste_actv);
 
-        viewModel.getTasteList().observe(getViewLifecycleOwner(), tastes -> {
-            Set<String> removedDuplicates = new HashSet<>(tastes);
-            tastes.clear();
-            tastes.addAll(removedDuplicates);
+        viewModel.getNoDupesTasteList().observe(getViewLifecycleOwner(), tastes -> {
             ArrayAdapter<String> tasteAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
                     tastes);
             taste_actv.setAdapter(tasteAdapter);
@@ -228,10 +225,7 @@ public class SearchListFragment extends Fragment {
     private void initCountryDropDown() {
         country_actv = filterDialog.findViewById(R.id.country_actv);
 
-        viewModel.getCountryList().observe(getViewLifecycleOwner(), countries -> {
-            Set<String> removedDuplicates = new HashSet<>(countries);
-            countries.clear();
-            countries.addAll(removedDuplicates);
+        viewModel.getNoDupesCountryList().observe(getViewLifecycleOwner(), countries -> {
             ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
                     countries);
             country_actv.setAdapter(countryAdapter);
@@ -284,10 +278,7 @@ public class SearchListFragment extends Fragment {
     private void initProcessDropDown() {
         process_actv = filterDialog.findViewById(R.id.process_actv);
 
-        viewModel.getProcessList().observe(getViewLifecycleOwner(), processes -> {
-            Set<String> removedDuplicates = new HashSet<>(processes);
-            processes.clear();
-            processes.addAll(removedDuplicates);
+        viewModel.getNoDupesProcessList().observe(getViewLifecycleOwner(), processes -> {
             ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
                     processes);
             process_actv.setAdapter(countryAdapter);
