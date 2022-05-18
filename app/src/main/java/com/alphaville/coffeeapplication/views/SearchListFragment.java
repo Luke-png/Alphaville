@@ -286,7 +286,7 @@ public class SearchListFragment extends Fragment {
 
         boolean isLiked = liked_checkbox.isChecked();
 
-        //TODO Create filters for taste, country, process, isliked, elevation.
+        //TODO Create filters for process
         viewModel.setFilter(sv.getQuery().toString(), taste_actv.getText().toString(),
                 country_actv.getText().toString(), "", acidUpper, acidLower, bodyUpper,
                 bodyLower, sweetUpper, sweetLower, minElevation, maxElevation, isLiked);
