@@ -55,12 +55,15 @@ public class ReviewInfoTabFragment extends Fragment {
         binding.countryText2.setText(review.getCoffeeProduct().getCountry());
         binding.processText2.setText(review.getCoffeeProduct().getProcess().toString());
         //binding.userImage.setImageDrawable(review.getCoffeeProduct().getPicture());
-        //binding.attributeText1.setText(review.getCoffeeProduct().getAttr1);
-        //binding.attributeText2.setText(review.getCoffeeProduct().getAttr2);
-        //binding.attributeText3.setText(review.getCoffeeProduct().getAttr3);
+        binding.attributeText1.setText("Sweetness");
+        binding.attributeText2.setText("Acidity");
+        binding.attributeText3.setText("Body");
         //binding.imageAttr1.setImageDrawable();
         //binding.imageAttr2.setImageDrawable();
         //binding.imageAttr3.setImageDrawable();
+        CoffeeInfoViewFragment.setTasteClockImageSpecific(review.getCoffeeProduct().getSweetness(),binding.imageAttr1, 0, 100);
+        CoffeeInfoViewFragment.setTasteClockImageSpecific(review.getCoffeeProduct().getAcidity(),binding.imageAttr2, 0, 10);
+        CoffeeInfoViewFragment.setTasteClockImageSpecific(review.getCoffeeProduct().getBody(),binding.imageAttr3, 0, 10);
     }
 
     /**
