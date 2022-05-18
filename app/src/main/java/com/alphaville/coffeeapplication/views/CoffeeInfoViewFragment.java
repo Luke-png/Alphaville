@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
@@ -85,6 +87,7 @@ public class CoffeeInfoViewFragment extends Fragment{
             // todo change to real attributes
             setCoffeeInformation(selected.getName());
             setCoffeeAttributes(selected.getElevation()+"", selected.getTaste(), selected.getCountry(), selected.getProcess());
+            setTasteClockImage(selected.getSweetness(), selected.getAcidity(), selected.getBody());
         }
         //setCoffeePicture(image);
         //setClockTexts(firstClockText, secondClockText, thirdClockText);
@@ -116,6 +119,27 @@ public class CoffeeInfoViewFragment extends Fragment{
         binding.clock2Text.setText(third);
 
     }
+    private void setTasteClockImages (float sweetness, float acidity, float body){
+        setTasteClockImageSpecific(sweetness, binding.imageView5);
+        setTasteClockImageSpecific(acidity, binding.imageView6);
+        setTasteClockImageSpecific(body, binding.imageView4);
+
+    }
+    private void setTasteClockImageSpecific (float value, ImageView image){
+        if(value<10){image.setImageResource(R.drawable.taste_clock0);}
+
+        if(value>=10 && value <= 30){image.setImageResource(R.drawable.taste_clock20);}
+
+        if(value > 30 && value <= 50){image.setImageResource(R.drawable.taste_clock40);}
+
+        if(value > 50 && value <= 70){image.setImageResource(R.drawable.taste_clock60);}
+
+        if(value > 70 && value <= 90){image.setImageResource(R.drawable.taste_clock80);}
+
+        if(value > 90){image.setImageResource(R.drawable.taste_clock100);}
+
+    }
+
     private void openReviewPage(){
         try {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
