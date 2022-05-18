@@ -42,6 +42,7 @@ public class SearchListFragment extends Fragment {
     private SearchView sv;
     private ImageButton filter_button;
     private Dialog filterDialog;
+
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 
 
@@ -129,30 +130,52 @@ public class SearchListFragment extends Fragment {
         RangeSlider body_slider = filterDialog.findViewById(R.id.body_slider);
         RangeSlider sweet_slider = filterDialog.findViewById(R.id.sweet_slider);
 
-        //Changes label of slider value to match 0-10
+        //Init sliders
+        float valueFrom = 0.0F;
+        float valueTo = 100.0F;
+        int labelDenominator = 20; //
+        float stepSize = 20.0F;
+
+        //Init acid slider
+        acid_slider.setValueFrom(valueFrom);
+        acid_slider.setValueTo(valueTo);
+        acid_slider.setStepSize(stepSize);
+
+        //Init body slider
+        body_slider.setValueFrom(valueFrom);
+        body_slider.setValueTo(valueTo);
+        body_slider.setStepSize(stepSize);
+
+        //Init sweet slider
+        sweet_slider.setValueFrom(valueFrom);
+        sweet_slider.setValueTo(valueTo);
+        sweet_slider.setStepSize(stepSize);
+
+
+        //Changes label of slider value to match 0-5
         acid_slider.setLabelFormatter(new LabelFormatter() {
             @NonNull
             @Override
             public String getFormattedValue(float value) {
-                return String.valueOf(value / 10);
+                return String.valueOf(value / labelDenominator);
             }
         });
 
-        //Changes label of slider value to match 0-10
+        //Changes label of slider value to match 0-5
         body_slider.setLabelFormatter(new LabelFormatter() {
             @NonNull
             @Override
             public String getFormattedValue(float value) {
-                return String.valueOf(value / 10);
+                return String.valueOf(value / labelDenominator);
             }
         });
 
-        //Changes label of slider value to match 0-10
+        //Changes label of slider value to match 0-5
         sweet_slider.setLabelFormatter(new LabelFormatter() {
             @NonNull
             @Override
             public String getFormattedValue(float value) {
-                return String.valueOf(value / 10);
+                return String.valueOf(value / labelDenominator);
             }
         });
 
