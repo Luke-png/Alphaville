@@ -278,6 +278,9 @@ public class SearchListFragment extends Fragment {
 
     }
 
+    /**
+     * Initiates dropdown menu for processes
+     */
     private void initProcessDropDown() {
         process_actv = filterDialog.findViewById(R.id.process_actv);
 
@@ -297,6 +300,9 @@ public class SearchListFragment extends Fragment {
 
     }
 
+    /**
+     * Resets the filter by setting all values to defaul
+     */
     private void resetFilter() {
         acid_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
         body_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
@@ -311,14 +317,6 @@ public class SearchListFragment extends Fragment {
         elevation_slider.setValues(0F, 11000F);
         filterSearch();
         adapter.notifyDataSetChanged();
-    }
-
-    /**
-     * Method for showing a toast-message
-     */
-    private void showToastMessage(String message){
-        Context context = getContext();
-        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
     }
 
     /**
