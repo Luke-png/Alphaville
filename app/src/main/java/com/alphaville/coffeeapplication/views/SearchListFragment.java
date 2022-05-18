@@ -76,14 +76,14 @@ public class SearchListFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-                viewModel.setFilter(s, 0, 0, 0, "", "Ethiopia", false, 0, 10000, "");
+                viewModel.setFilter(s, 0, 0, 0, "", "", false, 0, 10000, "");
                 adapter.notifyDataSetChanged();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                viewModel.setFilter(s, 0, 0, 0, "", "Ethiopia", false, 0, 10000, "");
+                viewModel.setFilter(s, 0, 0, 0, "", "", false, 0, 10000, "");
                 adapter.notifyDataSetChanged();
                 return true;
             }
