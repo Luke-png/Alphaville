@@ -48,6 +48,22 @@ public class SearchListViewModel extends AndroidViewModel {
     }
 
 
+    /**
+     * Sets the values for MutableLiveData object for filtering
+     * @param query the text search query
+     * @param taste the filtered taste
+     * @param country the filtered coffee
+     * @param process the filtered process
+     * @param acidityUpper the upper bound for acidity
+     * @param acidityLower the lower bound for acidity
+     * @param bodyUpper the upper bound for body
+     * @param bodyLower the lower boumd for body
+     * @param sweetnessUpper the upper bound for sweetness
+     * @param sweetnessLower the lower bound for sweetness
+     * @param minElevation the lower bound for elevation
+     * @param maxElevation the upper bound for elevation
+     * @param isLiked whether the coffee product is liked or not
+     */
     public void setFilter(String query, String taste, String country, String process,
                           int acidityUpper, int acidityLower, int bodyUpper, int bodyLower,
                           int sweetnessUpper, int sweetnessLower, int minElevation, int maxElevation,

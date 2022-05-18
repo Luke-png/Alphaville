@@ -108,10 +108,16 @@ public class SearchListFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Initiates filter button
+     */
     private void initFilterButton() {
         filter_button.setOnClickListener(view -> filterDialog.show());
     }
 
+    /**
+     * Initiates filter dialog by setting sliders and options
+     */
     private void initFilterDialog() {
         filterDialog = new Dialog(getActivity());
         filterDialog.setContentView(R.layout.filter_dialog);
@@ -170,6 +176,9 @@ public class SearchListFragment extends Fragment {
         });
     }
 
+    /**
+     * Filters the results based on current inputted filter values
+     */
     private void filterSearch() {
 
         int acidLower = (int) (float) Collections.min(acid_slider.getValues()) / valueDenominator;
