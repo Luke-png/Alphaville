@@ -40,6 +40,23 @@ public interface CoffeeDao {
     @Query("SELECT * FROM products ORDER BY name DESC")
     LiveData<List<CoffeeProduct>> getAllProducts();
 
+    /**
+     * Method to filter coffee
+     * @param name
+     * @param acidityRoof
+     * @param acidityFloor
+     * @param bodyRoof
+     * @param bodyFloor
+     * @param sweetnessRoof
+     * @param sweetnessFloor
+     * @param taste
+     * @param country
+     * @param isLiked
+     * @param minElevation
+     * @param maxElevation
+     * @param process
+     * @return
+     */
     @Query("SELECT * FROM products WHERE name LIKE '%' || :name || '%' " +
             "AND acidity >= :acidityFloor AND acidity < :acidityRoof " +
             "AND body >= :bodyFloor AND body < :bodyRoof " +
@@ -55,7 +72,6 @@ public interface CoffeeDao {
             String taste, String country, boolean isLiked,
                                          int minElevation, int maxElevation,
                                          String process);
-// 1 2 3 4 5 6
 
 
 }
