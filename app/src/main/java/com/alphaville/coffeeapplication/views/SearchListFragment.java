@@ -120,6 +120,8 @@ public class SearchListFragment extends Fragment {
      * Initiates filter dialog
      */
     private void initFilterDialog() {
+        ImageButton close_button = filterDialog.findViewById(R.id.close_button);
+        close_button.setOnClickListener(view -> filterDialog.dismiss());
         initSliders();
         initTasteDropDown();
         initCountryDropDown();
