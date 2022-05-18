@@ -1,17 +1,13 @@
 package com.alphaville.coffeeapplication.Model.Database;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
-import com.alphaville.coffeeapplication.Model.Database.CoffeeDao;
-import com.alphaville.coffeeapplication.Model.Database.CoffeeDatabase;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Repository for CoffeeProducts stored in the database.
@@ -27,8 +23,9 @@ public class CoffeeProductRepository {
      */
     private LiveData<List<CoffeeProduct>> allProducts;
     private LiveData<List<CoffeeProduct>> filteredProducts;
+    //private LiveData<List<String>> allTastes;
 
-    public CoffeeProductRepository(Application application){
+    public CoffeeProductRepository(Application application) {
         CoffeeDatabase database = CoffeeDatabase.getInstance(application);
         coffeeDao = database.coffeeDao();
         allProducts = coffeeDao.getAllProducts();
@@ -36,32 +33,34 @@ public class CoffeeProductRepository {
 
     /**
      * Basic insertion of CoffeeProduct.
+     *
      * @param product to insert
      */
-    public void insert(CoffeeProduct product){
-        CoffeeDatabase.databaseWriteExecutor.execute(()-> coffeeDao.insert(product));
+    public void insert(CoffeeProduct product) {
+        CoffeeDatabase.databaseWriteExecutor.execute(() -> coffeeDao.insert(product));
     }
 
     /**
      * Updates product with specified id with information in product object
+     *
      * @param product contains id and new information of the product
      */
-    public void update(CoffeeProduct product){
-        CoffeeDatabase.databaseWriteExecutor.execute(()-> coffeeDao.update(product));
+    public void update(CoffeeProduct product) {
+        CoffeeDatabase.databaseWriteExecutor.execute(() -> coffeeDao.update(product));
     }
 
     /**
      * Gets all CoffeeProducts (LiveData object)
+     *
      * @return the LiveData object containing all CoffeeProducts
      */
-    public LiveData<List<CoffeeProduct>> getAllProducts(){
+    public LiveData<List<CoffeeProduct>> getAllProducts() {
         return allProducts;
     }
 
     /**
-     *
      * @param input object which contains all the filters
-     * @return
+     * @return LiveData object containing list of coffee products matching the filter
      */
     public LiveData<List<CoffeeProduct>> filter(SearchListViewModel.Filter input) {
         float acidityRoof, acidityFloor, bodyRoof, bodyFloor, sweetnessRoof, sweetnessFloor;
@@ -87,7 +86,17 @@ public class CoffeeProductRepository {
     }
 
     /**
+     * Returns a LiveData object containing a list of all values in taste column
+     *
+     * @return the LiveData object
+     */
+    public LiveData<List<String>> getTasteList() {
+        return coffeeDao.getTasteList();
+    }
+
+    /**
      * Calculates lower bound, will probably be replaced
+     *
      * @param i
      * @return
      */
@@ -110,6 +119,7 @@ public class CoffeeProductRepository {
         }
         return 0;
     }
+
     private float upperBounds(int i) {
         switch (i) {
             case 0:

@@ -2,9 +2,15 @@ package com.alphaville.coffeeapplication.views;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
+import android.widget.SearchView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.Observer;
@@ -12,27 +18,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.SearchView;
-import android.widget.SeekBar;
-
-import com.google.android.material.slider.LabelFormatter;
-import com.google.android.material.slider.RangeSlider;
-
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
-import com.alphaville.coffeeapplication.Model.enums.Roast;
-import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
-import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
 import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
+import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
+import com.google.android.material.slider.RangeSlider;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SearchListFragment extends Fragment {
 
@@ -47,6 +44,8 @@ public class SearchListFragment extends Fragment {
     private RangeSlider acid_slider;
     private RangeSlider body_slider;
     private RangeSlider sweet_slider;
+
+    private AutoCompleteTextView taste_actv;
 
     // Makes thumbvalues between 0-10
     private int valueDenominator = 10;
@@ -73,12 +72,15 @@ public class SearchListFragment extends Fragment {
         sv = v.findViewById(R.id.searchInSearchTab);
         filter_button = v.findViewById((R.id.filter_button));
 
+
         fcv.setVisibility(View.INVISIBLE);
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
 
+        filterDialog = new Dialog(getActivity());
+        filterDialog.setContentView(R.layout.filter_dialog);
         initItemSpacing(15);
         initFilterDialog();
         initFilterButton();
@@ -119,10 +121,12 @@ public class SearchListFragment extends Fragment {
      * Initiates filter dialog by setting sliders and options
      */
     private void initFilterDialog() {
-        filterDialog = new Dialog(getActivity());
-        filterDialog.setContentView(R.layout.filter_dialog);
 
-        //Init sliders
+        initDropDown();
+        initSliders();
+    }
+
+    private void initSliders() {
         float valueFrom = 0.0F;
         float valueTo = 100.0F;
         float stepSize = 10.0F;
@@ -176,6 +180,24 @@ public class SearchListFragment extends Fragment {
         });
     }
 
+    private void initDropDown() {
+        taste_actv = filterDialog.findViewById(R.id.taste_actv);
+
+        viewModel.getTasteList().observe(getViewLifecycleOwner(), tastes -> {
+            Set<String> removedDuplicates = new HashSet<>(tastes);
+            tastes.clear();
+            tastes.addAll(removedDuplicates);
+            ArrayAdapter<String> tasteAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_taste_list_item,
+                    tastes);
+            taste_actv.setAdapter(tasteAdapter);
+        });
+
+        taste_actv.setOnItemClickListener((adapterView, view, i, l) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+    }
+
     /**
      * Filters the results based on current inputted filter values
      */
@@ -194,7 +216,7 @@ public class SearchListFragment extends Fragment {
         boolean isLiked = false;
 
         //TODO Create filters for taste, country, process, isliked, elevation.
-        viewModel.setFilter(sv.getQuery().toString(), "", "", "",
+        viewModel.setFilter(sv.getQuery().toString(), taste_actv.getText().toString(), "", "",
                 acidUpper, acidLower, bodyUpper, bodyLower, sweetUpper, sweetLower, minElevation, maxElevation,
                 isLiked);
     }
