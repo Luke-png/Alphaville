@@ -23,17 +23,13 @@ public class ReviewDataViewModel extends AndroidViewModel {
 
     ReviewRepository repository;
 
-    //TODO Move all use for reviewHandler
-    // Should not use reviewHandler anymore. Communicate with repository and logic classes instead
-    // ReviewHandler reviewHandler = new ReviewHandler();
-
     public ReviewDataViewModel(@NonNull Application application) {
         super(application);
         repository = new ReviewRepository(application);
     }
 
     /**
-     * Creates a review for a specific coffee product
+     * Creates a review for a specific coffee product and inserts it into database
      * @param cp the {@link CoffeeProduct} that has been reviewed
      * @param textReview the text review
      * @param rating the rating
@@ -44,16 +40,6 @@ public class ReviewDataViewModel extends AndroidViewModel {
     public void createReview(CoffeeProduct cp, String textReview,
                              double rating, String location, String drinkCategory,
                              long creationTime){
-
-        //TODO Replace this test coffee product with actual selected coffee product.
-        //CoffeeProduct testCp = new CoffeeProduct("Skånerost", "Colombia",
-         //       225, Roast.light, Process.dry, new ArrayList<Taste>() {},
-        //        2, 3, 4, "Tastes great", false);
-
-        //repository.insert(new Review(testCp,textReview, rating, location, drinkCategory, creationTime));
-        //  }
-
-  /*  public CoffeeProduct getActiveProduct(){
-        return getModel().getActive();
-    */}
+        repository.insert(new Review(cp,textReview, rating, location, drinkCategory, creationTime));
+    }
 }
