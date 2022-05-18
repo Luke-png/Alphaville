@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
@@ -19,10 +20,10 @@ import java.util.List;
 
 public class RecTabViewModel extends AndroidViewModel {
 
+    private final MutableLiveData<CoffeeProduct> selected = new MutableLiveData<CoffeeProduct>();
     private LiveData<List<CoffeeProduct>> filteredList;
     private CoffeeProductRepository repository;
     private LiveData<List<CoffeeProduct>> rankedList;
-    private List<CoffeeProduct> x;
 
 
     public RecTabViewModel(@NonNull Application application) {
@@ -32,12 +33,20 @@ public class RecTabViewModel extends AndroidViewModel {
 
     }
 
+
+
     /**
      * skicka filterList till Matcher och få rankedList
      */
     public LiveData<List<CoffeeProduct>> getRankedList(){
-        x = filteredList.getValue();
         return filteredList;
     }
 
+    public MutableLiveData<CoffeeProduct> getSelected() {
+        return selected;
+    }
+
+    public void selectItem(CoffeeProduct product) {
+        selected.setValue(product);
+    }
 }

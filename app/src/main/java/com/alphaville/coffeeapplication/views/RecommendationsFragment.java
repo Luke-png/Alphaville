@@ -16,6 +16,7 @@ import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
+import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 import com.alphaville.coffeeapplication.views.adapters.RecAdapter;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class RecommendationsFragment extends Fragment {
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        viewModel = new ViewModelProvider(this).get(RecTabViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(RecTabViewModel.class);
 
 
         recDetail = (FragmentContainerView) view.findViewById(R.id.rec_DetailView);
@@ -51,11 +52,17 @@ public class RecommendationsFragment extends Fragment {
         shadow = view.findViewById(R.id.shadowLayer);
         shadow.setVisibility(View.INVISIBLE);
 
+        viewModel.getRankedList().observe(getViewLifecycleOwner(), coffeeProducts -> setUpAdapter(new ArrayList<>(coffeeProducts)));
+
         viewModel.getRankedList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
             @Override
             public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
                 //adapter.setProducts(coffeeProducts);
-                setUpAdapter(new ArrayList<>(coffeeProducts));
+                if (coffeeProducts == null){
+                    setUpAdapter(new ArrayList<>(viewModel.getRankedList().getValue()));
+                }else{
+                    setUpAdapter(new ArrayList<>(coffeeProducts));
+                }
             }
         });
 
@@ -74,8 +81,8 @@ public class RecommendationsFragment extends Fragment {
         /**
          * Creates the adepter with the appropriate data
          */
-        adapterWeek = new RecAdapter(getActivity(),fillWeek(coffeeProducts),R.layout.rec_card, recDetail,shadow);
-        adapterDay = new RecAdapter(getActivity(),fillDay(coffeeProducts),R.layout.dagens, recDetail,shadow);
+        adapterWeek = new RecAdapter(getActivity(),fillWeek(coffeeProducts),R.layout.rec_card, recDetail,shadow,true, viewModel);
+        adapterDay = new RecAdapter(getActivity(),fillDay(coffeeProducts),R.layout.dagens, recDetail,shadow,false, viewModel);
 
         /**
          * Binds recGrid with the adepter
@@ -93,8 +100,7 @@ public class RecommendationsFragment extends Fragment {
     }
 
     private ArrayList<CoffeeProduct> fillDay(ArrayList<CoffeeProduct> coffeeProducts){
-        ArrayList<CoffeeProduct> coffee = new ArrayList<>();
-        coffee.add(coffeeProducts.get(0));
+        ArrayList<CoffeeProduct> coffee = new ArrayList<>(coffeeProducts);
 
         return coffee;
     }
