@@ -99,7 +99,19 @@ public class CoffeeProductRepository {
      *
      * @return the LiveData object
      */
-    public LiveData<List<String>> getCountryList() {return coffeeDao.getCountryList();}
+    public LiveData<List<String>> getCountryList() {
+        return coffeeDao.getCountryList();
+    }
+
+    /**
+     * Returns a LiveData object containing a list of all values in process column
+     *
+     * @return the LiveData object
+     */
+    public LiveData<List<String>> getProcessList() {
+        return coffeeDao.getProcessList();
+    }
+
     /**
      * Calculates lower bound, will probably be replaced
      *

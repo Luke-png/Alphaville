@@ -90,5 +90,13 @@ public interface CoffeeDao {
     @Query("SELECT country FROM products")
     LiveData<List<String>> getCountryList();
 
+    /**
+     * Returns a LiveData object containing a list of all values in process column
+     *
+     * @return the LiveData object
+     */
+    @Query("SELECT process FROM products")
+    LiveData<List<String>> getProcessList();
+
 
 }

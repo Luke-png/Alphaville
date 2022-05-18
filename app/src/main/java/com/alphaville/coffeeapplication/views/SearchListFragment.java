@@ -1,6 +1,7 @@
 package com.alphaville.coffeeapplication.views;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
@@ -43,6 +45,9 @@ public class SearchListFragment extends Fragment {
     private RangeSlider acid_slider;
     private RangeSlider body_slider;
     private RangeSlider sweet_slider;
+    private float tasteSliderValueFrom = 0.0F;
+    private float tasteSliderValueTo = 10.0F;
+    private float tasteSliderStepSize = 1.0F;
 
     private AutoCompleteTextView taste_actv;
     private AutoCompleteTextView country_actv;
@@ -50,6 +55,8 @@ public class SearchListFragment extends Fragment {
     private CheckBox liked_checkbox;
 
     private RangeSlider elevation_slider;
+
+    private AutoCompleteTextView process_actv;
 
 
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
@@ -125,20 +132,22 @@ public class SearchListFragment extends Fragment {
     private void initFilterDialog() {
         ImageButton close_button = filterDialog.findViewById(R.id.close_button);
         close_button.setOnClickListener(view -> filterDialog.dismiss());
+
+        ImageButton filter_reset_button = filterDialog.findViewById(R.id.filter_reset_button);
+        filter_reset_button.setOnClickListener(view -> resetFilter());
         initTasteSliders();
         initTasteDropDown();
         initCountryDropDown();
         initIsLikedCheckbox();
         initElevationSlider();
+        initProcessDropDown();
     }
 
     /**
      * Initiates sliders for acidity, body and sweetness
      */
     private void initTasteSliders() {
-        float valueFrom = 0.0F;
-        float valueTo = 10.0F;
-        float stepSize = 1.0F;
+
 
         acid_slider = filterDialog.findViewById(R.id.acid_slider);
         body_slider = filterDialog.findViewById(R.id.body_slider);
@@ -146,22 +155,22 @@ public class SearchListFragment extends Fragment {
 
 
         //Init acid slider
-        acid_slider.setValueFrom(valueFrom);
-        acid_slider.setValueTo(valueTo);
-        acid_slider.setStepSize(stepSize);
-        acid_slider.setValues(0.0F, 10.0F);
+        acid_slider.setValueFrom(tasteSliderValueFrom);
+        acid_slider.setValueTo(tasteSliderValueTo);
+        acid_slider.setStepSize(tasteSliderStepSize);
+        acid_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
 
         //Init body slider
-        body_slider.setValueFrom(valueFrom);
-        body_slider.setValueTo(valueTo);
-        body_slider.setStepSize(stepSize);
-        body_slider.setValues(0.0F, 10.0F);
+        body_slider.setValueFrom(tasteSliderValueFrom);
+        body_slider.setValueTo(tasteSliderValueTo);
+        body_slider.setStepSize(tasteSliderStepSize);
+        body_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
 
         //Init sweet slider
-        sweet_slider.setValueFrom(valueFrom);
-        sweet_slider.setValueTo(valueTo);
-        sweet_slider.setStepSize(stepSize);
-        sweet_slider.setValues(0.0F, 10.0F);
+        sweet_slider.setValueFrom(tasteSliderValueFrom);
+        sweet_slider.setValueTo(tasteSliderValueTo);
+        sweet_slider.setStepSize(tasteSliderStepSize);
+        sweet_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
 
 
         //Changes label of slider value to match 0-5
@@ -269,6 +278,49 @@ public class SearchListFragment extends Fragment {
 
     }
 
+    private void initProcessDropDown() {
+        process_actv = filterDialog.findViewById(R.id.process_actv);
+
+        viewModel.getProcessList().observe(getViewLifecycleOwner(), processes -> {
+            Set<String> removedDuplicates = new HashSet<>(processes);
+            processes.clear();
+            processes.addAll(removedDuplicates);
+            ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
+                    processes);
+            process_actv.setAdapter(countryAdapter);
+        });
+
+        process_actv.setOnItemClickListener((adapterView, view, i, l) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+
+    }
+
+    private void resetFilter() {
+        acid_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
+        body_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
+        sweet_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
+
+        taste_actv.setText("");
+        country_actv.setText("");
+        process_actv.setText("");
+
+        liked_checkbox.setChecked(false);
+
+        elevation_slider.setValues(0F, 11000F);
+        filterSearch();
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Method for showing a toast-message
+     */
+    private void showToastMessage(String message){
+        Context context = getContext();
+        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * Filters the results based on current inputted filter values
      */
@@ -288,7 +340,7 @@ public class SearchListFragment extends Fragment {
 
         //TODO Create filters for process
         viewModel.setFilter(sv.getQuery().toString(), taste_actv.getText().toString(),
-                country_actv.getText().toString(), "", acidUpper, acidLower, bodyUpper,
+                country_actv.getText().toString(), process_actv.getText().toString(), acidUpper, acidLower, bodyUpper,
                 bodyLower, sweetUpper, sweetLower, minElevation, maxElevation, isLiked);
     }
 

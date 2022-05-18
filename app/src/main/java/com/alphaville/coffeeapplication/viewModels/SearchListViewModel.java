@@ -66,6 +66,16 @@ public class SearchListViewModel extends AndroidViewModel {
         return repository.getCountryList();
     }
 
+    /**
+     * Returns a LiveData object containing a list of all values in process column
+     *
+     * @return the LiveData object
+     */
+    public LiveData<List<String>> getProcessList() {
+        return repository.getProcessList();
+    }
+
+
 
 
     /**

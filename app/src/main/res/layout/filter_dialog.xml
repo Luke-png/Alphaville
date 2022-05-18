@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="200dp"
     android:layout_height="match_parent"
     android:background="#EDE0D4">
 
@@ -94,13 +94,15 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
         android:text="Filter"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -109,6 +111,8 @@
         android:layout_width="158dp"
         android:layout_height="0dp"
         android:layout_marginTop="36dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:stepSize="20.0"
         android:theme="@style/Theme.App"
         android:valueFrom="0.0"
@@ -168,5 +172,34 @@
         android:text="Liked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/country_menu" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/process_menu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:hint="Process"
+        android:paddingTop="10dp"
+        android:paddingBottom="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/elevation_slider">
+
+        <AutoCompleteTextView
+            android:id="@+id/process_actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/filter_reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/close_button"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_reset" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
