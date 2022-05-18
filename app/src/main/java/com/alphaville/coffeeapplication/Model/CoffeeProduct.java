@@ -31,14 +31,9 @@ public class CoffeeProduct
 
     /** Elevation above sea level of where the product was made. */
     private final int elevation;
-    //** The method by which the coffee bean is roasted. */
-    //private final Roast roast;
+
     /** The way this product has been processed. */
     private final String process;
-
-    ///** A list of all taste profiles that this product matches. */
-    //@TypeConverters(TasteJsonConverter.class) // converter for conversion to/from json string which is stored in db
-    //private final ArrayList<Taste> tastes;
 
     /**
      * Taste attributes, [0.0, 10.0]
@@ -49,10 +44,10 @@ public class CoffeeProduct
     private final String taste;
 
     /** Whether the user likes the coffee product. */
-    private boolean isLiked;
+    private final boolean isLiked;
 
     public CoffeeProduct(String name, String country, int elevation, String process, float acidity,
-                         float body, float sweetness, String taste){
+                         float body, float sweetness, String taste, boolean isLiked){
         this.name = name;
         this.country = country;
         this.elevation = elevation;
@@ -62,7 +57,7 @@ public class CoffeeProduct
         this.sweetness = sweetness;
         this.taste = taste;
 
-        this.isLiked = false;
+        this.isLiked = isLiked;
     }
 
     // Getters ------------
@@ -97,20 +92,19 @@ public class CoffeeProduct
         this.id = id;
     }
 
-    public void setLiked(boolean liked){this.isLiked=liked;}
-
     @NonNull
     @Override
     public String toString(){
 
-        return "name: " + name + " | " +
-                "country: " + country + " | " +
-                "elevation: " + elevation + " | " +
-                "process: " + process + " | " +
-                "acidity: " + acidity + " | " +
-                "body: " + body + " | " +
-                "sweetness: " + sweetness + " | " +
-                "liked: " + isLiked;
+        return name + " | " +
+                country + " | " +
+                elevation + " | " +
+                process + " | " +
+                acidity + " | " +
+                body + " | " +
+                sweetness + " | " +
+                taste + " | " +
+                isLiked;
     }
 
     public String getTaste() {
