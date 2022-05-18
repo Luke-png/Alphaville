@@ -45,7 +45,7 @@ public class HistoryFragment extends Fragment {
         View view = binding.getRoot();
         fcv = binding.fragmentContainerView2;
         fcv.setVisibility(View.INVISIBLE);
-        model = new ViewModelProvider(this).get(HistoryTabViewModel.class);
+        model = new ViewModelProvider(getActivity()).get(HistoryTabViewModel.class);
 
         itemPressed();
         setItemSpacing(15);

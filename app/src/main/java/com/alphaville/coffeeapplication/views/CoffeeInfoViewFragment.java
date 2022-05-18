@@ -87,7 +87,7 @@ public class CoffeeInfoViewFragment extends Fragment{
             // todo change to real attributes
             setCoffeeInformation(selected.getName());
             setCoffeeAttributes(selected.getElevation()+"", selected.getTaste(), selected.getCountry(), selected.getProcess());
-            setTasteClockImage(selected.getSweetness(), selected.getAcidity(), selected.getBody());
+            setTasteClockImages(selected.getSweetness(), selected.getAcidity(), selected.getBody());
         }
         //setCoffeePicture(image);
         //setClockTexts(firstClockText, secondClockText, thirdClockText);
@@ -120,23 +120,26 @@ public class CoffeeInfoViewFragment extends Fragment{
 
     }
     private void setTasteClockImages (float sweetness, float acidity, float body){
-        setTasteClockImageSpecific(sweetness, binding.imageView5);
-        setTasteClockImageSpecific(acidity, binding.imageView6);
-        setTasteClockImageSpecific(body, binding.imageView4);
+        setTasteClockImageSpecific(sweetness, binding.imageView5, 0, 100);
+        setTasteClockImageSpecific(acidity, binding.imageView6, 0, 10);
+        setTasteClockImageSpecific(body, binding.imageView4, 0, 10);
 
     }
-    private void setTasteClockImageSpecific (float value, ImageView image){
-        if(value<10){image.setImageResource(R.drawable.taste_clock0);}
+    public static void setTasteClockImageSpecific (float value, ImageView image, int min, int max){
 
-        if(value>=10 && value <= 30){image.setImageResource(R.drawable.taste_clock20);}
+        double delta = (max-min)/10;
 
-        if(value > 30 && value <= 50){image.setImageResource(R.drawable.taste_clock40);}
+        if(value<delta){image.setImageResource(R.drawable.taste_clock0);}
 
-        if(value > 50 && value <= 70){image.setImageResource(R.drawable.taste_clock60);}
+        if(value>=delta && value <= 3*delta){image.setImageResource(R.drawable.taste_clock20);}
 
-        if(value > 70 && value <= 90){image.setImageResource(R.drawable.taste_clock80);}
+        if(value > 3*delta && value <= 5*delta){image.setImageResource(R.drawable.taste_clock40);}
 
-        if(value > 90){image.setImageResource(R.drawable.taste_clock100);}
+        if(value > 5*delta && value <= 7*delta){image.setImageResource(R.drawable.taste_clock60);}
+
+        if(value > 7*delta && value <= 9*delta){image.setImageResource(R.drawable.taste_clock80);}
+
+        if(value > 9*delta){image.setImageResource(R.drawable.taste_clock100);}
 
     }
 
