@@ -127,6 +127,8 @@ public class CoffeeInfoViewFragment extends Fragment{
     }
     public static void setTasteClockImageSpecific (float value, ImageView image, int min, int max){
 
+        if(image == null){return;}
+
         double delta = (max-min)/10;
 
         if(value<delta){image.setImageResource(R.drawable.taste_clock0);}

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.viewModels.HistoryTabViewModel;
+import com.alphaville.coffeeapplication.views.CoffeeInfoViewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,26 +90,32 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
         private final TextView name;
         private final TextView country;
         private final TextView process;
-        //private final TextView attr1;
-        //private final TextView attr2;
-        //private final TextView attr3;
+        private final TextView sweetness;
+        private final TextView acidity;
+        private final TextView body;
         private final TextView reviewDate;
         private final TextView drinktype; //Something like "cappuccino"
         //private final ImageView image;
         private final RatingBar rating;
+        private final ImageView sweetnessClock;
+        private final ImageView acidityClock;
+        private final ImageView bodyClock;
 
         public ReviewCardViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.review_cp_product_name);
             country = itemView.findViewById(R.id.review_cp_country);
             process = itemView.findViewById(R.id.review_cp_process);
-            //attr1 = itemView.findViewById(R.id.review_cp_att1);
-            //attr2 = itemView.findViewById(R.id.review_cp_att2);
-            //attr3 = itemView.findViewById(R.id.review_cp_att3);
+            sweetness = itemView.findViewById(R.id.review_cp_att1);
+            acidity = itemView.findViewById(R.id.review_cp_att2);
+            body = itemView.findViewById(R.id.review_cp_att3);
             reviewDate = itemView.findViewById(R.id.review_date);
             drinktype = itemView.findViewById(R.id.review_desc);
             //image = itemView.findViewById(R.id.review_image);
             rating = itemView.findViewById(R.id.review_rating);
+            sweetnessClock = itemView.findViewById(R.id.review_cp_clock1);
+            acidityClock = itemView.findViewById(R.id.review_cp_clock2);
+            bodyClock = itemView.findViewById(R.id.review_cp_clock3);
 
         }
 
@@ -120,6 +128,13 @@ public class HistoryResultAdapter extends RecyclerView.Adapter<HistoryResultAdap
             drinktype.setText("Review for " + item.getDrinkCategory());
             //image.setImageIcon(item.getCoffeeProduct().getImage());
             rating.setRating((float) item.getRating());
+            sweetness.setText("Sweetness");
+            acidity.setText("Acidity");
+            body.setText("Body");
+
+            CoffeeInfoViewFragment.setTasteClockImageSpecific(item.getCoffeeProduct().getSweetness(), sweetnessClock, 0, 100);
+            CoffeeInfoViewFragment.setTasteClockImageSpecific(item.getCoffeeProduct().getAcidity(), acidityClock, 0, 10);
+            CoffeeInfoViewFragment.setTasteClockImageSpecific(item.getCoffeeProduct().getBody(), bodyClock, 0, 10);
 
         }
     }
