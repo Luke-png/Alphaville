@@ -22,6 +22,7 @@ public class RecTabViewModel extends AndroidViewModel {
     private LiveData<List<CoffeeProduct>> filteredList;
     private CoffeeProductRepository repository;
     private LiveData<List<CoffeeProduct>> rankedList;
+    private List<CoffeeProduct> x;
 
 
     public RecTabViewModel(@NonNull Application application) {
@@ -35,10 +36,7 @@ public class RecTabViewModel extends AndroidViewModel {
      * skicka filterList till Matcher och få rankedList
      */
     public LiveData<List<CoffeeProduct>> getRankedList(){
-        return filteredList;
-    }
-
-    public LiveData<List<CoffeeProduct>> getFilteredList() {
+        x = filteredList.getValue();
         return filteredList;
     }
 
