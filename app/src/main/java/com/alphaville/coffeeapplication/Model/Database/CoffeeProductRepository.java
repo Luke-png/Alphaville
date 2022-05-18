@@ -58,7 +58,11 @@ public class CoffeeProductRepository {
         return allProducts;
     }
 
-
+    /**
+     *
+     * @param input object which contains all the filters
+     * @return
+     */
     public LiveData<List<CoffeeProduct>> filter(SearchListViewModel.Filter input) {
         float acidityRoof, acidityFloor, bodyRoof, bodyFloor, sweetnessRoof, sweetnessFloor;
         String name = input.getString();
@@ -82,6 +86,11 @@ public class CoffeeProductRepository {
                 taste, country, isLiked, minElevation, maxElevation, process);
     }
 
+    /**
+     * Calculates lower bound, will probably be replaced
+     * @param i
+     * @return
+     */
     private float lowerBounds(int i) {
         switch (i) {
             case 0:

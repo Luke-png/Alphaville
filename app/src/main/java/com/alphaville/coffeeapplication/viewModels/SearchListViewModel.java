@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
-
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.Model.CoffeeSearcher;
 import com.alphaville.coffeeapplication.Model.Database.CoffeeProductRepository;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Denna viewmodel borde användas av både searchlistan & searchbaren/filter
-// Om problem: ta tillbaka ViewModelEngine
+
 public class SearchListViewModel extends AndroidViewModel {
 
     private final MutableLiveData<CoffeeProduct> selected = new MutableLiveData<CoffeeProduct>();
@@ -65,6 +64,10 @@ public class SearchListViewModel extends AndroidViewModel {
         return selected;
     }
 
+    /**
+     * Filter class
+     * Contains all the nessecary properties to filter
+     */
     public class Filter {
         private String string, taste, country, process;
         // klockor, 0, 1, 2, 3, 4, 5
@@ -72,7 +75,8 @@ public class SearchListViewModel extends AndroidViewModel {
                 sweetnessUpper, sweetnessLower, minElevation, maxElevation;
         private boolean isLiked;
 
-        public Filter(String string, String taste, String country, String process,
+        // Constructor
+                public Filter(String string, String taste, String country, String process,
                       int acidityUpper, int acidityLower, int bodyUpper, int bodyLower,
                       int sweetnessUpper, int sweetnessLower, int minElevation, int maxElevation,
                       boolean isLiked) {
