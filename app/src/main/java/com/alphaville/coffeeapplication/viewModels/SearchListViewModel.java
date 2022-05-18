@@ -44,6 +44,10 @@ public class SearchListViewModel extends AndroidViewModel {
         });
     }
 
+    public CoffeeProductRepository getRepository() {
+        return repository;
+    }
+
     public LiveData<List<CoffeeProduct>> getFilteredList() {
         return filteredList;
     }

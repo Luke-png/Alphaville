@@ -72,7 +72,9 @@ public class CoffeeInfoViewFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 CoffeeProduct selected = viewModel.getSelected().getValue();
-                selected.setLiked(binding.likeBtn.isChecked());
+                System.out.println(selected.getCountry());
+                CoffeeProduct updCoffeeProduct = new CoffeeProduct(selected, binding.likeBtn.isChecked());
+                viewModel.getRepository().update(updCoffeeProduct);
             }
         });
 
@@ -95,7 +97,7 @@ public class CoffeeInfoViewFragment extends Fragment{
         binding.likeBtn.setChecked(liked);
     }
 
-    private void setCoffeeInformation(String name, String info, String description){
+    private void setCoffeeInformation(String name){
         binding.coffeenameText.setText(name);
         binding.infoText.setText("infotext");
         binding.descriptionText.setText("description");
