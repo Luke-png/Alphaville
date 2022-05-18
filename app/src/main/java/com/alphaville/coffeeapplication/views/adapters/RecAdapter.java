@@ -45,7 +45,7 @@ public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
             listitemView = LayoutInflater.from(getContext()).inflate(layout, viewGroup, false);
         }
 
-        gridCard = getItem(position);
+        coffeeProduct = getItem(position);
         setupGridCard(listitemView);
         TextView cardName = listitemView.findViewById(R.id.gridCardText);
 
