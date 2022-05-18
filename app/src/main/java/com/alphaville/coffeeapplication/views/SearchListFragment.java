@@ -49,8 +49,8 @@ public class SearchListFragment extends Fragment {
 
     private CheckBox liked_checkbox;
 
-    // Makes thumbvalues between 0-10
-    private int valueDenominator = 10;
+    private RangeSlider elevation_slider;
+
 
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 
@@ -125,19 +125,20 @@ public class SearchListFragment extends Fragment {
     private void initFilterDialog() {
         ImageButton close_button = filterDialog.findViewById(R.id.close_button);
         close_button.setOnClickListener(view -> filterDialog.dismiss());
-        initSliders();
+        initTasteSliders();
         initTasteDropDown();
         initCountryDropDown();
         initIsLikedCheckbox();
+        initElevationSlider();
     }
 
     /**
      * Initiates sliders for acidity, body and sweetness
      */
-    private void initSliders() {
+    private void initTasteSliders() {
         float valueFrom = 0.0F;
-        float valueTo = 100.0F;
-        float stepSize = 10.0F;
+        float valueTo = 10.0F;
+        float stepSize = 1.0F;
 
         acid_slider = filterDialog.findViewById(R.id.acid_slider);
         body_slider = filterDialog.findViewById(R.id.body_slider);
@@ -148,26 +149,29 @@ public class SearchListFragment extends Fragment {
         acid_slider.setValueFrom(valueFrom);
         acid_slider.setValueTo(valueTo);
         acid_slider.setStepSize(stepSize);
+        acid_slider.setValues(0.0F, 10.0F);
 
         //Init body slider
         body_slider.setValueFrom(valueFrom);
         body_slider.setValueTo(valueTo);
         body_slider.setStepSize(stepSize);
+        body_slider.setValues(0.0F, 10.0F);
 
         //Init sweet slider
         sweet_slider.setValueFrom(valueFrom);
         sweet_slider.setValueTo(valueTo);
         sweet_slider.setStepSize(stepSize);
+        sweet_slider.setValues(0.0F, 10.0F);
 
 
         //Changes label of slider value to match 0-5
-        acid_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
+        acid_slider.setLabelFormatter(value -> String.valueOf(value));
 
         //Changes label of slider value to match 0-5
-        body_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
+        body_slider.setLabelFormatter(value -> String.valueOf(value));
 
         //Changes label of slider value to match 0-5
-        sweet_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
+        sweet_slider.setLabelFormatter(value -> String.valueOf(value));
 
         //Acidity listener
         acid_slider.addOnChangeListener((slider, value, fromUser) -> {
@@ -237,13 +241,32 @@ public class SearchListFragment extends Fragment {
     private void initIsLikedCheckbox() {
         liked_checkbox = filterDialog.findViewById(R.id.liked_checkbox);
 
-        liked_checkbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filterSearch();
-                adapter.notifyDataSetChanged();
-            }
+        liked_checkbox.setOnClickListener(view -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
         });
+    }
+
+    /**
+     * Initiates elevation slider for filtering
+     */
+    private void initElevationSlider() {
+        elevation_slider = filterDialog.findViewById(R.id.elevation_slider);
+
+        int maxElevation = 11000; // This misses elevations of  190164, 190164, 110000 in database,
+        // but they incorrect freak values
+        float stepSize = 100.0F;
+        elevation_slider.setValueFrom(0);
+        elevation_slider.setValueTo(maxElevation);
+        elevation_slider.setValues(0F, (float) maxElevation);
+        elevation_slider.setStepSize(stepSize);
+
+
+        elevation_slider.addOnChangeListener((slider, value, fromUser) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+
     }
 
     /**
@@ -251,15 +274,15 @@ public class SearchListFragment extends Fragment {
      */
     private void filterSearch() {
 
-        int acidLower = (int) (float) Collections.min(acid_slider.getValues()) / valueDenominator;
-        int acidUpper = (int) (float) Collections.max(acid_slider.getValues()) / valueDenominator;
-        int bodyLower = (int) (float) Collections.min(body_slider.getValues()) / valueDenominator;
-        int bodyUpper = (int) (float) Collections.max(body_slider.getValues()) / valueDenominator;
-        int sweetLower = (int) (float) Collections.min(sweet_slider.getValues()) / valueDenominator;
-        int sweetUpper = (int) (float) Collections.max(sweet_slider.getValues()) / valueDenominator;
+        int acidLower = (int) (float) Collections.min(acid_slider.getValues());
+        int acidUpper = (int) (float) Collections.max(acid_slider.getValues());
+        int bodyLower = (int) (float) Collections.min(body_slider.getValues());
+        int bodyUpper = (int) (float) Collections.max(body_slider.getValues());
+        int sweetLower = (int) (float) Collections.min(sweet_slider.getValues());
+        int sweetUpper = (int) (float) Collections.max(sweet_slider.getValues());
 
-        int minElevation = 0;
-        int maxElevation = 10000;
+        int minElevation = (int) (float) Collections.min(elevation_slider.getValues());
+        int maxElevation = (int) (float) Collections.max(elevation_slider.getValues());
 
         boolean isLiked = liked_checkbox.isChecked();
 

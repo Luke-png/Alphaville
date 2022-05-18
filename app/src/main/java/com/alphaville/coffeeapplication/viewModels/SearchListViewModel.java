@@ -67,6 +67,7 @@ public class SearchListViewModel extends AndroidViewModel {
     }
 
 
+
     /**
      * Sets the values for MutableLiveData object for filtering
      *
