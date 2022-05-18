@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
@@ -85,6 +87,7 @@ public class CoffeeInfoViewFragment extends Fragment{
             // todo change to real attributes
             setCoffeeInformation(selected.getName());
             setCoffeeAttributes(selected.getElevation()+"", selected.getTaste(), selected.getCountry(), selected.getProcess());
+            setTasteClockImages(selected.getSweetness(), selected.getAcidity(), selected.getBody());
         }
         //setCoffeePicture(image);
         //setClockTexts(firstClockText, secondClockText, thirdClockText);
@@ -116,6 +119,32 @@ public class CoffeeInfoViewFragment extends Fragment{
         binding.clock2Text.setText(third);
 
     }
+    private void setTasteClockImages (float sweetness, float acidity, float body){
+        setTasteClockImageSpecific(sweetness, binding.imageView5, 0, 100);
+        setTasteClockImageSpecific(acidity, binding.imageView6, 0, 10);
+        setTasteClockImageSpecific(body, binding.imageView4, 0, 10);
+
+    }
+    public static void setTasteClockImageSpecific (float value, ImageView image, int min, int max){
+
+        if(image == null){return;}
+
+        double delta = (max-min)/10;
+
+        if(value<delta){image.setImageResource(R.drawable.taste_clock0);}
+
+        if(value>=delta && value <= 3*delta){image.setImageResource(R.drawable.taste_clock20);}
+
+        if(value > 3*delta && value <= 5*delta){image.setImageResource(R.drawable.taste_clock40);}
+
+        if(value > 5*delta && value <= 7*delta){image.setImageResource(R.drawable.taste_clock60);}
+
+        if(value > 7*delta && value <= 9*delta){image.setImageResource(R.drawable.taste_clock80);}
+
+        if(value > 9*delta){image.setImageResource(R.drawable.taste_clock100);}
+
+    }
+
     private void openReviewPage(){
         try {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#EDE0D4">
+
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/body_slider"
+        android:theme="@style/Theme.App"
+        android:layout_width="158dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:valueFrom="0.0"
+        android:valueTo="100.0"
+        android:stepSize="20.0"
+        app:values="@array/initial_slider_values"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acid_slider" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body"
+        app:layout_constraintBottom_toTopOf="@+id/body_slider"
+        app:layout_constraintStart_toStartOf="@+id/body_slider" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sweetness"
+        app:layout_constraintBottom_toTopOf="@+id/sweet_slider"
+        app:layout_constraintStart_toStartOf="@+id/sweet_slider" />
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/sweet_slider"
+        android:theme="@style/Theme.App"
+        android:layout_width="158dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:stepSize="20.0"
+        android:valueFrom="0.0"
+        android:valueTo="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/body_slider"
+        app:values="@array/initial_slider_values" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/acid_slider"
+        android:layout_width="158dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="36dp"
+        android:stepSize="20.0"
+        android:theme="@style/Theme.App"
+        android:valueFrom="0.0"
+        android:valueTo="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:values="@array/initial_slider_values" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acidity"
+        app:layout_constraintBottom_toTopOf="@+id/acid_slider"
+        app:layout_constraintStart_toStartOf="@+id/acid_slider" />
+</androidx.constraintlayout.widget.ConstraintLayout>
