@@ -1,38 +1,36 @@
 package com.alphaville.coffeeapplication.views;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.SearchView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.SearchView;
-import android.widget.SeekBar;
-
-import com.google.android.material.slider.LabelFormatter;
-import com.google.android.material.slider.RangeSlider;
-
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
-import com.alphaville.coffeeapplication.Model.enums.Roast;
-import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
-import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
 import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
+import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
+import com.google.android.material.slider.RangeSlider;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SearchListFragment extends Fragment {
 
@@ -47,9 +45,19 @@ public class SearchListFragment extends Fragment {
     private RangeSlider acid_slider;
     private RangeSlider body_slider;
     private RangeSlider sweet_slider;
+    private float tasteSliderValueFrom = 0.0F;
+    private float tasteSliderValueTo = 10.0F;
+    private float tasteSliderStepSize = 1.0F;
 
-    // Makes thumbvalues between 0-10
-    private int valueDenominator = 10;
+    private AutoCompleteTextView taste_actv;
+    private AutoCompleteTextView country_actv;
+
+    private CheckBox liked_checkbox;
+
+    private RangeSlider elevation_slider;
+
+    private AutoCompleteTextView process_actv;
+
 
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 
@@ -73,12 +81,15 @@ public class SearchListFragment extends Fragment {
         sv = v.findViewById(R.id.searchInSearchTab);
         filter_button = v.findViewById((R.id.filter_button));
 
+
         fcv.setVisibility(View.INVISIBLE);
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
         rv.setAdapter(adapter);
 
+        filterDialog = new Dialog(getActivity());
+        filterDialog.setContentView(R.layout.filter_dialog);
         initItemSpacing(15);
         initFilterDialog();
         initFilterButton();
@@ -116,16 +127,27 @@ public class SearchListFragment extends Fragment {
     }
 
     /**
-     * Initiates filter dialog by setting sliders and options
+     * Initiates filter dialog
      */
     private void initFilterDialog() {
-        filterDialog = new Dialog(getActivity());
-        filterDialog.setContentView(R.layout.filter_dialog);
+        ImageButton close_button = filterDialog.findViewById(R.id.close_button);
+        close_button.setOnClickListener(view -> filterDialog.dismiss());
 
-        //Init sliders
-        float valueFrom = 0.0F;
-        float valueTo = 100.0F;
-        float stepSize = 10.0F;
+        ImageButton filter_reset_button = filterDialog.findViewById(R.id.filter_reset_button);
+        filter_reset_button.setOnClickListener(view -> resetFilter());
+        initTasteSliders();
+        initTasteDropDown();
+        initCountryDropDown();
+        initIsLikedCheckbox();
+        initElevationSlider();
+        initProcessDropDown();
+    }
+
+    /**
+     * Initiates sliders for acidity, body and sweetness
+     */
+    private void initTasteSliders() {
+
 
         acid_slider = filterDialog.findViewById(R.id.acid_slider);
         body_slider = filterDialog.findViewById(R.id.body_slider);
@@ -133,29 +155,32 @@ public class SearchListFragment extends Fragment {
 
 
         //Init acid slider
-        acid_slider.setValueFrom(valueFrom);
-        acid_slider.setValueTo(valueTo);
-        acid_slider.setStepSize(stepSize);
+        acid_slider.setValueFrom(tasteSliderValueFrom);
+        acid_slider.setValueTo(tasteSliderValueTo);
+        acid_slider.setStepSize(tasteSliderStepSize);
+        acid_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
 
         //Init body slider
-        body_slider.setValueFrom(valueFrom);
-        body_slider.setValueTo(valueTo);
-        body_slider.setStepSize(stepSize);
+        body_slider.setValueFrom(tasteSliderValueFrom);
+        body_slider.setValueTo(tasteSliderValueTo);
+        body_slider.setStepSize(tasteSliderStepSize);
+        body_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
 
         //Init sweet slider
-        sweet_slider.setValueFrom(valueFrom);
-        sweet_slider.setValueTo(valueTo);
-        sweet_slider.setStepSize(stepSize);
+        sweet_slider.setValueFrom(tasteSliderValueFrom);
+        sweet_slider.setValueTo(tasteSliderValueTo);
+        sweet_slider.setStepSize(tasteSliderStepSize);
+        sweet_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
 
 
         //Changes label of slider value to match 0-5
-        acid_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
+        acid_slider.setLabelFormatter(value -> String.valueOf(value));
 
         //Changes label of slider value to match 0-5
-        body_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
+        body_slider.setLabelFormatter(value -> String.valueOf(value));
 
         //Changes label of slider value to match 0-5
-        sweet_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
+        sweet_slider.setLabelFormatter(value -> String.valueOf(value));
 
         //Acidity listener
         acid_slider.addOnChangeListener((slider, value, fromUser) -> {
@@ -177,26 +202,144 @@ public class SearchListFragment extends Fragment {
     }
 
     /**
+     * Initiates dropdown menu for tastes
+     */
+    private void initTasteDropDown() {
+        taste_actv = filterDialog.findViewById(R.id.taste_actv);
+
+        viewModel.getTasteList().observe(getViewLifecycleOwner(), tastes -> {
+            Set<String> removedDuplicates = new HashSet<>(tastes);
+            tastes.clear();
+            tastes.addAll(removedDuplicates);
+            ArrayAdapter<String> tasteAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
+                    tastes);
+            taste_actv.setAdapter(tasteAdapter);
+        });
+
+        taste_actv.setOnItemClickListener((adapterView, view, i, l) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+    }
+
+    /**
+     * Initiates dropdown menu for countries
+     */
+    private void initCountryDropDown() {
+        country_actv = filterDialog.findViewById(R.id.country_actv);
+
+        viewModel.getCountryList().observe(getViewLifecycleOwner(), countries -> {
+            Set<String> removedDuplicates = new HashSet<>(countries);
+            countries.clear();
+            countries.addAll(removedDuplicates);
+            ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
+                    countries);
+            country_actv.setAdapter(countryAdapter);
+        });
+
+        country_actv.setOnItemClickListener((adapterView, view, i, l) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+
+    }
+
+    /**
+     * Initiates checkbox for isLiked boolean
+     */
+    private void initIsLikedCheckbox() {
+        liked_checkbox = filterDialog.findViewById(R.id.liked_checkbox);
+
+        liked_checkbox.setOnClickListener(view -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+    }
+
+    /**
+     * Initiates elevation slider for filtering
+     */
+    private void initElevationSlider() {
+        elevation_slider = filterDialog.findViewById(R.id.elevation_slider);
+
+        int maxElevation = 11000; // This misses elevations of  190164, 190164, 110000 in database,
+        // but they incorrect freak values
+        float stepSize = 100.0F;
+        elevation_slider.setValueFrom(0);
+        elevation_slider.setValueTo(maxElevation);
+        elevation_slider.setValues(0F, (float) maxElevation);
+        elevation_slider.setStepSize(stepSize);
+
+
+        elevation_slider.addOnChangeListener((slider, value, fromUser) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+
+    }
+
+    /**
+     * Initiates dropdown menu for processes
+     */
+    private void initProcessDropDown() {
+        process_actv = filterDialog.findViewById(R.id.process_actv);
+
+        viewModel.getProcessList().observe(getViewLifecycleOwner(), processes -> {
+            Set<String> removedDuplicates = new HashSet<>(processes);
+            processes.clear();
+            processes.addAll(removedDuplicates);
+            ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(requireContext(), R.layout.filter_list_item,
+                    processes);
+            process_actv.setAdapter(countryAdapter);
+        });
+
+        process_actv.setOnItemClickListener((adapterView, view, i, l) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
+        });
+
+    }
+
+    /**
+     * Resets the filter by setting all values to defaul
+     */
+    private void resetFilter() {
+        acid_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
+        body_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
+        sweet_slider.setValues(tasteSliderValueFrom, tasteSliderValueTo);
+
+        taste_actv.setText("");
+        country_actv.setText("");
+        process_actv.setText("");
+
+        liked_checkbox.setChecked(false);
+
+        elevation_slider.setValues(0F, 11000F);
+        filterSearch();
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
      * Filters the results based on current inputted filter values
      */
     private void filterSearch() {
 
-        int acidLower = (int) (float) Collections.min(acid_slider.getValues()) / valueDenominator;
-        int acidUpper = (int) (float) Collections.max(acid_slider.getValues()) / valueDenominator;
-        int bodyLower = (int) (float) Collections.min(body_slider.getValues()) / valueDenominator;
-        int bodyUpper = (int) (float) Collections.max(body_slider.getValues()) / valueDenominator;
-        int sweetLower = (int) (float) Collections.min(sweet_slider.getValues()) / valueDenominator;
-        int sweetUpper = (int) (float) Collections.max(sweet_slider.getValues()) / valueDenominator;
+        int acidLower = (int) (float) Collections.min(acid_slider.getValues());
+        int acidUpper = (int) (float) Collections.max(acid_slider.getValues());
+        int bodyLower = (int) (float) Collections.min(body_slider.getValues());
+        int bodyUpper = (int) (float) Collections.max(body_slider.getValues());
+        int sweetLower = (int) (float) Collections.min(sweet_slider.getValues());
+        int sweetUpper = (int) (float) Collections.max(sweet_slider.getValues());
 
-        int minElevation = 0;
-        int maxElevation = 10000;
+        int minElevation = (int) (float) Collections.min(elevation_slider.getValues());
+        int maxElevation = (int) (float) Collections.max(elevation_slider.getValues());
 
-        boolean isLiked = false;
+        boolean isLiked = liked_checkbox.isChecked();
 
-        //TODO Create filters for taste, country, process, isliked, elevation.
-        viewModel.setFilter(sv.getQuery().toString(), "", "", "",
-                acidUpper, acidLower, bodyUpper, bodyLower, sweetUpper, sweetLower, minElevation, maxElevation,
-                isLiked);
+        //TODO Create filters for process
+        viewModel.setFilter(sv.getQuery().toString(), taste_actv.getText().toString(),
+                country_actv.getText().toString(), process_actv.getText().toString(), acidUpper, acidLower, bodyUpper,
+                bodyLower, sweetUpper, sweetLower, minElevation, maxElevation, isLiked);
     }
 
     /**
