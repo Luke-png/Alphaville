@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
@@ -45,6 +46,8 @@ public class SearchListFragment extends Fragment {
 
     private AutoCompleteTextView taste_actv;
     private AutoCompleteTextView country_actv;
+
+    private CheckBox liked_checkbox;
 
     // Makes thumbvalues between 0-10
     private int valueDenominator = 10;
@@ -125,6 +128,7 @@ public class SearchListFragment extends Fragment {
         initSliders();
         initTasteDropDown();
         initCountryDropDown();
+        initIsLikedCheckbox();
     }
 
     /**
@@ -228,6 +232,21 @@ public class SearchListFragment extends Fragment {
     }
 
     /**
+     * Initiates checkbox for isLiked boolean
+     */
+    private void initIsLikedCheckbox() {
+        liked_checkbox = filterDialog.findViewById(R.id.liked_checkbox);
+
+        liked_checkbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterSearch();
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    /**
      * Filters the results based on current inputted filter values
      */
     private void filterSearch() {
@@ -242,7 +261,7 @@ public class SearchListFragment extends Fragment {
         int minElevation = 0;
         int maxElevation = 10000;
 
-        boolean isLiked = false;
+        boolean isLiked = liked_checkbox.isChecked();
 
         //TODO Create filters for taste, country, process, isliked, elevation.
         viewModel.setFilter(sv.getQuery().toString(), taste_actv.getText().toString(),

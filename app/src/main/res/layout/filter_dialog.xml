@@ -13,7 +13,7 @@
         android:layout_width="158dp"
         android:layout_height="wrap_content"
         android:hint="Country"
-        android:paddingBottom="20dp"
+        android:paddingBottom="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taste_menu">
@@ -136,5 +136,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageButton>
+
+    <CheckBox
+        android:id="@+id/liked_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="5dp"
+        android:text="Liked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/country_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
