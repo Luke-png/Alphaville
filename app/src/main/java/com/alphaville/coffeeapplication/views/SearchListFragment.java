@@ -184,6 +184,7 @@ public class SearchListFragment extends Fragment {
 
         boolean isLiked = false;
 
+        //TODO Create filters for taste, country, process, isliked, elevation.
         viewModel.setFilter(sv.getQuery().toString(), "", "", "",
                 acidUpper, acidLower, bodyUpper, bodyLower, sweetUpper, sweetLower, minElevation, maxElevation,
                 isLiked);
