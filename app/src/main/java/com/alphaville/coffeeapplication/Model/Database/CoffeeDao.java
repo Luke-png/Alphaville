@@ -79,7 +79,7 @@ public interface CoffeeDao {
      *
      * @return the LiveData object
      */
-    @Query("SELECT taste AS _id FROM products")
+    @Query("SELECT taste FROM products")
     LiveData<List<String>> getTasteList();
 
 
