@@ -31,6 +31,7 @@ import com.alphaville.coffeeapplication.views.util.SpacingItemDecorator;
 import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchListFragment extends Fragment {
@@ -42,6 +43,13 @@ public class SearchListFragment extends Fragment {
     private SearchView sv;
     private ImageButton filter_button;
     private Dialog filterDialog;
+
+    private RangeSlider acid_slider;
+    private RangeSlider body_slider;
+    private RangeSlider sweet_slider;
+
+    // Makes thumbvalues between 0-10
+    private int valueDenominator = 10;
 
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
 
@@ -56,19 +64,13 @@ public class SearchListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         viewModel = new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
-        viewModel.setFilter("",0,0, 0, "", "Peru", false, 0, 10000, "");
-        viewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
-            @Override
-            public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
-                adapter.setProducts(coffeeProducts);
-            }
-        });
+        viewModel.getFilteredList().observe(getViewLifecycleOwner(), coffeeProducts -> adapter.setProducts(coffeeProducts));
 
-        View v = inflater.inflate(R.layout.search_list_fragment,container,false);
+        View v = inflater.inflate(R.layout.search_list_fragment, container, false);
 
-        rv = (RecyclerView) v.findViewById(R.id.RV_SearchList);
-        fcv = (FragmentContainerView) v.findViewById(R.id.rec_DetailView);
-        sv = (SearchView) v.findViewById(R.id.searchInSearchTab);
+        rv = v.findViewById(R.id.RV_SearchList);
+        fcv = v.findViewById(R.id.rec_DetailView);
+        sv = v.findViewById(R.id.searchInSearchTab);
         filter_button = v.findViewById((R.id.filter_button));
 
         fcv.setVisibility(View.INVISIBLE);
@@ -80,24 +82,25 @@ public class SearchListFragment extends Fragment {
         initItemSpacing(15);
         initFilterDialog();
         initFilterButton();
+        filterSearch();
 
 
-        /**
+        /*
          * Listener that should be triggered everytime the user changes anything in the search-field.
          * This is if we want continuous updates while writing.
          */
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-                viewModel.setFilter(s, 0, 0, 0, "", "Ethiopia", false, 0, 10000, "");
+                filterSearch();
                 adapter.notifyDataSetChanged();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                viewModel.setFilter(s, 0, 0, 0, "", "Ethiopia", false, 0, 10000, "");
+                filterSearch();
                 adapter.notifyDataSetChanged();
                 return true;
             }
@@ -106,26 +109,22 @@ public class SearchListFragment extends Fragment {
     }
 
     private void initFilterButton() {
-        filter_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filterDialog.show();
-            }
-        });
+        filter_button.setOnClickListener(view -> filterDialog.show());
     }
 
     private void initFilterDialog() {
         filterDialog = new Dialog(getActivity());
         filterDialog.setContentView(R.layout.filter_dialog);
-        RangeSlider acid_slider = filterDialog.findViewById(R.id.acid_slider);
-        RangeSlider body_slider = filterDialog.findViewById(R.id.body_slider);
-        RangeSlider sweet_slider = filterDialog.findViewById(R.id.sweet_slider);
 
         //Init sliders
         float valueFrom = 0.0F;
         float valueTo = 100.0F;
-        int labelDenominator = 20; //
-        float stepSize = 20.0F;
+        float stepSize = 10.0F;
+
+        acid_slider = filterDialog.findViewById(R.id.acid_slider);
+        body_slider = filterDialog.findViewById(R.id.body_slider);
+        sweet_slider = filterDialog.findViewById(R.id.sweet_slider);
+
 
         //Init acid slider
         acid_slider.setValueFrom(valueFrom);
@@ -144,59 +143,55 @@ public class SearchListFragment extends Fragment {
 
 
         //Changes label of slider value to match 0-5
-        acid_slider.setLabelFormatter(new LabelFormatter() {
-            @NonNull
-            @Override
-            public String getFormattedValue(float value) {
-                return String.valueOf(value / labelDenominator);
-            }
-        });
+        acid_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
 
         //Changes label of slider value to match 0-5
-        body_slider.setLabelFormatter(new LabelFormatter() {
-            @NonNull
-            @Override
-            public String getFormattedValue(float value) {
-                return String.valueOf(value / labelDenominator);
-            }
-        });
+        body_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
 
         //Changes label of slider value to match 0-5
-        sweet_slider.setLabelFormatter(new LabelFormatter() {
-            @NonNull
-            @Override
-            public String getFormattedValue(float value) {
-                return String.valueOf(value / labelDenominator);
-            }
-        });
+        sweet_slider.setLabelFormatter(value -> String.valueOf(value / valueDenominator));
 
         //Acidity listener
-        acid_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-
-            }
+        acid_slider.addOnChangeListener((slider, value, fromUser) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
         });
 
         //Body listener
-        body_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-
-            }
+        body_slider.addOnChangeListener((slider, value, fromUser) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
         });
 
         //Sweetness listener
-        sweet_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-
-            }
+        sweet_slider.addOnChangeListener((slider, value, fromUser) -> {
+            filterSearch();
+            adapter.notifyDataSetChanged();
         });
+    }
+
+    private void filterSearch() {
+
+        int acidLower = (int) (float) Collections.min(acid_slider.getValues()) / valueDenominator;
+        int acidUpper = (int) (float) Collections.max(acid_slider.getValues()) / valueDenominator;
+        int bodyLower = (int) (float) Collections.min(body_slider.getValues()) / valueDenominator;
+        int bodyUpper = (int) (float) Collections.max(body_slider.getValues()) / valueDenominator;
+        int sweetLower = (int) (float) Collections.min(sweet_slider.getValues()) / valueDenominator;
+        int sweetUpper = (int) (float) Collections.max(sweet_slider.getValues()) / valueDenominator;
+
+        int minElevation = 0;
+        int maxElevation = 10000;
+
+        boolean isLiked = false;
+
+        viewModel.setFilter(sv.getQuery().toString(), "", "", "",
+                acidUpper, acidLower, bodyUpper, bodyLower, sweetUpper, sweetLower, minElevation, maxElevation,
+                isLiked);
     }
 
     /**
      * Adds some distance between the items in a RecyclerView
+     *
      * @param spacing amount of spacing
      */
     private void initItemSpacing(int spacing) {

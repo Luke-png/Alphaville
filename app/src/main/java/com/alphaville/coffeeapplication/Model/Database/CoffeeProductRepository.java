@@ -69,14 +69,14 @@ public class CoffeeProductRepository {
         int maxElevation = input.getMaxElevation();
         String process = input.getProcess();
 
-        acidityFloor = lowerBounds(input.getAcidity());
-        acidityRoof = upperBounds(input.getAcidity());
+        acidityFloor = input.getAcidityLower();
+        acidityRoof = input.getAcidityUpper();
 
-        bodyFloor = lowerBounds(input.getBody());
-        bodyRoof = upperBounds(input.getBody());
+        bodyFloor = input.getBodyLower();
+        bodyRoof = input.getBodyUpper();
 
-        sweetnessFloor = lowerBounds(input.getSweetness());
-        sweetnessRoof = upperBounds(input.getSweetness());
+        sweetnessFloor = input.getSweetnessLower();
+        sweetnessRoof = input.getSweetnessUpper();
 
         return coffeeDao.filter(name, acidityRoof, acidityFloor, bodyRoof, bodyFloor, sweetnessRoof, sweetnessFloor,
                 taste, country, isLiked, minElevation, maxElevation, process);
