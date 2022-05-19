@@ -43,20 +43,20 @@ public interface CoffeeDao {
     /**
      * Method to filter coffee
      *
-     * @param name
-     * @param acidityRoof
-     * @param acidityFloor
-     * @param bodyRoof
-     * @param bodyFloor
-     * @param sweetnessRoof
-     * @param sweetnessFloor
-     * @param taste
-     * @param country
-     * @param isLiked
-     * @param minElevation
-     * @param maxElevation
-     * @param process
-     * @return
+     * @param name the searched name
+     * @param acidityRoof the upper bound for acidity
+     * @param acidityFloor the lower bound for acidity
+     * @param bodyRoof the upper bound for body
+     * @param bodyFloor the lower bound for body
+     * @param sweetnessRoof the upper bound for sweetness
+     * @param sweetnessFloor the lower bound for sweetness
+     * @param taste the filtered taste
+     * @param country the filtered country
+     * @param isLiked if true, return only liked products. If false, return all regardless of like status
+     * @param minElevation the lower bound for elevation
+     * @param maxElevation the upper bound for elevation
+     * @param process the filtered process
+     * @return a livedata object containing coffee products matching filter
      */
     @Query("SELECT * FROM products WHERE name LIKE '%' || :name || '%' " +
             "AND acidity >= :acidityFloor AND acidity <= :acidityRoof " +
