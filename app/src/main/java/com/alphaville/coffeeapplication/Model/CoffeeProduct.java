@@ -67,6 +67,7 @@ public class CoffeeProduct
      * @param isLiked the new boolean value for the product.
      */
     public CoffeeProduct(CoffeeProduct object, Boolean isLiked){
+        this.id = object.getId();
         this.name = object.getName();
         this.country = object.getCountry();
         this.elevation = object.getElevation();

@@ -72,7 +72,6 @@ public class CoffeeInfoViewFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 CoffeeProduct selected = viewModel.getSelected().getValue();
-                System.out.println(selected.getCountry());
                 CoffeeProduct updCoffeeProduct = new CoffeeProduct(selected, binding.likeBtn.isChecked());
                 viewModel.getRepository().update(updCoffeeProduct);
             }
