@@ -64,7 +64,7 @@ public interface CoffeeDao {
             "AND sweetness >= :sweetnessFloor AND sweetness <= :sweetnessRoof " +
             "AND Taste = CASE WHEN :taste = '' THEN Taste ELSE :taste END " +
             "AND Country = CASE WHEN :country = '' THEN Country ELSE :country END " +
-            "AND isLiked = CASE WHEN :isLiked = 'false' THEN isLIked ELSE :isLiked END " +
+            "AND isLiked = CASE WHEN :isLiked = 0 THEN isLIked ELSE :isLiked END " +
             "AND elevation >= :minElevation AND elevation <= :maxElevation " +
             "AND Process = CASE WHEN :process = '' THEN Process ELSE :process END ")
     LiveData<List<CoffeeProduct>> filter(String name, float acidityRoof, float acidityFloor,
