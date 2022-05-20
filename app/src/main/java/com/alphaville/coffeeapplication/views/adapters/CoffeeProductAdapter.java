@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Database.CoffeeDao;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
@@ -57,6 +60,7 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         holder.height.setText(product.getElevation() + "");
         holder.country.setText(product.getCountry() + "");
         holder.process.setText(product.getProcess().toString() + "");
+        holder.like.setChecked(product.isLiked());
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,12 +69,22 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
                 fcv.setVisibility(View.VISIBLE);
             }
         });
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CoffeeProduct original = coffeeProducts.get(holder.getAdapterPosition());
+                CoffeeProduct updCoffeeProduct = new CoffeeProduct(original, holder.like.isChecked());
+                vm.getRepository().update(updCoffeeProduct);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return coffeeProducts.size();
     }
+
     public void setProducts(List<CoffeeProduct> products) {
         this.coffeeProducts = products;
         notifyDataSetChanged();
@@ -84,9 +98,8 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         public TextView height;
         public TextView country;
         public TextView process;
-
+        public ToggleButton like;
         public LinearLayout card;
-        public ImageButton like;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -100,9 +113,9 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
             height = (TextView) itemView.findViewById(R.id.sr_height);
             country = (TextView) itemView.findViewById(R.id.sr_country);
             process = (TextView) itemView.findViewById(R.id.sr_process);
+            like = (ToggleButton) itemView.findViewById(R.id.likeBtn3);
 
             card = (LinearLayout) itemView.findViewById(R.id.LinearItem);
-            like = (ImageButton) itemView.findViewById(R.id.sr_liked_button);
         }
     }
 }

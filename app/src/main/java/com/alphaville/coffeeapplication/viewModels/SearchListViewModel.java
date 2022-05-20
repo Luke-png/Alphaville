@@ -44,35 +44,39 @@ public class SearchListViewModel extends AndroidViewModel {
         });
     }
 
+    public CoffeeProductRepository getRepository() {
+        return repository;
+    }
+
     public LiveData<List<CoffeeProduct>> getFilteredList() {
         return filteredList;
     }
 
     /**
-     * Returns a LiveData object containing a list of all values in taste column
+     * Returns a LiveData object containing a list of distinct values in taste column
      *
      * @return the LiveData object
      */
-    public LiveData<List<String>> getTasteList() {
-        return repository.getTasteList();
+    public LiveData<List<String>> getNoDupesTasteList() {
+        return repository.getNoDupesTasteList();
     }
 
     /**
-     * Returns a LiveData object containing a list of all values in country column
+     * Returns a LiveData object containing a list of distinct values in country column
      *
      * @return the LiveData object
      */
-    public LiveData<List<String>> getCountryList() {
-        return repository.getCountryList();
+    public LiveData<List<String>> getNoDupesCountryList() {
+        return repository.getNoDupesCountryList();
     }
 
     /**
-     * Returns a LiveData object containing a list of all values in process column
+     * Returns a LiveData object containing a list of distinct values in process column
      *
      * @return the LiveData object
      */
-    public LiveData<List<String>> getProcessList() {
-        return repository.getProcessList();
+    public LiveData<List<String>> getNoDupesProcessList() {
+        return repository.getNoDupesProcessList();
     }
 
 

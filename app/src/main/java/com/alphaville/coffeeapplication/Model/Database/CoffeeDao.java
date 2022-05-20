@@ -43,20 +43,20 @@ public interface CoffeeDao {
     /**
      * Method to filter coffee
      *
-     * @param name
-     * @param acidityRoof
-     * @param acidityFloor
-     * @param bodyRoof
-     * @param bodyFloor
-     * @param sweetnessRoof
-     * @param sweetnessFloor
-     * @param taste
-     * @param country
-     * @param isLiked
-     * @param minElevation
-     * @param maxElevation
-     * @param process
-     * @return
+     * @param name the searched name
+     * @param acidityRoof the upper bound for acidity
+     * @param acidityFloor the lower bound for acidity
+     * @param bodyRoof the upper bound for body
+     * @param bodyFloor the lower bound for body
+     * @param sweetnessRoof the upper bound for sweetness
+     * @param sweetnessFloor the lower bound for sweetness
+     * @param taste the filtered taste
+     * @param country the filtered country
+     * @param isLiked if true, return only liked products. If false, return all regardless of like status
+     * @param minElevation the lower bound for elevation
+     * @param maxElevation the upper bound for elevation
+     * @param process the filtered process
+     * @return a livedata object containing coffee products matching filter
      */
     @Query("SELECT * FROM products WHERE name LIKE '%' || :name || '%' " +
             "AND acidity >= :acidityFloor AND acidity <= :acidityRoof " +
@@ -64,7 +64,7 @@ public interface CoffeeDao {
             "AND sweetness >= :sweetnessFloor AND sweetness <= :sweetnessRoof " +
             "AND Taste = CASE WHEN :taste = '' THEN Taste ELSE :taste END " +
             "AND Country = CASE WHEN :country = '' THEN Country ELSE :country END " +
-            "AND isLiked = :isLiked " +
+            "AND isLiked = CASE WHEN :isLiked = 0 THEN isLIked ELSE :isLiked END " +
             "AND elevation >= :minElevation AND elevation <= :maxElevation " +
             "AND Process = CASE WHEN :process = '' THEN Process ELSE :process END ")
     LiveData<List<CoffeeProduct>> filter(String name, float acidityRoof, float acidityFloor,
@@ -75,28 +75,28 @@ public interface CoffeeDao {
                                          String process);
 
     /**
-     * Returns a LiveData object containing a list of all values in taste column
+     * Returns a LiveData object containing a list of distinct values in taste column
      *
      * @return the LiveData object
      */
-    @Query("SELECT taste FROM products")
-    LiveData<List<String>> getTasteList();
+    @Query("SELECT DISTINCT taste FROM products")
+    LiveData<List<String>> getNoDupesTasteList();
 
     /**
-     * Returns a LiveData object containing a list of all values in country column
+     * Returns a LiveData object containing a list of distinct values in country column
      *
      * @return the LiveData object
      */
-    @Query("SELECT country FROM products")
-    LiveData<List<String>> getCountryList();
+    @Query("SELECT DISTINCT country FROM products")
+    LiveData<List<String>> getNoDupesCountryList();
 
     /**
-     * Returns a LiveData object containing a list of all values in process column
+     * Returns a LiveData object containing a list of distinct values in process column
      *
      * @return the LiveData object
      */
-    @Query("SELECT process FROM products")
-    LiveData<List<String>> getProcessList();
+    @Query("SELECT DISTINCT process FROM products")
+    LiveData<List<String>> getNoDupesProcessList();
 
 
 }
