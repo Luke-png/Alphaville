@@ -78,6 +78,13 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
                 vm.getRepository().update(updCoffeeProduct);
             }
         });
+
+        fcv.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fcv.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     @Override

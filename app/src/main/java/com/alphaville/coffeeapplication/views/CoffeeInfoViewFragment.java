@@ -108,6 +108,7 @@ public class CoffeeInfoViewFragment extends Fragment{
         binding.flavourText.setText(flavour);
         binding.countryText.setText(country);
         binding.processText.setText(process);
+        binding.likeBtn.setChecked(viewModel.getSelected().getValue().isLiked());
     }
 
     //Don't know which setImage-method to use here
