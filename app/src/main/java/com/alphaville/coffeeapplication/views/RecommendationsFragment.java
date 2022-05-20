@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.FragmentRecommendationsBinding;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
@@ -52,7 +53,6 @@ public class RecommendationsFragment extends Fragment {
         shadow.setVisibility(View.INVISIBLE);
 
         viewModel.getRankedList().observe(getViewLifecycleOwner(), coffeeProducts -> setUpAdapter(new ArrayList<>(coffeeProducts)));
-
         viewModel.getRankedList().observe(getViewLifecycleOwner(), new Observer<List<CoffeeProduct>>() {
             @Override
             public void onChanged(@Nullable List<CoffeeProduct> coffeeProducts) {
