@@ -3,7 +3,10 @@
     android:id="@+id/LinearItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#E6CCB2"
+    >
+
 
     <ImageView
         android:id="@+id/sr_image"
@@ -28,7 +31,9 @@
             android:fontFamily="sans-serif"
             android:text="Example coffee product title"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="#DDB892"
+            />
 
         <TextView
             android:id="@+id/sr_match"
@@ -83,7 +88,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="5dp"
-        android:background="#FFFFFFFF"
+        android:background="#E6CCB2"
         android:padding="3dp"
         android:scaleType="centerCrop"
         android:src="@drawable/empty_heart" />

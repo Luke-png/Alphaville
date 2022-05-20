@@ -326,8 +326,7 @@ public class SearchListFragment extends Fragment {
         int maxElevation = (int) (float) Collections.max(elevation_slider.getValues());
 
         boolean isLiked = liked_checkbox.isChecked();
-
-        //TODO Create filters for process
+        
         viewModel.setFilter(sv.getQuery().toString(), taste_actv.getText().toString(),
                 country_actv.getText().toString(), process_actv.getText().toString(), acidUpper, acidLower, bodyUpper,
                 bodyLower, sweetUpper, sweetLower, minElevation, maxElevation, isLiked);
