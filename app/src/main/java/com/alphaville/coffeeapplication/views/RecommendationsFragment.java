@@ -33,7 +33,7 @@ public class RecommendationsFragment extends Fragment {
     private RecTabViewModel viewModel;
     private FragmentContainerView recDetail;
     private View shadow;
-
+    private SearchListViewModel searchListViewModel;
 
     @Nullable
     @Override
@@ -45,8 +45,7 @@ public class RecommendationsFragment extends Fragment {
         View view = binding.getRoot();
 
         viewModel = new ViewModelProvider(getActivity()).get(RecTabViewModel.class);
-
-
+        searchListViewModel = new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
         recDetail = (FragmentContainerView) view.findViewById(R.id.rec_DetailView);
         recDetail.setVisibility(View.INVISIBLE);
         shadow = view.findViewById(R.id.shadowLayer);
@@ -81,8 +80,8 @@ public class RecommendationsFragment extends Fragment {
         /**
          * Creates the adepter with the appropriate data
          */
-        adapterWeek = new RecAdapter(getActivity(),fillWeek(coffeeProducts),R.layout.rec_card, recDetail,shadow,true, viewModel);
-        adapterDay = new RecAdapter(getActivity(),fillDay(coffeeProducts),R.layout.dagens, recDetail,shadow,false, viewModel);
+        adapterWeek = new RecAdapter(getActivity(),fillWeek(coffeeProducts),R.layout.rec_card, recDetail,shadow,true, viewModel,searchListViewModel);
+        adapterDay = new RecAdapter(getActivity(),fillDay(coffeeProducts),R.layout.dagens, recDetail,shadow,false, viewModel,searchListViewModel);
 
         /**
          * Binds recGrid with the adepter
@@ -101,8 +100,6 @@ public class RecommendationsFragment extends Fragment {
 
     private ArrayList<CoffeeProduct> fillDay(ArrayList<CoffeeProduct> coffeeProducts){
         ArrayList<CoffeeProduct> coffee = new ArrayList<>(coffeeProducts);
-
         return coffee;
     }
-
 }
