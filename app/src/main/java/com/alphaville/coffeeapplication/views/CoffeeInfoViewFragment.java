@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.databinding.CoffeeInfoViewFragmentBinding;
@@ -36,14 +38,15 @@ public class CoffeeInfoViewFragment extends Fragment{
                               Bundle savedInstanceState) {
         binding = CoffeeInfoViewFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        viewModel= new ViewModelProvider(requireActivity()).get(SearchListViewModel.class);
+        viewModel= new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
 
-         /*
-         setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
-         setCoffeeInformation(name, info, description);
-         setCoffeePicture(image);
-         setClockTexts(firstClockText, secondClockText, thirdClockText);
-         */
+        /*
+        setCoffeeAttributes(hight, flavour, country, region, process, rostery, brand);
+        setCoffeeInformation(name, info, description);
+        setCoffeePicture(image);
+        setClockTexts(firstClockText, secondClockText, thirdClockText);
+        initLikeButton(viewModel.getSelected().getValue().isLiked());
+        */
 
         /*
          * Observer
@@ -64,45 +67,48 @@ public class CoffeeInfoViewFragment extends Fragment{
                 openReviewPage();
             }
         });
-        return view;
 
-/*
-        //listener for the heart button (the boolean value in model needs to reverse)
         binding.likeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                model.changeLikeStatus(binding.likeBtn.isChecked());
+                CoffeeProduct selected = viewModel.getSelected().getValue();
+                CoffeeProduct updCoffeeProduct = new CoffeeProduct(selected, binding.likeBtn.isChecked());
+                viewModel.getRepository().update(updCoffeeProduct);
             }
         });
-        */
-    }
 
+        return view;
+    }
 
     public void rebuildCoffeeInfo(){
         CoffeeProduct selected = viewModel.getSelected().getValue();
         if (selected!=null) {
-            setCoffeeAttributes(selected.getElevation() + "", selected.getTastes().toString(), selected.getCountry(), "region", selected.getProcess().toString(), selected.getRoast().toString(), "brand");
-            setCoffeeInformation(selected.getName(), "Our special mixture", selected.getDescription());
+            // todo change to real attributes
+            setCoffeeInformation(selected.getName());
+            setCoffeeAttributes(selected.getElevation()+"", selected.getTaste(), selected.getCountry(), selected.getProcess());
+            setTasteClockImages(selected.getSweetness(), selected.getAcidity(), selected.getBody());
         }
         //setCoffeePicture(image);
         //setClockTexts(firstClockText, secondClockText, thirdClockText);
     }
 
-    private void setCoffeeInformation(String name, String info, String description){
-        binding.coffeenameText.setText(name);
-        binding.infoText.setText(info);
-        binding.descriptionText.setText(description);
+    private void initLikeButton(boolean liked) {
+        binding.likeBtn.setChecked(liked);
     }
 
-    private void setCoffeeAttributes(String hight, String flavour, String country, String region,
-                                     String process, String rostery, String brand){
+    private void setCoffeeInformation(String name){
+        binding.coffeenameText.setText(name);
+        binding.infoText.setText("infotext");
+        binding.descriptionText.setText("description");
+    }
+
+    private void setCoffeeAttributes(String hight, String flavour, String country,
+                                     String process){
         binding.hightText.setText(hight);
         binding.flavourText.setText(flavour);
         binding.countryText.setText(country);
-        binding.regionText.setText(region);
         binding.processText.setText(process);
-        binding.rosteryText.setText(rostery);
-        binding.brandText.setText(brand);
+        binding.likeBtn.setChecked(viewModel.getSelected().getValue().isLiked());
     }
 
     //Don't know which setImage-method to use here
@@ -117,6 +123,32 @@ public class CoffeeInfoViewFragment extends Fragment{
         binding.clock2Text.setText(third);
 
     }
+    private void setTasteClockImages (float sweetness, float acidity, float body){
+        setTasteClockImageSpecific(sweetness, binding.imageView5, 0, 100);
+        setTasteClockImageSpecific(acidity, binding.imageView6, 0, 10);
+        setTasteClockImageSpecific(body, binding.imageView4, 0, 10);
+
+    }
+    public static void setTasteClockImageSpecific (float value, ImageView image, int min, int max){
+
+        if(image == null){return;}
+
+        double delta = (max-min)/10;
+
+        if(value<delta){image.setImageResource(R.drawable.taste_clock0);}
+
+        if(value>=delta && value <= 3*delta){image.setImageResource(R.drawable.taste_clock20);}
+
+        if(value > 3*delta && value <= 5*delta){image.setImageResource(R.drawable.taste_clock40);}
+
+        if(value > 5*delta && value <= 7*delta){image.setImageResource(R.drawable.taste_clock60);}
+
+        if(value > 7*delta && value <= 9*delta){image.setImageResource(R.drawable.taste_clock80);}
+
+        if(value > 9*delta){image.setImageResource(R.drawable.taste_clock100);}
+
+    }
+
     private void openReviewPage(){
         try {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

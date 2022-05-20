@@ -47,16 +47,16 @@ public class CoffeeSearcher {
                 if (!(p.getElevation() >= minElevation && p.getElevation() <= maxElevation)) itemsToRemove.add(p);
             }
 
-            if (roasts != null) {
-                if (!(roasts.contains(p.getRoast()))) itemsToRemove.add(p);
-            }
+            //if (roasts != null) {
+            //    if (!(roasts.contains(p.getRoast()))) itemsToRemove.add(p);
+            //}
 
             if (processes != null) {
                 if (!(processes.contains(p.getProcess()))) itemsToRemove.add(p);
             }
             // t har 2 1 (CoffeeProduct.Taste)
             // vi söker med 3, 1 (tastes)
-            if (!(tastes == null)) {
+            /*if (!(tastes == null)) {
                 int deleteP = 0;
                 for (Taste t : p.getTastes()) {
                     if(tastes.contains(t)) {
@@ -67,7 +67,7 @@ public class CoffeeSearcher {
                     }
                 }
                 if (deleteP >= p.getTastes().size()) itemsToRemove.add(p);
-            }
+            }*/
         }
 
         // Makes new list from the filter
