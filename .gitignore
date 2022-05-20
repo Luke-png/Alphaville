@@ -8,6 +8,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/schemas/com.alphaville.coffeeapplication.Model.CoffeeDatabase/1.json
-/app/schemas/com.alphaville.coffeeapplication.Model.CoffeeDatabase/4.json
 /app/schemas/com.alphaville.coffeeapplication.Model.Database.CoffeeDatabase/4.json

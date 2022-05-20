@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
 import com.alphaville.coffeeapplication.Model.CoffeeSearcher;
 import com.alphaville.coffeeapplication.Model.Database.CoffeeProductRepository;
+import com.alphaville.coffeeapplication.Model.Database.ReviewRepository;
 import com.alphaville.coffeeapplication.Model.Review;
 
 import java.util.ArrayList;
@@ -25,11 +26,15 @@ public class SearchListViewModel extends AndroidViewModel {
     private MutableLiveData<Filter> filter = new MutableLiveData<>();
 
     private LiveData<List<CoffeeProduct>> filteredList;
+    private LiveData<List<Review>> reviewList;
     private CoffeeProductRepository repository;
+    private ReviewRepository reviewRepo;
 
     public SearchListViewModel(@NonNull Application application) {
         super(application);
         repository = new CoffeeProductRepository(application);
+        reviewRepo = new ReviewRepository(application);
+        reviewList = reviewRepo.getAllReviews();
         filteredList = Transformations.switchMap(filter, (input) ->
         {
             if (input == null /*|| (filter.getValue().getString().equals("")
@@ -51,6 +56,8 @@ public class SearchListViewModel extends AndroidViewModel {
     public LiveData<List<CoffeeProduct>> getFilteredList() {
         return filteredList;
     }
+
+    public LiveData<List<Review>> getReviewList() { return reviewList; }
 
     /**
      * Returns a LiveData object containing a list of distinct values in taste column

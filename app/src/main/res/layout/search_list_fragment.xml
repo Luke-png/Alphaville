@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.SearchListFragment">
+    tools:context=".views.SearchListFragment"
+    android:background="#EDE0D4">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
