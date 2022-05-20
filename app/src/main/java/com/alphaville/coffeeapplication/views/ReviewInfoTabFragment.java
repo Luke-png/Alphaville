@@ -32,6 +32,7 @@ public class ReviewInfoTabFragment extends Fragment {
         View view = binding.getRoot();
         model = new ViewModelProvider(getActivity()).get(HistoryTabViewModel.class);
         closingView();
+        editButtonPressed();
 
         model.getSelected().observe(getViewLifecycleOwner(), new Observer<Review>() {
             @Override
@@ -76,6 +77,17 @@ public class ReviewInfoTabFragment extends Fragment {
                 Bundle ping = new Bundle();
                 ping.putBoolean("closeBtn", true);
                 getActivity().getSupportFragmentManager().setFragmentResult("requestkey", ping);
+            }
+        });
+    }
+
+    private void editButtonPressed(){
+        binding.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, ReviewDataFragment.class, null)
+                        .commit();
             }
         });
     }

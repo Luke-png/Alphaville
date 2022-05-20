@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 import com.alphaville.coffeeapplication.Model.enums.Process;
 import com.alphaville.coffeeapplication.Model.enums.Roast;
 import com.alphaville.coffeeapplication.Model.enums.Taste;
+import com.opencsv.bean.ComplexFieldMapEntry;
 
 import java.util.ArrayList;
 
@@ -60,6 +61,24 @@ public class CoffeeProduct
         this.isLiked = isLiked;
     }
 
+    /**
+     * Constructor used when changing the like-status for a product.
+     * @param object the original coffeeproduct-object that will be replaced.
+     * @param isLiked the new boolean value for the product.
+     */
+    public CoffeeProduct(CoffeeProduct object, Boolean isLiked){
+        this.id = object.getId();
+        this.name = object.getName();
+        this.country = object.getCountry();
+        this.elevation = object.getElevation();
+        this.process = object.getProcess();
+        this.acidity = object.getAcidity();
+        this.body = object.getBody();
+        this.sweetness = object.getSweetness();
+        this.taste = object.getTaste();
+
+        this.isLiked = isLiked;
+    }
     // Getters ------------
 
     public int getId() { return id; }

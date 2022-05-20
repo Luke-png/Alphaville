@@ -24,7 +24,7 @@ import java.util.concurrent.Executors;
 /**
  * Singleton class containing the Data Access Objects for every entity. Also handles asynchronous tasks from the repositories.
  */
-@Database(entities = {Review.class, CoffeeProduct.class}, version = 4)
+@Database(entities = {Review.class, CoffeeProduct.class}, version = 5)
 public abstract class CoffeeDatabase extends RoomDatabase {
 
     private static CoffeeDatabase instance;
