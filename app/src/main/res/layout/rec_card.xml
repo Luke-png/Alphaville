@@ -57,7 +57,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/match"
+                        android:id="@+id/countryid"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginBottom="5dp"

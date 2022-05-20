@@ -11,17 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentContainerView;
 
+import com.alphaville.coffeeapplication.Model.CoffeeMatcher;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
+import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
-import com.alphaville.coffeeapplication.views.GridCard;
 import com.alphaville.coffeeapplication.R;
 
-import org.w3c.dom.Text;
-
-import java.net.CookieHandler;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
@@ -32,11 +30,15 @@ public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
     private FragmentContainerView recDetail;
     private RecTabViewModel recTabViewModel;
     private SearchListViewModel searchListViewModel;
+    private ReviewDataViewModel reviewDataViewModel;
+    private CoffeeMatcher coffeeMatcher;
+    private List<Review> reviews;
     private View shadow;
     private boolean week = false;
 
     public RecAdapter(@NonNull Context context,@NonNull ArrayList<CoffeeProduct> coffeeProducts,int layout,
-                      FragmentContainerView recDetail, View shadow, boolean week, RecTabViewModel recTabViewModel, SearchListViewModel searchListViewModel){
+                      FragmentContainerView recDetail, View shadow, boolean week, RecTabViewModel recTabViewModel,
+                      SearchListViewModel searchListViewModel){
         super(context,0, coffeeProducts);
         this.recTabViewModel = recTabViewModel;
         this.layout = layout;
@@ -114,8 +116,7 @@ public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
      */
     private void setupGridCard(View listitemView){
         TextView cardName = listitemView.findViewById(R.id.gridCardText);
-        TextView match = listitemView.findViewById(R.id.match);
-        TextView country = listitemView.findViewById(R.id.country);
+        TextView country = listitemView.findViewById(R.id.countryid);
         ImageView cardImage = listitemView.findViewById(R.id.gridCardImg);
         ImageView clock1 = listitemView.findViewById(R.id.imageView);
         ImageView clock2 = listitemView.findViewById(R.id.imageView2);
@@ -125,7 +126,6 @@ public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
 
         cardName.setText(gridCard.getName());
         country.setText(gridCard.getCountry());
-        //match.setText(gridCard.get());
         //cardImage.setImageResource(gridCard.getImg());
 
     }
