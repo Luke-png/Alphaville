@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/gridCardText">
 
                 <TextView
-                    android:id="@+id/match"
+                    android:id="@+id/asd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:autoSizeMaxTextSize="10sp"
@@ -82,7 +82,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/country"
+                        android:id="@+id/countryid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:autoSizeMaxTextSize="10sp"
