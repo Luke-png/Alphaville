@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.alphaville.coffeeapplication.Model.CoffeeMatcher;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 
@@ -24,13 +27,15 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
     private List<CoffeeProduct> coffeeProducts;
     private SearchListViewModel vm;
     private FragmentContainerView fcv;
+    private List<Review> reviews;
 
 
     // Pass in the contact array into the constructor
-    public CoffeeProductAdapter(List<CoffeeProduct> coffeeProducts, SearchListViewModel vm, FragmentContainerView fcv) {
+    public CoffeeProductAdapter(List<CoffeeProduct> coffeeProducts, SearchListViewModel vm, FragmentContainerView fcv, List<Review> reviews) {
         this.coffeeProducts = coffeeProducts;
         this.vm = vm;
         this.fcv = fcv;
+        this.reviews = reviews;
     }
 
     @NonNull
@@ -53,7 +58,7 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         CoffeeProduct product = coffeeProducts.get(position);
 
         holder.title.setText(product.getName() + "");
-        holder.match.setText("match??");
+        holder.match.setText(String.format("%.2f",CoffeeMatcher.getMatchPercentage(product, reviews)) + "% match");
         holder.height.setText(product.getElevation() + "");
         holder.country.setText(product.getCountry() + "");
         holder.process.setText(product.getProcess().toString() + "");
@@ -74,6 +79,10 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
 
     public void setProducts(List<CoffeeProduct> products) {
         this.coffeeProducts = products;
+        notifyDataSetChanged();
+    }
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
         notifyDataSetChanged();
     }
     // ViewHolder
