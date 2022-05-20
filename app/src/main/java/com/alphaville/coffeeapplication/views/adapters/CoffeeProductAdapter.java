@@ -78,9 +78,11 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CoffeeProduct original = coffeeProducts.get(holder.getAdapterPosition());
-                CoffeeProduct updCoffeeProduct = new CoffeeProduct(original, holder.like.isChecked());
-                vm.getRepository().update(updCoffeeProduct);
+                if(fcv.getVisibility() == View.VISIBLE){
+                    CoffeeProduct original = coffeeProducts.get(holder.getAdapterPosition());
+                    CoffeeProduct updCoffeeProduct = new CoffeeProduct(original, holder.like.isChecked());
+                    vm.getRepository().update(updCoffeeProduct);
+                }
             }
         });
 
