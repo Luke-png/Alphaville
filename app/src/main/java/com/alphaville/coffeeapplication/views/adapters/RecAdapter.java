@@ -11,8 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentContainerView;
 
+import com.alphaville.coffeeapplication.Model.CoffeeMatcher;
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.viewModels.RecTabViewModel;
+import com.alphaville.coffeeapplication.viewModels.ReviewDataViewModel;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 import com.alphaville.coffeeapplication.views.GridCard;
 import com.alphaville.coffeeapplication.R;
@@ -32,11 +35,15 @@ public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
     private FragmentContainerView recDetail;
     private RecTabViewModel recTabViewModel;
     private SearchListViewModel searchListViewModel;
+    private ReviewDataViewModel reviewDataViewModel;
+    private CoffeeMatcher coffeeMatcher;
+    private List<Review> reviews;
     private View shadow;
     private boolean week = false;
 
     public RecAdapter(@NonNull Context context,@NonNull ArrayList<CoffeeProduct> coffeeProducts,int layout,
-                      FragmentContainerView recDetail, View shadow, boolean week, RecTabViewModel recTabViewModel, SearchListViewModel searchListViewModel){
+                      FragmentContainerView recDetail, View shadow, boolean week, RecTabViewModel recTabViewModel,
+                      SearchListViewModel searchListViewModel){
         super(context,0, coffeeProducts);
         this.recTabViewModel = recTabViewModel;
         this.layout = layout;
@@ -125,7 +132,7 @@ public class RecAdapter extends ArrayAdapter<CoffeeProduct> {
 
         cardName.setText(gridCard.getName());
         country.setText(gridCard.getCountry());
-        //match.setText(gridCard.get());
+        match.setText(String.format("%.2f", CoffeeMatcher.getMatchPercentage(gridCard, reviews)) + "% match");
         //cardImage.setImageResource(gridCard.getImg());
 
     }
