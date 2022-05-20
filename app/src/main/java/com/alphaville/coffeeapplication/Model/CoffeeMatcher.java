@@ -28,7 +28,7 @@ public class CoffeeMatcher {
             if(r.getCoffeeProduct().getSweetness() == sweetness_ref) s_match.add(r.getRating());
             if(r.getCoffeeProduct().getBody() == body_ref) f_match.add(r.getRating());
         }
-        return (Mean(s_match) + Mean(b_match) + Mean(f_match))/30;
+        return 100*(Mean(s_match) + Mean(b_match) + Mean(f_match))/30;
     }
 
     //TODO: tester

@@ -60,11 +60,11 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         // Get the data model based on position
         CoffeeProduct product = coffeeProducts.get(position);
 
-        holder.title.setText(product.getName() + "");
+        holder.title.setText(product.getName());
         holder.match.setText(String.format("%.2f",CoffeeMatcher.getMatchPercentage(product, reviews)) + "% match");
-        holder.height.setText(product.getElevation() + "");
-        holder.country.setText(product.getCountry() + "");
-        holder.process.setText(product.getProcess().toString() + "");
+        holder.height.setText(product.getElevation() + "m");
+        holder.country.setText(product.getCountry());
+        holder.process.setText(product.getProcess().toString());
         holder.like.setChecked(product.isLiked());
 
         holder.card.setOnClickListener(new View.OnClickListener() {

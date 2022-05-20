@@ -30,12 +30,13 @@
             android:id="@+id/sr_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#DDB892"
+            android:ellipsize="end"
             android:fontFamily="sans-serif"
+            android:maxLines="1"
             android:text="Example coffee product title"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:background="#DDB892"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/sr_match"
