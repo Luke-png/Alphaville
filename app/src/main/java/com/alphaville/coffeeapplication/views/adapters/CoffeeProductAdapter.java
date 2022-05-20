@@ -61,7 +61,7 @@ public class CoffeeProductAdapter extends RecyclerView.Adapter<CoffeeProductAdap
         CoffeeProduct product = coffeeProducts.get(position);
 
         holder.title.setText(product.getName());
-        holder.match.setText(String.format("%.2f",CoffeeMatcher.getMatchPercentage(product, reviews)) + "% match");
+        holder.match.setText(String.format("%.0f",CoffeeMatcher.getMatchPercentage(product, reviews)) + "% match");
         holder.height.setText(product.getElevation() + "m");
         holder.country.setText(product.getCountry());
         holder.process.setText(product.getProcess().toString());
