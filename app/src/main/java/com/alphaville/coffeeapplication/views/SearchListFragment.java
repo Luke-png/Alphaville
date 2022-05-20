@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alphaville.coffeeapplication.Model.CoffeeProduct;
+import com.alphaville.coffeeapplication.Model.Review;
 import com.alphaville.coffeeapplication.R;
 import com.alphaville.coffeeapplication.viewModels.SearchListViewModel;
 import com.alphaville.coffeeapplication.views.adapters.CoffeeProductAdapter;
@@ -60,7 +61,7 @@ public class SearchListFragment extends Fragment {
 
 
     List<CoffeeProduct> coffeeProducts = new ArrayList<>(); // Get model through ViewModel instead.
-
+    List<Review> coffeReviews = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class SearchListFragment extends Fragment {
 
         viewModel = new ViewModelProvider(getActivity()).get(SearchListViewModel.class);
         viewModel.getFilteredList().observe(getViewLifecycleOwner(), coffeeProducts -> adapter.setProducts(coffeeProducts));
-
+        viewModel.getReviewList().observe(getViewLifecycleOwner(), coffeReviews -> adapter.setReviews(coffeReviews));
         View v = inflater.inflate(R.layout.search_list_fragment, container, false);
 
         rv = v.findViewById(R.id.RV_SearchList);
@@ -85,7 +86,7 @@ public class SearchListFragment extends Fragment {
         fcv.setVisibility(View.INVISIBLE);
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv);
+        adapter = new CoffeeProductAdapter(coffeeProducts, viewModel, fcv, coffeReviews);
         rv.setAdapter(adapter);
 
         filterDialog = new Dialog(getActivity());
